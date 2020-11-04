@@ -203,7 +203,7 @@ middle</text>
 <wire x1="89.343" y1="14.72" x2="88.843" y2="14.22" width="0" layer="20" curve="-90"/>
 <wire x1="88.843" y1="14.22" x2="67.843" y2="14.22" width="0" layer="20"/>
 <wire x1="67.843" y1="14.22" x2="67.343" y2="14.72" width="0" layer="20" curve="-90"/>
-<text x="78.418" y="27.144" size="2.286" layer="22" font="vector" ratio="15" align="bottom-center">EXPANSION</text>
+<text x="78.418" y="27.144" size="2.286" layer="21" font="vector" ratio="15" align="bottom-center">EXPANSION</text>
 <wire x1="2" y1="14.2" x2="131" y2="14.2" width="0.1" layer="22"/>
 <wire x1="131" y1="12.6" x2="2" y2="12.6" width="0.1" layer="22"/>
 <hole x="41.9764" y="16.78" drill="6"/>
