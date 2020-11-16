@@ -22,34 +22,18 @@ bool (*app_func_wr_pointer[])(void*) = {
 /************************************************************************/
 /* REG_AUX_INPUTS                                                       */
 /************************************************************************/
-void app_read_REG_AUX_INPUTS(void)
-{
-	//app_regs.REG_AUX_INPUTS = 0;
-
-}
-
+void app_read_REG_AUX_INPUTS(void) {}	// Should be up to date by the interrupts
 bool app_write_REG_AUX_INPUTS(void *a)
 {
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_AUX_INPUTS = reg;
-	return true;
+	return false;
 }
 
 
 /************************************************************************/
 /* REG_INPUTS                                                           */
 /************************************************************************/
-void app_read_REG_INPUTS(void)
-{
-	//app_regs.REG_INPUTS = 0;
-
-}
-
+void app_read_REG_INPUTS(void) {}	// Should be up to date by the interrupts
 bool app_write_REG_INPUTS(void *a)
 {
-	uint16_t reg = *((uint16_t*)a);
-
-	app_regs.REG_INPUTS = reg;
-	return true;
+	return false;
 }

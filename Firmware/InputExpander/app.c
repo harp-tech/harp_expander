@@ -62,7 +62,7 @@ void core_callback_catastrophic_error_detected(void)
 /************************************************************************/
 /* Initialization Callbacks                                             */
 /************************************************************************/
-#define T_STARTUP_ON  100
+#define T_STARTUP_ON  50
 #define T_STARTUP_OFF 0
 void core_callback_1st_config_hw_after_boot(void)
 {
@@ -86,17 +86,17 @@ void core_callback_1st_config_hw_after_boot(void)
 		set_LED_I9;  _delay_ms(T_STARTUP_ON); clr_LED_I9;  _delay_ms(T_STARTUP_OFF);
 		set_LED_STATE;  _delay_ms(T_STARTUP_ON); clr_LED_STATE;  _delay_ms(T_STARTUP_OFF);
 	}
-	_delay_ms(200);
+	_delay_ms(T_STARTUP_ON*2);
 	
 	for (uint8_t i = 0; i < 2; i++)
 	{
 		set_LED_I0; set_LED_I1; set_LED_I2; set_LED_I3; set_LED_I4; set_LED_PWR;
 		set_LED_I5; set_LED_I6; set_LED_I7; set_LED_I8; set_LED_I9; set_LED_STATE;
-		_delay_ms(200);
+		_delay_ms(T_STARTUP_ON*2);
 		
 		clr_LED_I0; clr_LED_I1; clr_LED_I2; clr_LED_I3; clr_LED_I4; clr_LED_PWR;
 		clr_LED_I5; clr_LED_I6; clr_LED_I7; clr_LED_I8; clr_LED_I9; clr_LED_STATE;
-		_delay_ms(200);
+		_delay_ms(T_STARTUP_ON*2);
 	}
 	
 	_delay_ms(500);
