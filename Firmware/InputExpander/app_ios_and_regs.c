@@ -9,10 +9,30 @@ void init_ios(void)
 {	/* Configure input pins */
 	io_pin2in(&PORTA, 0, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // AUX_INPUT0
 	io_pin2in(&PORTA, 1, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // AUX_INPUT1
+	io_pin2in(&PORTD, 4, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN0
+	io_pin2in(&PORTD, 3, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN1
+	io_pin2in(&PORTD, 2, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN2
+	io_pin2in(&PORTD, 1, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN3
+	io_pin2in(&PORTD, 0, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN4
+	io_pin2in(&PORTC, 0, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN5
+	io_pin2in(&PORTC, 1, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN6
+	io_pin2in(&PORTC, 2, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN7
+	io_pin2in(&PORTC, 3, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN8
+	io_pin2in(&PORTC, 4, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN9
 
 	/* Configure input interrupts */
 	io_set_int(&PORTA, INT_LEVEL_LOW, 0, (1<<0), false);                 // AUX_INPUT0
 	io_set_int(&PORTA, INT_LEVEL_LOW, 1, (1<<1), false);                 // AUX_INPUT1
+	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<4), false);                 // IN0
+	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<3), false);                 // IN1
+	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<2), false);                 // IN2
+	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<1), false);                 // IN3
+	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<0), false);                 // IN4
+	io_set_int(&PORTC, INT_LEVEL_LOW, 0, (1<<0), false);                 // IN5
+	io_set_int(&PORTC, INT_LEVEL_LOW, 0, (1<<1), false);                 // IN6
+	io_set_int(&PORTC, INT_LEVEL_LOW, 0, (1<<2), false);                 // IN7
+	io_set_int(&PORTC, INT_LEVEL_LOW, 0, (1<<3), false);                 // IN8
+	io_set_int(&PORTC, INT_LEVEL_LOW, 0, (1<<4), false);                 // IN9
 
 	/* Configure output pins */
 	io_pin2out(&PORTH, 0, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // LED_I0
@@ -29,8 +49,8 @@ void init_ios(void)
 	io_pin2out(&PORTA, 6, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // LED_STATE
 	io_pin2out(&PORTB, 5, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // IDE_IOS_DIR
 	io_pin2out(&PORTB, 6, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // IDE_IOS_EN
-	io_pin2out(&PORTD, 6, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // BNC_IOS_DIR
-	io_pin2out(&PORTD, 7, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // BNC_IOS_EN
+	io_pin2out(&PORTD, 7, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // BNC_IOS_DIR
+	io_pin2out(&PORTD, 6, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // BNC_IOS_EN
 
 	/* Initialize output pins */
 	clr_LED_I0;

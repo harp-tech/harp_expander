@@ -8,9 +8,29 @@ void init_ios(void);
 /************************************************************************/
 // AUX_INPUT0             Description: Auxiliar input 0
 // AUX_INPUT1             Description: Auxiliar input 1
+// IN0                    Description: Input 0
+// IN1                    Description: Input 1
+// IN2                    Description: Input 2
+// IN3                    Description: Input 3
+// IN4                    Description: Input 4
+// IN5                    Description: Input 5
+// IN6                    Description: Input 6
+// IN7                    Description: Input 7
+// IN8                    Description: Input 8
+// IN9                    Description: Input 9
 
 #define read_AUX_INPUT0 read_io(PORTA, 0)       // AUX_INPUT0
 #define read_AUX_INPUT1 read_io(PORTA, 1)       // AUX_INPUT1
+#define read_IN0 read_io(PORTD, 4)              // IN0
+#define read_IN1 read_io(PORTD, 3)              // IN1
+#define read_IN2 read_io(PORTD, 2)              // IN2
+#define read_IN3 read_io(PORTD, 1)              // IN3
+#define read_IN4 read_io(PORTD, 0)              // IN4
+#define read_IN5 read_io(PORTC, 0)              // IN5
+#define read_IN6 read_io(PORTC, 1)              // IN6
+#define read_IN7 read_io(PORTC, 2)              // IN7
+#define read_IN8 read_io(PORTC, 3)              // IN8
+#define read_IN9 read_io(PORTC, 4)              // IN9
 
 /************************************************************************/
 /* Definition of output pins                                            */
@@ -117,16 +137,16 @@ void init_ios(void);
 #define read_IDE_IOS_EN read_io(PORTB, 6)
 
 /* BNC_IOS_DIR */
-#define set_BNC_IOS_DIR set_io(PORTD, 6)
-#define clr_BNC_IOS_DIR clear_io(PORTD, 6)
-#define tgl_BNC_IOS_DIR toggle_io(PORTD, 6)
-#define read_BNC_IOS_DIR read_io(PORTD, 6)
+#define set_BNC_IOS_DIR set_io(PORTD, 7)
+#define clr_BNC_IOS_DIR clear_io(PORTD, 7)
+#define tgl_BNC_IOS_DIR toggle_io(PORTD, 7)
+#define read_BNC_IOS_DIR read_io(PORTD, 7)
 
 /* BNC_IOS_EN */
-#define set_BNC_IOS_EN set_io(PORTD, 7)
-#define clr_BNC_IOS_EN clear_io(PORTD, 7)
-#define tgl_BNC_IOS_EN toggle_io(PORTD, 7)
-#define read_BNC_IOS_EN read_io(PORTD, 7)
+#define set_BNC_IOS_EN set_io(PORTD, 6)
+#define clr_BNC_IOS_EN clear_io(PORTD, 6)
+#define tgl_BNC_IOS_EN toggle_io(PORTD, 6)
+#define read_BNC_IOS_EN read_io(PORTD, 6)
 
 
 /************************************************************************/
