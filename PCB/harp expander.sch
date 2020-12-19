@@ -15614,6 +15614,14 @@ Source: http://www.semiconductors.philips.com/acrobat_download/datasheets/74HC_H
 <attribute name="MPN" value="CRCW04021K00FKED"/>
 </part>
 <part name="GND61" library="supply1" deviceset="GND" device=""/>
+<part name="+3V3_TP" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="PAD1-13" package3d_urn="urn:adsk.eagle:package:27946/1">
+<attribute name="MPN" value="n.a."/>
+</part>
+<part name="+3V19" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
+<part name="+5V_TP" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="PAD1-13" package3d_urn="urn:adsk.eagle:package:27946/1">
+<attribute name="MPN" value="n.a."/>
+</part>
+<part name="P+5" library="supply1" deviceset="+5V" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -15622,7 +15630,7 @@ Source: http://www.semiconductors.philips.com/acrobat_download/datasheets/74HC_H
 We need ~5.5mA</text>
 <text x="54.102" y="51.308" size="1.778" layer="91" rot="R90">8.5 mA max.</text>
 <text x="657.86" y="332.74" size="1.778" layer="91">SBH11-PBPC-D05-RA-BK</text>
-<text x="44.196" y="94.234" size="1.778" layer="91" align="bottom-right">u IO-function
+<text x="41.656" y="94.234" size="1.778" layer="91" align="bottom-right">u IO-function
 selection</text>
 </plain>
 <instances>
@@ -16716,13 +16724,29 @@ selection</text>
 <instance part="GND54" gate="1" x="551.18" y="276.86" smashed="yes">
 <attribute name="VALUE" x="548.64" y="274.32" size="1.778" layer="96"/>
 </instance>
-<instance part="R53" gate="G$1" x="48.26" y="96.52" smashed="yes" rot="R270">
-<attribute name="NAME" x="49.7586" y="100.33" size="1.778" layer="95" rot="R270"/>
-<attribute name="VALUE" x="44.958" y="100.33" size="1.778" layer="96" rot="R270"/>
-<attribute name="MPN" x="48.26" y="96.52" size="1.778" layer="96" rot="R270" display="off"/>
+<instance part="R53" gate="G$1" x="45.72" y="96.52" smashed="yes" rot="R270">
+<attribute name="NAME" x="47.2186" y="100.33" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="42.418" y="100.33" size="1.778" layer="96" rot="R270"/>
+<attribute name="MPN" x="45.72" y="96.52" size="1.778" layer="96" rot="R270" display="off"/>
 </instance>
-<instance part="GND61" gate="1" x="48.26" y="88.9" smashed="yes">
-<attribute name="VALUE" x="45.72" y="86.36" size="1.778" layer="96"/>
+<instance part="GND61" gate="1" x="45.72" y="88.9" smashed="yes">
+<attribute name="VALUE" x="43.18" y="86.36" size="1.778" layer="96"/>
+</instance>
+<instance part="+3V3_TP" gate="G$1" x="322.58" y="45.72" smashed="yes">
+<attribute name="NAME" x="321.31" y="46.99" size="1.778" layer="95"/>
+<attribute name="TP_SIGNAL_NAME" x="323.85" y="44.45" size="1.778" layer="97"/>
+<attribute name="MPN" x="322.58" y="45.72" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="+3V19" gate="G$1" x="317.5" y="48.26" smashed="yes">
+<attribute name="VALUE" x="314.96" y="43.18" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="+5V_TP" gate="G$1" x="345.44" y="45.72" smashed="yes">
+<attribute name="NAME" x="344.17" y="46.99" size="1.778" layer="95"/>
+<attribute name="TP_SIGNAL_NAME" x="346.71" y="44.45" size="1.778" layer="97"/>
+<attribute name="MPN" x="345.44" y="45.72" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="P+5" gate="1" x="340.36" y="48.26" smashed="yes">
+<attribute name="VALUE" x="337.82" y="43.18" size="1.778" layer="96" rot="R90"/>
 </instance>
 </instances>
 <busses>
@@ -17446,6 +17470,13 @@ selection</text>
 <wire x1="500.38" y1="421.64" x2="492.76" y2="421.64" width="0.1524" layer="91"/>
 <junction x="492.76" y="421.64"/>
 </segment>
+<segment>
+<pinref part="P+5" gate="1" pin="+5V"/>
+<wire x1="340.36" y1="45.72" x2="340.36" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="340.36" y1="40.64" x2="345.44" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="+5V_TP" gate="G$1" pin="TP"/>
+<wire x1="345.44" y1="40.64" x2="345.44" y2="43.18" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="N$2" class="0">
 <segment>
@@ -18047,6 +18078,11 @@ selection</text>
 <wire x1="71.12" y1="210.82" x2="55.88" y2="210.82" width="0.1524" layer="91"/>
 <label x="66.04" y="210.82" size="1.778" layer="95" rot="MR0"/>
 </segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="PE5(OC1B/XCK1/MOSI)"/>
+<wire x1="71.12" y1="96.52" x2="55.88" y2="96.52" width="0.1524" layer="91"/>
+<label x="66.04" y="96.52" size="1.778" layer="95" rot="MR0"/>
+</segment>
 </net>
 <net name="AUX_IN0_UC" class="0">
 <segment>
@@ -18063,6 +18099,11 @@ selection</text>
 <pinref part="IC1" gate="G$1" pin="PE2(OC0C/RXD0)"/>
 <wire x1="71.12" y1="104.14" x2="55.88" y2="104.14" width="0.1524" layer="91"/>
 <label x="66.04" y="104.14" size="1.778" layer="95" rot="MR0"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="PE4(OC1A/!SS!)"/>
+<wire x1="71.12" y1="99.06" x2="55.88" y2="99.06" width="0.1524" layer="91"/>
+<label x="66.04" y="99.06" size="1.778" layer="95" rot="MR0"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -18307,6 +18348,13 @@ selection</text>
 <wire x1="502.92" y1="284.48" x2="500.38" y2="284.48" width="0.1524" layer="91"/>
 <wire x1="500.38" y1="284.48" x2="500.38" y2="287.02" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="+3V19" gate="G$1" pin="+3V3"/>
+<wire x1="317.5" y1="45.72" x2="317.5" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="317.5" y1="40.64" x2="322.58" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="+3V3_TP" gate="G$1" pin="TP"/>
+<wire x1="322.58" y1="40.64" x2="322.58" y2="43.18" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="N$175" class="0">
 <segment>
@@ -18451,9 +18499,9 @@ selection</text>
 <pinref part="U1" gate="1" pin="B4"/>
 </segment>
 <segment>
-<wire x1="71.12" y1="149.86" x2="55.88" y2="149.86" width="0.1524" layer="91"/>
-<label x="66.04" y="149.86" size="1.778" layer="95" rot="MR0"/>
-<pinref part="IC1" gate="G$1" pin="PC4(OC1A/!SS!)"/>
+<pinref part="IC1" gate="G$1" pin="PE0(OC0A/SDA)"/>
+<wire x1="71.12" y1="109.22" x2="55.88" y2="109.22" width="0.1524" layer="91"/>
+<label x="66.04" y="109.22" size="1.778" layer="95" rot="MR0"/>
 </segment>
 </net>
 <net name="AUX_IN0" class="0">
@@ -18612,13 +18660,7 @@ selection</text>
 <segment>
 <pinref part="IC1" gate="G$1" pin="PE3(OC0D/TXD0)"/>
 <pinref part="R53" gate="G$1" pin="1"/>
-<wire x1="71.12" y1="101.6" x2="48.26" y2="101.6" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$166" class="0">
-<segment>
-<pinref part="IC1" gate="G$1" pin="PF6(RXD1/MISO)"/>
-<wire x1="134.62" y1="193.04" x2="142.24" y2="193.04" width="0.1524" layer="91"/>
+<wire x1="71.12" y1="101.6" x2="45.72" y2="101.6" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
