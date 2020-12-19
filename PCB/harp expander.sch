@@ -17261,12 +17261,12 @@ selection</text>
 <segment>
 <pinref part="CLKIN" gate="G$1" pin="4"/>
 <pinref part="R3" gate="G$1" pin="2"/>
-<wire x1="104.14" y1="426.72" x2="147.32" y2="426.72" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="426.72" x2="147.32" y2="426.72" width="0.1524" layer="91"/>
 <wire x1="147.32" y1="426.72" x2="228.6" y2="426.72" width="0.1524" layer="91"/>
 <wire x1="228.6" y1="426.72" x2="236.22" y2="426.72" width="0.1524" layer="91"/>
 <wire x1="228.6" y1="429.26" x2="228.6" y2="426.72" width="0.1524" layer="91"/>
 <junction x="228.6" y="426.72"/>
-<label x="104.14" y="426.72" size="1.778" layer="95"/>
+<label x="101.6" y="426.72" size="1.778" layer="95"/>
 <wire x1="147.32" y1="421.64" x2="147.32" y2="426.72" width="0.1524" layer="91"/>
 <junction x="147.32" y="426.72"/>
 <pinref part="IC8" gate="A" pin="I"/>
@@ -17693,8 +17693,8 @@ selection</text>
 <label x="66.04" y="142.24" size="1.778" layer="95" rot="MR0"/>
 </segment>
 <segment>
-<wire x1="129.54" y1="386.08" x2="104.14" y2="386.08" width="0.1524" layer="91"/>
-<label x="104.14" y="386.08" size="1.778" layer="95"/>
+<wire x1="129.54" y1="386.08" x2="101.6" y2="386.08" width="0.1524" layer="91"/>
+<label x="101.6" y="386.08" size="1.778" layer="95"/>
 <pinref part="IC9" gate="A" pin="I"/>
 </segment>
 </net>
@@ -18103,11 +18103,6 @@ selection</text>
 <label x="457.2" y="294.64" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="IC1" gate="G$1" pin="PA0(ADCA0/AREFA)"/>
-<wire x1="71.12" y1="210.82" x2="55.88" y2="210.82" width="0.1524" layer="91"/>
-<label x="66.04" y="210.82" size="1.778" layer="95" rot="MR0"/>
-</segment>
-<segment>
 <pinref part="IC1" gate="G$1" pin="PE5(OC1B/XCK1/MOSI)"/>
 <wire x1="71.12" y1="96.52" x2="55.88" y2="96.52" width="0.1524" layer="91"/>
 <label x="66.04" y="96.52" size="1.778" layer="95" rot="MR0"/>
@@ -18118,11 +18113,6 @@ selection</text>
 <wire x1="523.24" y1="330.2" x2="457.2" y2="330.2" width="0.1524" layer="91"/>
 <label x="457.2" y="330.2" size="1.778" layer="95"/>
 <pinref part="IC10" gate="A" pin="O"/>
-</segment>
-<segment>
-<pinref part="IC1" gate="G$1" pin="PA1(ADCA1)"/>
-<wire x1="71.12" y1="208.28" x2="55.88" y2="208.28" width="0.1524" layer="91"/>
-<label x="66.04" y="208.28" size="1.778" layer="95" rot="MR0"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="PE2(OC0C/RXD0)"/>
@@ -18719,9 +18709,9 @@ selection</text>
 <segment>
 <pinref part="IC8" gate="A" pin="OE"/>
 <wire x1="139.7" y1="416.56" x2="124.46" y2="416.56" width="0.1524" layer="91"/>
-<label x="104.14" y="416.56" size="1.778" layer="95"/>
+<label x="101.6" y="416.56" size="1.778" layer="95"/>
 <pinref part="R54" gate="G$1" pin="1"/>
-<wire x1="124.46" y1="416.56" x2="104.14" y2="416.56" width="0.1524" layer="91"/>
+<wire x1="124.46" y1="416.56" x2="101.6" y2="416.56" width="0.1524" layer="91"/>
 <wire x1="124.46" y1="414.02" x2="124.46" y2="416.56" width="0.1524" layer="91"/>
 <junction x="124.46" y="416.56"/>
 </segment>
