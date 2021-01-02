@@ -19,8 +19,8 @@ void init_ios(void);
 // IN8                    Description: Input 8
 // IN9                    Description: Input 9
 
-#define read_AUX_INPUT0 read_io(PORTA, 0)       // AUX_INPUT0
-#define read_AUX_INPUT1 read_io(PORTA, 1)       // AUX_INPUT1
+#define read_AUX_INPUT0 read_io(PORTE, 4)       // AUX_INPUT0
+#define read_AUX_INPUT1 read_io(PORTE, 5)       // AUX_INPUT1
 #define read_IN0 read_io(PORTD, 4)              // IN0
 #define read_IN1 read_io(PORTD, 3)              // IN1
 #define read_IN2 read_io(PORTD, 2)              // IN2

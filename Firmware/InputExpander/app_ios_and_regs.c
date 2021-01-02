@@ -7,8 +7,8 @@
 /************************************************************************/
 void init_ios(void)
 {	/* Configure input pins */
-	io_pin2in(&PORTA, 0, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // AUX_INPUT0
-	io_pin2in(&PORTA, 1, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // AUX_INPUT1
+	io_pin2in(&PORTE, 2, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // AUX_INPUT0
+	io_pin2in(&PORTE, 5, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // AUX_INPUT1
 	io_pin2in(&PORTD, 4, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN0
 	io_pin2in(&PORTD, 3, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN1
 	io_pin2in(&PORTD, 2, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN2
@@ -21,8 +21,8 @@ void init_ios(void)
 	io_pin2in(&PORTC, 4, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN9
 
 	/* Configure input interrupts */
-	io_set_int(&PORTA, INT_LEVEL_LOW, 0, (1<<0), false);                 // AUX_INPUT0
-	io_set_int(&PORTA, INT_LEVEL_LOW, 1, (1<<1), false);                 // AUX_INPUT1
+	io_set_int(&PORTE, INT_LEVEL_LOW, 0, (1<<2), false);                 // AUX_INPUT0
+	io_set_int(&PORTE, INT_LEVEL_LOW, 1, (1<<5), false);                 // AUX_INPUT1
 	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<4), false);                 // IN0
 	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<3), false);                 // IN1
 	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<2), false);                 // IN2

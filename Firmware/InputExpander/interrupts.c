@@ -29,22 +29,55 @@ extern AppRegs app_regs;
 /************************************************************************/ 
 /* AUX_INPUT0                                                           */
 /************************************************************************/
-ISR(PORTA_INT0_vect, ISR_NAKED)
+ISR(PORTE_INT0_vect, ISR_NAKED)
 {
 	app_regs.REG_AUX_INPUTS &= ~(B_AUX_IN0);
 	app_regs.REG_AUX_INPUTS |= (read_AUX_INPUT0) ? B_AUX_IN0 : 0;
 	core_func_send_event(ADD_REG_AUX_INPUTS, true);
+	
+	if (read_AUX_INPUT0)
+		PORTH_OUTSET = 0x1F;
+	else
+		PORTH_OUTCLR = 0x1F;
+	
 	reti();
 }
 
 /************************************************************************/ 
 /* AUX_INPUT1                                                           */
 /************************************************************************/
-ISR(PORTA_INT1_vect, ISR_NAKED)
+bool aux1_prev_state = false;
+ISR(PORTE_INT1_vect, ISR_NAKED)
 {	
-	app_regs.REG_AUX_INPUTS &= ~(B_AUX_IN1);
-	app_regs.REG_AUX_INPUTS |= (read_AUX_INPUT1) ? B_AUX_IN1 : 0;
-	core_func_send_event(ADD_REG_AUX_INPUTS, true);
+	if (read_AUX_INPUT1)
+	{
+		if (!aux1_prev_state)
+		{		
+			aux1_prev_state = true;
+			
+			app_regs.REG_AUX_INPUTS &= ~(B_AUX_IN1);
+			app_regs.REG_AUX_INPUTS |= (read_AUX_INPUT1) ? B_AUX_IN1 : 0;
+			core_func_send_event(ADD_REG_AUX_INPUTS, true);
+			
+			PORTH_OUTSET = 0xE0;
+			PORTJ_OUTSET = 0x07;
+		}
+	}
+	else
+	{
+		if (aux1_prev_state)
+		{
+			aux1_prev_state = false;
+			
+			app_regs.REG_AUX_INPUTS &= ~(B_AUX_IN1);
+			app_regs.REG_AUX_INPUTS |= (read_AUX_INPUT1) ? B_AUX_IN1 : 0;
+			core_func_send_event(ADD_REG_AUX_INPUTS, true);
+			
+			PORTH_OUTCLR = 0xE0;
+			PORTJ_OUTCLR = 0x07;
+		}
+	}
+		
 	reti();
 }
 
