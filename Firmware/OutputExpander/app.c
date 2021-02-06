@@ -129,8 +129,17 @@ void core_callback_registers_were_reinitialized(void)
 /************************************************************************/
 void core_callback_visualen_to_on(void)
 {
-	/* Update visual indicators */
-	
+	/* Update visual indicators */	
+	if (read_OUT0) set_LED_0;
+	if (read_OUT1) set_LED_1;
+	if (read_OUT2) set_LED_2;
+	if (read_OUT3) set_LED_3;
+	if (read_OUT4) set_LED_4;
+	if (read_OUT5) set_LED_5;
+	if (read_OUT6) set_LED_6;
+	if (read_OUT7) set_LED_7;
+	if (read_OUT8) set_LED_8;
+	if (read_OUT9) set_LED_9;
 }
 
 void core_callback_visualen_to_off(void)

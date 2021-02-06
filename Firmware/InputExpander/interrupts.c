@@ -29,9 +29,12 @@ void check_for_event_and_update_LEDs(void)
 		inputs_previous_read = inputs_current_read;
 		
 		/* Update LEDs */
-		PORTH_OUT = (uint8_t) app_regs.REG_INPUTS[0];
-		if (app_regs.REG_INPUTS[0] & B_IN8) { set_LED_8; } else { clr_LED_8; }
-		if (app_regs.REG_INPUTS[0] & B_IN9) { set_LED_9; } else { clr_LED_9; }
+		if (core_bool_is_visual_enabled())
+		{
+			PORTH_OUT = (uint8_t) app_regs.REG_INPUTS[0];
+			if (app_regs.REG_INPUTS[0] & B_IN8) { set_LED_8; } else { clr_LED_8; }
+			if (app_regs.REG_INPUTS[0] & B_IN9) { set_LED_9; } else { clr_LED_9; }
+		}
 	}
 }
 

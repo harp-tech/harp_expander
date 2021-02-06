@@ -50,16 +50,16 @@ bool app_write_REG_OUTPUTS_SET(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 	
-	if (reg & B_OUT0) { set_OUT0; set_LED_0; }
-	if (reg & B_OUT1) { set_OUT1; set_LED_1; }
-	if (reg & B_OUT2) { set_OUT2; set_LED_2; }
-	if (reg & B_OUT3) { set_OUT3; set_LED_3; }
-	if (reg & B_OUT4) { set_OUT4; set_LED_4; }
-	if (reg & B_OUT5) { set_OUT5; set_LED_5; }
-	if (reg & B_OUT6) { set_OUT6; set_LED_6; }
-	if (reg & B_OUT7) { set_OUT7; set_LED_7; }
-	if (reg & B_OUT8) { set_OUT8; set_LED_8; }
-	if (reg & B_OUT9) { set_OUT9; set_LED_9; }
+	if (reg & B_OUT0) { set_OUT0; if (core_bool_is_visual_enabled()) set_LED_0; }
+	if (reg & B_OUT1) { set_OUT1; if (core_bool_is_visual_enabled()) set_LED_1; }
+	if (reg & B_OUT2) { set_OUT2; if (core_bool_is_visual_enabled()) set_LED_2; }
+	if (reg & B_OUT3) { set_OUT3; if (core_bool_is_visual_enabled()) set_LED_3; }
+	if (reg & B_OUT4) { set_OUT4; if (core_bool_is_visual_enabled()) set_LED_4; }
+	if (reg & B_OUT5) { set_OUT5; if (core_bool_is_visual_enabled()) set_LED_5; }
+	if (reg & B_OUT6) { set_OUT6; if (core_bool_is_visual_enabled()) set_LED_6; }
+	if (reg & B_OUT7) { set_OUT7; if (core_bool_is_visual_enabled()) set_LED_7; }
+	if (reg & B_OUT8) { set_OUT8; if (core_bool_is_visual_enabled()) set_LED_8; }
+	if (reg & B_OUT9) { set_OUT9; if (core_bool_is_visual_enabled()) set_LED_9; }
 
 	app_regs.REG_OUTPUTS_SET = reg;
 	return true;
@@ -98,16 +98,16 @@ bool app_write_REG_OUTPUTS_TOGGLE(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 	
-	if (reg & B_OUT0) { tgl_OUT0; tgl_LED_0; }
-	if (reg & B_OUT1) { tgl_OUT1; tgl_LED_1; }
-	if (reg & B_OUT2) { tgl_OUT2; tgl_LED_2; }
-	if (reg & B_OUT3) { tgl_OUT3; tgl_LED_3; }
-	if (reg & B_OUT4) { tgl_OUT4; tgl_LED_4; }
-	if (reg & B_OUT5) { tgl_OUT5; tgl_LED_5; }
-	if (reg & B_OUT6) { tgl_OUT6; tgl_LED_6; }
-	if (reg & B_OUT7) { tgl_OUT7; tgl_LED_7; }
-	if (reg & B_OUT8) { tgl_OUT8; tgl_LED_8; }
-	if (reg & B_OUT9) { tgl_OUT9; tgl_LED_9; }
+	if (reg & B_OUT0) { tgl_OUT0; if (core_bool_is_visual_enabled()) tgl_LED_0; }
+	if (reg & B_OUT1) { tgl_OUT1; if (core_bool_is_visual_enabled()) tgl_LED_1; }
+	if (reg & B_OUT2) { tgl_OUT2; if (core_bool_is_visual_enabled()) tgl_LED_2; }
+	if (reg & B_OUT3) { tgl_OUT3; if (core_bool_is_visual_enabled()) tgl_LED_3; }
+	if (reg & B_OUT4) { tgl_OUT4; if (core_bool_is_visual_enabled()) tgl_LED_4; }
+	if (reg & B_OUT5) { tgl_OUT5; if (core_bool_is_visual_enabled()) tgl_LED_5; }
+	if (reg & B_OUT6) { tgl_OUT6; if (core_bool_is_visual_enabled()) tgl_LED_6; }
+	if (reg & B_OUT7) { tgl_OUT7; if (core_bool_is_visual_enabled()) tgl_LED_7; }
+	if (reg & B_OUT8) { tgl_OUT8; if (core_bool_is_visual_enabled()) tgl_LED_8; }
+	if (reg & B_OUT9) { tgl_OUT9; if (core_bool_is_visual_enabled()) tgl_LED_9; }
 
 	app_regs.REG_OUTPUTS_TOGGLE = reg;
 	return true;
@@ -129,23 +129,22 @@ void app_read_REG_OUTPUTS_WRITE(void)
 	app_regs.REG_OUTPUTS_WRITE |= (read_OUT7) ? B_OUT7 : 0;
 	app_regs.REG_OUTPUTS_WRITE |= (read_OUT8) ? B_OUT8 : 0;
 	app_regs.REG_OUTPUTS_WRITE |= (read_OUT9) ? B_OUT9 : 0;
-
 }
 
 bool app_write_REG_OUTPUTS_WRITE(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 	
-	if (reg & B_OUT0) { set_OUT0; set_LED_0; } else { clr_OUT0; clr_LED_0; }
-	if (reg & B_OUT1) { set_OUT1; set_LED_1; } else { clr_OUT1; clr_LED_1; }
-	if (reg & B_OUT2) { set_OUT2; set_LED_2; } else { clr_OUT2; clr_LED_2; }
-	if (reg & B_OUT3) { set_OUT3; set_LED_3; } else { clr_OUT3; clr_LED_3; }
-	if (reg & B_OUT4) { set_OUT4; set_LED_4; } else { clr_OUT4; clr_LED_4; }
-	if (reg & B_OUT5) { set_OUT5; set_LED_5; } else { clr_OUT5; clr_LED_5; }
-	if (reg & B_OUT6) { set_OUT6; set_LED_6; } else { clr_OUT6; clr_LED_6; }
-	if (reg & B_OUT7) { set_OUT7; set_LED_7; } else { clr_OUT7; clr_LED_7; }
-	if (reg & B_OUT8) { set_OUT8; set_LED_8; } else { clr_OUT8; clr_LED_8; }
-	if (reg & B_OUT9) { set_OUT9; set_LED_9; } else { clr_OUT9; clr_LED_9; }
+	if (reg & B_OUT0) { set_OUT0; if (core_bool_is_visual_enabled()) set_LED_0; } else { clr_OUT0; clr_LED_0; }
+	if (reg & B_OUT1) { set_OUT1; if (core_bool_is_visual_enabled()) set_LED_1; } else { clr_OUT1; clr_LED_1; }
+	if (reg & B_OUT2) { set_OUT2; if (core_bool_is_visual_enabled()) set_LED_2; } else { clr_OUT2; clr_LED_2; }
+	if (reg & B_OUT3) { set_OUT3; if (core_bool_is_visual_enabled()) set_LED_3; } else { clr_OUT3; clr_LED_3; }
+	if (reg & B_OUT4) { set_OUT4; if (core_bool_is_visual_enabled()) set_LED_4; } else { clr_OUT4; clr_LED_4; }
+	if (reg & B_OUT5) { set_OUT5; if (core_bool_is_visual_enabled()) set_LED_5; } else { clr_OUT5; clr_LED_5; }
+	if (reg & B_OUT6) { set_OUT6; if (core_bool_is_visual_enabled()) set_LED_6; } else { clr_OUT6; clr_LED_6; }
+	if (reg & B_OUT7) { set_OUT7; if (core_bool_is_visual_enabled()) set_LED_7; } else { clr_OUT7; clr_LED_7; }
+	if (reg & B_OUT8) { set_OUT8; if (core_bool_is_visual_enabled()) set_LED_8; } else { clr_OUT8; clr_LED_8; }
+	if (reg & B_OUT9) { set_OUT9; if (core_bool_is_visual_enabled()) set_LED_9; } else { clr_OUT9; clr_LED_9; }
 		
 	app_regs.REG_OUTPUTS_WRITE = reg;
 	return true;
