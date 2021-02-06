@@ -7,7 +7,7 @@
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="12" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="4" altunitdist="mil" altunit="mil"/>
+<grid distance="19.6850394" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="4" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -767,13 +767,13 @@ Your Eurocircuits Team
 <attribute name="POPULARITY" value="0" x="35" y="36.032" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="35" y="41.112" size="1.778" layer="27" ratio="10"/>
 </element>
-<element name="SV2" library="CNP-connectors" package="CON_3.5MM_1X8" value="CON_3.5MM_1X8" x="31.848" y="8.128" smashed="yes" rot="R180">
-<attribute name="NAME" x="16.7692" y="2.5568" size="0.8128" layer="25" font="vector" ratio="15" rot="R270"/>
-<attribute name="VALUE" x="45.813" y="12.009" size="1.27" layer="27" ratio="10" rot="R180"/>
+<element name="SV2" library="CNP-connectors" package="CON_3.5MM_1X8" value="CON_3.5MM_1X8" x="31.048" y="7.628" smashed="yes" rot="R180">
+<attribute name="NAME" x="30.26" y="0.6276" size="0.8128" layer="25" font="vector" ratio="15"/>
+<attribute name="VALUE" x="45.013" y="11.509" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
-<element name="SV3" library="CNP-connectors" package="CON_3.5MM_1X2" value="CON_3.5MM_1X2" x="50.1585" y="8.128" smashed="yes" rot="R180">
-<attribute name="NAME" x="54.2596" y="2.5285" size="0.8128" layer="25" font="vector" ratio="15" rot="R270"/>
-<attribute name="VALUE" x="53.9635" y="12.009" size="1.27" layer="27" ratio="10" rot="R180"/>
+<element name="SV3" library="CNP-connectors" package="CON_3.5MM_1X2" value="CON_3.5MM_1X2" x="50.9585" y="7.628" smashed="yes" rot="R180">
+<attribute name="NAME" x="50.1699" y="0.6724" size="0.8128" layer="25" font="vector" ratio="15"/>
+<attribute name="VALUE" x="54.7635" y="11.509" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
 <element name="R2" library="rcl" package="R0603" value="2.2k" x="49.4792" y="32.512" smashed="yes" rot="R270">
 <attribute name="NAME" x="47.8028" y="33.3756" size="0.8128" layer="25" font="vector" ratio="15" rot="R270"/>
@@ -806,7 +806,7 @@ Your Eurocircuits Team
 <element name="SW0" library="switch-omron" package="B3F-40XX" value="" x="19.2024" y="22.5552" smashed="yes" rot="R90">
 <attribute name="MF" value="OMRON COMPONENTS USA" x="19.2024" y="22.5552" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="B3F-4000" x="19.2024" y="22.5552" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="NAME" x="18.1864" y="29.2354" size="0.8128" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="12.163" y="22.6008" size="1.27" layer="25" font="vector" ratio="15" rot="R90" align="bottom-center"/>
 <attribute name="OC_FARNELL" value="176434" x="19.2024" y="22.5552" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="OC_NEWARK" value="36K3105" x="19.2024" y="22.5552" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="VALUE" x="24.2824" y="19.3802" size="1.27" layer="27" ratio="10" rot="R90"/>
@@ -814,7 +814,7 @@ Your Eurocircuits Team
 <element name="SW1" library="switch-omron" package="B3F-40XX" value="" x="52.4256" y="22.5552" smashed="yes" rot="R90">
 <attribute name="MF" value="OMRON COMPONENTS USA" x="52.4256" y="22.5552" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="B3F-4000" x="52.4256" y="22.5552" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="NAME" x="51.4096" y="29.2354" size="0.8128" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="60.7822" y="22.5552" size="1.27" layer="25" font="vector" ratio="15" rot="R90" align="bottom-center"/>
 <attribute name="OC_FARNELL" value="176434" x="52.4256" y="22.5552" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="OC_NEWARK" value="36K3105" x="52.4256" y="22.5552" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="VALUE" x="57.5056" y="19.3802" size="1.27" layer="27" ratio="10" rot="R90"/>
@@ -863,7 +863,7 @@ Your Eurocircuits Team
 <contactref element="SV1" pad="10"/>
 <contactref element="SV3" pad="P1"/>
 <wire x1="50.1756" y1="37.302" x2="40.08" y2="37.302" width="1.27" layer="16"/>
-<wire x1="52.2485" y1="8.128" x2="52.2478" y2="8.1287" width="1.27" layer="16"/>
+<wire x1="53.0485" y1="7.628" x2="52.2478" y2="8.4287" width="1.27" layer="16"/>
 <wire x1="40.08" y1="37.302" x2="38.3676" y2="39.0144" width="0.3048" layer="1"/>
 <wire x1="38.3676" y1="39.0144" x2="24.6888" y2="39.0144" width="0.3048" layer="1"/>
 <wire x1="24.0792" y1="38.4048" x2="24.0792" y2="37.7952" width="0.3048" layer="1"/>
@@ -875,17 +875,16 @@ Your Eurocircuits Team
 <wire x1="24.0792" y1="29.5656" x2="23.3172" y2="28.8036" width="0.3048" layer="16"/>
 <contactref element="SW1" pad="4"/>
 <wire x1="52.2478" y1="35.2298" x2="50.1756" y2="37.302" width="1.27" layer="16"/>
-<wire x1="52.2478" y1="8.1287" x2="52.2478" y2="28.6512" width="1.27" layer="16"/>
-<wire x1="52.2478" y1="28.6512" x2="52.2478" y2="31.6992" width="1.27" layer="16"/>
-<wire x1="52.2478" y1="31.6992" x2="52.2478" y2="35.2298" width="1.27" layer="16"/>
+<wire x1="52.2478" y1="8.4287" x2="52.2478" y2="28.6512" width="1.27" layer="16"/>
+<wire x1="52.2478" y1="28.6512" x2="52.2478" y2="35.2298" width="1.27" layer="16"/>
 <wire x1="54.9148" y1="28.8036" x2="52.4002" y2="28.8036" width="0.3048" layer="16"/>
 <wire x1="52.4002" y1="28.8036" x2="52.2478" y2="28.6512" width="0.3048" layer="16"/>
 </signal>
 <signal name="IO5">
 <contactref element="SV1" pad="1"/>
 <contactref element="SV2" pad="P7"/>
-<wire x1="23.098" y1="8.128" x2="23.098" y2="10.1252" width="0.3048" layer="16"/>
-<wire x1="23.098" y1="10.1252" x2="19.5072" y2="13.716" width="0.3048" layer="16"/>
+<wire x1="22.298" y1="7.628" x2="22.298" y2="10.9252" width="0.3048" layer="16"/>
+<wire x1="22.298" y1="10.9252" x2="19.5072" y2="13.716" width="0.3048" layer="16"/>
 <wire x1="19.5072" y1="13.716" x2="19.5072" y2="31.5468" width="0.3048" layer="16"/>
 <wire x1="19.5072" y1="31.5468" x2="22.7076" y2="34.7472" width="0.3048" layer="16"/>
 <via x="22.7076" y="34.7472" extent="1-16" drill="0.35"/>
@@ -895,27 +894,27 @@ Your Eurocircuits Team
 <signal name="IO6">
 <contactref element="SV1" pad="2"/>
 <contactref element="SV2" pad="P6"/>
-<wire x1="26.598" y1="8.128" x2="26.598" y2="33.98" width="0.3048" layer="16"/>
-<wire x1="26.598" y1="33.98" x2="29.92" y2="37.302" width="0.3048" layer="16"/>
+<wire x1="25.798" y1="7.628" x2="25.798" y2="33.18" width="0.3048" layer="16"/>
+<wire x1="25.798" y1="33.18" x2="29.92" y2="37.302" width="0.3048" layer="16"/>
 </signal>
 <signal name="IO7">
 <contactref element="SV1" pad="3"/>
 <contactref element="SV2" pad="P5"/>
-<wire x1="30.098" y1="8.128" x2="32.46" y2="10.49" width="0.3048" layer="1"/>
-<wire x1="32.46" y1="10.49" x2="32.46" y2="34.762" width="0.3048" layer="1"/>
+<wire x1="29.298" y1="7.628" x2="32.46" y2="10.79" width="0.3048" layer="1"/>
+<wire x1="32.46" y1="10.79" x2="32.46" y2="34.762" width="0.3048" layer="1"/>
 </signal>
 <signal name="IO8">
 <contactref element="SV1" pad="4"/>
 <contactref element="SV2" pad="P4"/>
-<wire x1="33.7185" y1="8.2485" x2="33.598" y2="8.128" width="0.3048" layer="1"/>
+<wire x1="33.7185" y1="8.5485" x2="32.798" y2="7.628" width="0.3048" layer="1"/>
 <wire x1="33.7185" y1="36.0435" x2="32.46" y2="37.302" width="0.3048" layer="1"/>
-<wire x1="33.7185" y1="8.2485" x2="33.7185" y2="36.0435" width="0.3048" layer="1"/>
+<wire x1="33.7185" y1="8.5485" x2="33.7185" y2="36.0435" width="0.3048" layer="1"/>
 </signal>
 <signal name="IO9">
 <contactref element="SV1" pad="5"/>
 <contactref element="SV2" pad="P3"/>
-<wire x1="35.0406" y1="34.7468" x2="35.0406" y2="10.1854" width="0.3048" layer="1"/>
-<wire x1="37.098" y1="8.128" x2="35.0406" y2="10.1854" width="0.3048" layer="1"/>
+<wire x1="35.0406" y1="34.7468" x2="35.0406" y2="8.8854" width="0.3048" layer="1"/>
+<wire x1="36.298" y1="7.628" x2="35.0406" y2="8.8854" width="0.3048" layer="1"/>
 <wire x1="35.0406" y1="34.7468" x2="35.0254" y2="34.762" width="0.3048" layer="1"/>
 <wire x1="35.0254" y1="34.762" x2="35" y2="34.762" width="0.3048" layer="1"/>
 </signal>
@@ -980,15 +979,15 @@ Your Eurocircuits Team
 <signal name="AUX_IN0_CONNECTOR">
 <contactref element="SV2" pad="P2"/>
 <contactref element="JP1" pad="3"/>
-<wire x1="40.598" y1="8.128" x2="40.598" y2="18.5332" width="0.3048" layer="16"/>
-<wire x1="40.598" y1="18.5332" x2="37.7952" y2="21.336" width="0.3048" layer="16"/>
+<wire x1="39.798" y1="7.628" x2="39.798" y2="19.3332" width="0.3048" layer="16"/>
+<wire x1="39.798" y1="19.3332" x2="37.7952" y2="21.336" width="0.3048" layer="16"/>
 <wire x1="37.7952" y1="21.336" x2="30.3784" y2="21.336" width="0.3048" layer="16"/>
 </signal>
 <signal name="AUX_IN1_CONNECTOR">
 <contactref element="SV2" pad="P1"/>
 <contactref element="JP2" pad="3"/>
-<wire x1="41.6256" y1="21.7328" x2="44.098" y2="19.2604" width="0.3048" layer="1"/>
-<wire x1="44.098" y1="19.2604" x2="44.098" y2="8.128" width="0.3048" layer="1"/>
+<wire x1="41.6256" y1="21.7328" x2="43.298" y2="20.0604" width="0.3048" layer="1"/>
+<wire x1="43.298" y1="20.0604" x2="43.298" y2="7.628" width="0.3048" layer="1"/>
 </signal>
 <signal name="S$1">
 <via x="6.35" y="37.1602" extent="1-16" drill="6.858"/>
