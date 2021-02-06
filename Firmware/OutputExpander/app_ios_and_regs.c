@@ -9,17 +9,7 @@ void init_ios(void)
 {	/* Configure input pins */
 	io_pin2in(&PORTE, 2, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // AUX_INPUT0
 	io_pin2in(&PORTE, 5, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // AUX_INPUT1
-	io_pin2in(&PORTE, 3, PULL_IO_UP, SENSE_IO_EDGES_BOTH);               // IS_INPUT
-	io_pin2in(&PORTD, 4, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN0
-	io_pin2in(&PORTD, 3, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN1
-	io_pin2in(&PORTD, 2, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN2
-	io_pin2in(&PORTD, 1, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN3
-	io_pin2in(&PORTD, 0, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN4
-	io_pin2in(&PORTC, 0, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN5
-	io_pin2in(&PORTC, 1, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN6
-	io_pin2in(&PORTC, 2, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN7
-	io_pin2in(&PORTC, 3, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN8
-	io_pin2in(&PORTE, 0, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);         // IN9
+	io_pin2in(&PORTE, 3, PULL_IO_UP, SENSE_IO_EDGES_BOTH);               // IS_OUTPUT
 	io_pin2in(&PORTA, 0, PULL_IO_DOWN, SENSE_IO_EDGES_BOTH);             // PA0
 	io_pin2in(&PORTA, 1, PULL_IO_DOWN, SENSE_IO_EDGES_BOTH);             // PA1
 	io_pin2in(&PORTA, 2, PULL_IO_DOWN, SENSE_IO_EDGES_BOTH);             // PA2
@@ -62,16 +52,6 @@ void init_ios(void)
 	/* Configure input interrupts */
 	io_set_int(&PORTE, INT_LEVEL_LOW, 0, (1<<2), false);                 // AUX_INPUT0
 	io_set_int(&PORTE, INT_LEVEL_LOW, 0, (1<<5), false);                 // AUX_INPUT1
-	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<4), false);                 // IN0
-	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<3), false);                 // IN1
-	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<2), false);                 // IN2
-	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<1), false);                 // IN3
-	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<0), false);                 // IN4
-	io_set_int(&PORTC, INT_LEVEL_LOW, 0, (1<<0), false);                 // IN5
-	io_set_int(&PORTC, INT_LEVEL_LOW, 0, (1<<1), false);                 // IN6
-	io_set_int(&PORTC, INT_LEVEL_LOW, 0, (1<<2), false);                 // IN7
-	io_set_int(&PORTC, INT_LEVEL_LOW, 0, (1<<3), false);                 // IN8
-	io_set_int(&PORTE, INT_LEVEL_LOW, 1, (1<<0), false);                 // IN9
 
 	/* Configure output pins */
 	io_pin2out(&PORTH, 0, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // LED_0
@@ -90,6 +70,16 @@ void init_ios(void)
 	io_pin2out(&PORTB, 6, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // IDE_IOS_EN
 	io_pin2out(&PORTD, 7, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // BNC_IOS_DIR
 	io_pin2out(&PORTD, 6, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // BNC_IOS_EN
+	io_pin2out(&PORTD, 4, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // OUT0
+	io_pin2out(&PORTD, 3, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // OUT1
+	io_pin2out(&PORTD, 2, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // OUT2
+	io_pin2out(&PORTD, 1, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // OUT3
+	io_pin2out(&PORTD, 0, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // OUT4
+	io_pin2out(&PORTC, 0, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // OUT5
+	io_pin2out(&PORTC, 1, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // OUT6
+	io_pin2out(&PORTC, 2, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // OUT7
+	io_pin2out(&PORTC, 3, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // OUT8
+	io_pin2out(&PORTE, 0, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // OUT9
 
 	/* Initialize output pins */
 	clr_LED_0;
@@ -104,10 +94,20 @@ void init_ios(void)
 	clr_LED_9;
 	clr_LED_PWR;
 	clr_LED_STATE;
-	set_IDE_IOS_DIR;
+	clr_IDE_IOS_DIR;
 	clr_IDE_IOS_EN;
-	set_BNC_IOS_DIR;
+	clr_BNC_IOS_DIR;
 	clr_BNC_IOS_EN;
+	clr_OUT0;
+	clr_OUT1;
+	clr_OUT2;
+	clr_OUT3;
+	clr_OUT4;
+	clr_OUT5;
+	clr_OUT6;
+	clr_OUT7;
+	clr_OUT8;
+	clr_OUT9;
 }
 
 /************************************************************************/
@@ -120,7 +120,7 @@ uint8_t app_regs_type[] = {
 	TYPE_U16,
 	TYPE_U16,
 	TYPE_U16,
-	TYPE_U8,
+	TYPE_U16,
 	TYPE_U8,
 	TYPE_U8,
 	TYPE_U8
@@ -128,7 +128,7 @@ uint8_t app_regs_type[] = {
 
 uint16_t app_regs_n_elements[] = {
 	1,
-	2,
+	1,
 	1,
 	1,
 	1,
@@ -139,10 +139,10 @@ uint16_t app_regs_n_elements[] = {
 
 uint8_t *app_regs_pointer[] = {
 	(uint8_t*)(&app_regs.REG_AUX_INPUTS),
-	(uint8_t*)(app_regs.REG_INPUTS),
-	(uint8_t*)(&app_regs.REG_RISING_EDGE_ENABLE),
-	(uint8_t*)(&app_regs.REG_FALLING_EDGE_ENABLE),
-	(uint8_t*)(&app_regs.REG_INPUT_MODE),
+	(uint8_t*)(&app_regs.REG_OUTPUTS_SET),
+	(uint8_t*)(&app_regs.REG_OUTPUTS_CLEAR),
+	(uint8_t*)(&app_regs.REG_OUTPUTS_TOGGLE),
+	(uint8_t*)(&app_regs.REG_OUTPUTS_WRITE),
 	(uint8_t*)(&app_regs.REG_RESERVED0),
 	(uint8_t*)(&app_regs.REG_RESERVED1),
 	(uint8_t*)(&app_regs.REG_EXPANSION_OPTIONS)

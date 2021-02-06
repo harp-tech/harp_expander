@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.C</ToolchainName>
-    <ProjectGuid>{d4cc7258-f73c-4625-a4da-7ba2e029f314}</ProjectGuid>
+    <ProjectGuid>{07d859b3-5dec-45e3-af27-8a430bf51d6f}</ProjectGuid>
     <avrdevice>ATxmega128A1U</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>

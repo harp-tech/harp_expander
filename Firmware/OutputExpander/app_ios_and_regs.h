@@ -8,17 +8,7 @@ void init_ios(void);
 /************************************************************************/
 // AUX_INPUT0             Description: Auxiliar input 0
 // AUX_INPUT1             Description: Auxiliar input 1
-// IS_INPUT               Description: Check for the right hardware
-// IN0                    Description: Input 0
-// IN1                    Description: Input 1
-// IN2                    Description: Input 2
-// IN3                    Description: Input 3
-// IN4                    Description: Input 4
-// IN5                    Description: Input 5
-// IN6                    Description: Input 6
-// IN7                    Description: Input 7
-// IN8                    Description: Input 8
-// IN9                    Description: Input 9
+// IS_OUTPUT              Description: Check for the right hardware
 // PA0                    Description: 
 // PA1                    Description: 
 // PA2                    Description: 
@@ -60,17 +50,7 @@ void init_ios(void);
 
 #define read_AUX_INPUT0 read_io(PORTE, 2)       // AUX_INPUT0
 #define read_AUX_INPUT1 read_io(PORTE, 5)       // AUX_INPUT1
-#define read_IS_INPUT read_io(PORTE, 3)         // IS_INPUT
-#define read_IN0 read_io(PORTD, 4)              // IN0
-#define read_IN1 read_io(PORTD, 3)              // IN1
-#define read_IN2 read_io(PORTD, 2)              // IN2
-#define read_IN3 read_io(PORTD, 1)              // IN3
-#define read_IN4 read_io(PORTD, 0)              // IN4
-#define read_IN5 read_io(PORTC, 0)              // IN5
-#define read_IN6 read_io(PORTC, 1)              // IN6
-#define read_IN7 read_io(PORTC, 2)              // IN7
-#define read_IN8 read_io(PORTC, 3)              // IN8
-#define read_IN9 read_io(PORTE, 0)              // IN9
+#define read_IS_OUTPUT read_io(PORTE, 3)        // IS_OUTPUT
 #define read_PA0 read_io(PORTA, 0)              // PA0
 #define read_PA1 read_io(PORTA, 1)              // PA1
 #define read_PA2 read_io(PORTA, 2)              // PA2
@@ -113,22 +93,32 @@ void init_ios(void);
 /************************************************************************/
 /* Definition of output pins                                            */
 /************************************************************************/
-// LED_0                  Description: Drives the I0 LED
-// LED_1                  Description: Drives the I1 LED
-// LED_2                  Description: Drives the I2 LED
-// LED_3                  Description: Drives the I3 LED
-// LED_4                  Description: Drives the I4 LED
-// LED_5                  Description: Drives the I5 LED
-// LED_6                  Description: Drives the I6 LED
-// LED_7                  Description: Drives the I7 LED
-// LED_8                  Description: Drives the I8 LED
-// LED_9                  Description: Drives the I9 LED
+// LED_0                  Description: Drives the LED 0
+// LED_1                  Description: Drives the LED 1
+// LED_2                  Description: Drives the LED 2
+// LED_3                  Description: Drives the LED 3
+// LED_4                  Description: Drives the LED 4
+// LED_5                  Description: Drives the LED 5
+// LED_6                  Description: Drives the LED 6
+// LED_7                  Description: Drives the LED 7
+// LED_8                  Description: Drives the LED 8
+// LED_9                  Description: Drives the LED 9
 // LED_PWR                Description: Drives the PWR LED
 // LED_STATE              Description: Drives the STATE LED
 // IDE_IOS_DIR            Description: Direction control
 // IDE_IOS_EN             Description: Buffer enable
 // BNC_IOS_DIR            Description: Direction control
 // BNC_IOS_EN             Description: Buffer enable
+// OUT0                   Description: Output 0
+// OUT1                   Description: Output 1
+// OUT2                   Description: Output 2
+// OUT3                   Description: Output 3
+// OUT4                   Description: Output 4
+// OUT5                   Description: Output 5
+// OUT6                   Description: Output 6
+// OUT7                   Description: Output 7
+// OUT8                   Description: Output 8
+// OUT9                   Description: Output 9
 
 /* LED_0 */
 #define set_LED_0 set_io(PORTH, 0)
@@ -226,6 +216,66 @@ void init_ios(void);
 #define tgl_BNC_IOS_EN toggle_io(PORTD, 6)
 #define read_BNC_IOS_EN read_io(PORTD, 6)
 
+/* OUT0 */
+#define set_OUT0 set_io(PORTD, 4)
+#define clr_OUT0 clear_io(PORTD, 4)
+#define tgl_OUT0 toggle_io(PORTD, 4)
+#define read_OUT0 read_io(PORTD, 4)
+
+/* OUT1 */
+#define set_OUT1 set_io(PORTD, 3)
+#define clr_OUT1 clear_io(PORTD, 3)
+#define tgl_OUT1 toggle_io(PORTD, 3)
+#define read_OUT1 read_io(PORTD, 3)
+
+/* OUT2 */
+#define set_OUT2 set_io(PORTD, 2)
+#define clr_OUT2 clear_io(PORTD, 2)
+#define tgl_OUT2 toggle_io(PORTD, 2)
+#define read_OUT2 read_io(PORTD, 2)
+
+/* OUT3 */
+#define set_OUT3 set_io(PORTD, 1)
+#define clr_OUT3 clear_io(PORTD, 1)
+#define tgl_OUT3 toggle_io(PORTD, 1)
+#define read_OUT3 read_io(PORTD, 1)
+
+/* OUT4 */
+#define set_OUT4 set_io(PORTD, 0)
+#define clr_OUT4 clear_io(PORTD, 0)
+#define tgl_OUT4 toggle_io(PORTD, 0)
+#define read_OUT4 read_io(PORTD, 0)
+
+/* OUT5 */
+#define set_OUT5 set_io(PORTC, 0)
+#define clr_OUT5 clear_io(PORTC, 0)
+#define tgl_OUT5 toggle_io(PORTC, 0)
+#define read_OUT5 read_io(PORTC, 0)
+
+/* OUT6 */
+#define set_OUT6 set_io(PORTC, 1)
+#define clr_OUT6 clear_io(PORTC, 1)
+#define tgl_OUT6 toggle_io(PORTC, 1)
+#define read_OUT6 read_io(PORTC, 1)
+
+/* OUT7 */
+#define set_OUT7 set_io(PORTC, 2)
+#define clr_OUT7 clear_io(PORTC, 2)
+#define tgl_OUT7 toggle_io(PORTC, 2)
+#define read_OUT7 read_io(PORTC, 2)
+
+/* OUT8 */
+#define set_OUT8 set_io(PORTC, 3)
+#define clr_OUT8 clear_io(PORTC, 3)
+#define tgl_OUT8 toggle_io(PORTC, 3)
+#define read_OUT8 read_io(PORTC, 3)
+
+/* OUT9 */
+#define set_OUT9 set_io(PORTE, 0)
+#define clr_OUT9 clear_io(PORTE, 0)
+#define tgl_OUT9 toggle_io(PORTE, 0)
+#define read_OUT9 read_io(PORTE, 0)
+
 
 /************************************************************************/
 /* Registers' structure                                                 */
@@ -233,10 +283,10 @@ void init_ios(void);
 typedef struct
 {
 	uint8_t REG_AUX_INPUTS;
-	uint16_t REG_INPUTS[2];
-	uint16_t REG_RISING_EDGE_ENABLE;
-	uint16_t REG_FALLING_EDGE_ENABLE;
-	uint8_t REG_INPUT_MODE;
+	uint16_t REG_OUTPUTS_SET;
+	uint16_t REG_OUTPUTS_CLEAR;
+	uint16_t REG_OUTPUTS_TOGGLE;
+	uint16_t REG_OUTPUTS_WRITE;
 	uint8_t REG_RESERVED0;
 	uint8_t REG_RESERVED1;
 	uint8_t REG_EXPANSION_OPTIONS;
@@ -247,10 +297,10 @@ typedef struct
 /************************************************************************/
 /* Registers */
 #define ADD_REG_AUX_INPUTS                  32 // U8     State of the auxiliar inputs
-#define ADD_REG_INPUTS                      33 // U16    State of the inputs [0] , change masks [1]
-#define ADD_REG_RISING_EDGE_ENABLE          34 // U16    Enables the rising edge detection of the correspondet input (bitmask)
-#define ADD_REG_FALLING_EDGE_ENABLE         35 // U16    Enables the falling edge detection of the correspondet input (bitmask)
-#define ADD_REG_INPUT_MODE                  36 // U8     Configures the input mode
+#define ADD_REG_OUTPUTS_SET                 33 // U16    Set the outputs
+#define ADD_REG_OUTPUTS_CLEAR               34 // U16    Clear the outputs
+#define ADD_REG_OUTPUTS_TOGGLE              35 // U16    Toggle the outputs
+#define ADD_REG_OUTPUTS_WRITE               36 // U16    Write to all outputs at once
 #define ADD_REG_RESERVED0                   37 // U8     
 #define ADD_REG_RESERVED1                   38 // U8     
 #define ADD_REG_EXPANSION_OPTIONS           39 // U8     Selects the current expansion board available in the EXPANSION port
@@ -264,7 +314,7 @@ typedef struct
 /* Memory limits */
 #define APP_REGS_ADD_MIN                    0x20
 #define APP_REGS_ADD_MAX                    0x27
-#define APP_NBYTES_OF_REG_BANK              13
+#define APP_NBYTES_OF_REG_BANK              12
 
 /************************************************************************/
 /* Registers' bits                                                      */
@@ -273,31 +323,24 @@ typedef struct
 #define B_AUX_IN1                          (1<<1)       // Auxiliar input 1
 #define B_AUX_IN0_CHANGE_MSK               (1<<4)       // Set when the Auxiliar input 0 created the interrupt
 #define B_AUX_IN1_CHANGE_MSK               (1<<5)       // Set when the Auxiliar input 1 created the interrupt
-#define B_IN0                              (1<<0)       // Digital IN0
-#define B_IN1                              (1<<1)       // Digital IN1
-#define B_IN2                              (1<<2)       // Digital IN2
-#define B_IN3                              (1<<3)       // Digital IN3
-#define B_IN4                              (1<<4)       // Digital IN4
-#define B_IN5                              (1<<5)       // Digital IN5
-#define B_IN6                              (1<<6)       // Digital IN6
-#define B_IN7                              (1<<7)       // Digital IN7
-#define B_IN8                              (1<<8)       // Digital IN8
-#define B_IN9                              (1<<9)       // Digital IN9
-#define B_IN0_CHANGE_MSK                   (1<<0)       // Set when the digital input 0 created the interrupt
-#define B_IN1_CHANGE_MSK                   (1<<1)       // Set when the digital input 1 created the interrupt
-#define B_IN2_CHANGE_MSK                   (1<<2)       // Set when the digital input 2 created the interrupt
-#define B_IN3_CHANGE_MSK                   (1<<3)       // Set when the digital input 3 created the interrupt
-#define B_IN4_CHANGE_MSK                   (1<<4)       // Set when the digital input 4 created the interrupt
-#define B_IN5_CHANGE_MSK                   (1<<5)       // Set when the digital input 5 created the interrupt
-#define B_IN6_CHANGE_MSK                   (1<<6)       // Set when the digital input 6 created the interrupt
-#define B_IN7_CHANGE_MSK                   (1<<7)       // Set when the digital input 7 created the interrupt
-#define B_IN8_CHANGE_MSK                   (1<<8)       // Set when the digital input 8 created the interrupt
-#define B_IN9_CHANGE_MSK                   (1<<9)       // Set when the digital input 9 created the interrupt
-#define GM_INPUT_MODE                      1            // 
-#define MSK_ON_INTERRUPTS                  0            // 
-#define MSK_AT_1000FPS                     1            // 
-#define MSK_AT_2000FPS                     2            // 
-#define GM_EXPANSION_OPTIONS               1            // 
+#define B_OUT0                             (1<<0)       // Digital OUT0
+#define B_OUT1                             (1<<1)       // Digital OUT1
+#define B_OUT2                             (1<<2)       // Digital OUT2
+#define B_OUT3                             (1<<3)       // Digital OUT3
+#define B_OUT4                             (1<<4)       // Digital OUT4
+#define B_OUT5                             (1<<5)       // Digital OUT5
+#define B_OUT6                             (1<<6)       // Digital OUT6
+#define B_OUT7                             (1<<7)       // Digital OUT7
+#define B_OUT8                             (1<<8)       // Digital OUT8
+#define B_OUT9                             (1<<9)       // Digital OUT9
+#define GM_EXPANSION_OPTIONS               7            // 
 #define MSK_BREAKOUT                       0            // 
+#define MSK_MAGNETIC_ENCODER               1            // 
+#define MSK_SERVO_MOTOR_1                  2            // 
+#define MSK_SERVO_MOTOR_2                  3            // 
+#define MSK_SERVO_MOTOR_3                  4            // 
+#define MSK_CAMERAS                        5            // 
+#define MSK_PWM_1                          6            // 
+#define MSK_PWM_2                          7            // 
 
 #endif /* _APP_REGS_H_ */

@@ -10,6 +10,32 @@
 extern AppRegs app_regs;
 
 /************************************************************************/
+/* Local functions                                                      */
+/************************************************************************/
+uint16_t inputs_previous_read = 0;
+
+void check_for_event_and_update_LEDs(void)
+{
+	uint16_t inputs_current_read  = (read_IN0 ? B_IN0 : 0) | (read_IN1 ? B_IN1 : 0) | (read_IN2 ? B_IN2 : 0) | (read_IN3 ? B_IN3 : 0) | (read_IN4 ? B_IN4 : 0);
+	         inputs_current_read |= (read_IN5 ? B_IN5 : 0) | (read_IN6 ? B_IN6 : 0) | (read_IN7 ? B_IN7 : 0) | (read_IN8 ? B_IN8 : 0) | (read_IN9 ? B_IN9 : 0);
+	
+	if (inputs_previous_read != inputs_current_read)
+	{
+		app_regs.REG_INPUTS[0] = inputs_current_read;
+		app_regs.REG_INPUTS[1] = inputs_previous_read ^ inputs_current_read;
+		
+		core_func_send_event(ADD_REG_INPUTS, true);
+		
+		inputs_previous_read = inputs_current_read;
+		
+		/* Update LEDs */
+		PORTH_OUT = (uint8_t) app_regs.REG_INPUTS[0];
+		if (app_regs.REG_INPUTS[0] & B_IN8) { set_LED_8; } else { clr_LED_8; }
+		if (app_regs.REG_INPUTS[0] & B_IN9) { set_LED_9; } else { clr_LED_9; }
+	}
+}
+
+/************************************************************************/
 /* Interrupts from Timers                                               */
 /************************************************************************/
 // ISR(TCC0_OVF_vect, ISR_NAKED)
@@ -27,79 +53,28 @@ extern AppRegs app_regs;
 // ISR(TCD1_CCA_vect, ISR_NAKED)
 
 /************************************************************************/ 
-/* AUX_INPUT0                                                           */
+/* AUX_INPUT0-1                                                         */
 /************************************************************************/
+uint8_t aux_inputs_previous_read = 0;
+
 ISR(PORTE_INT0_vect, ISR_NAKED)
 {
-	app_regs.REG_AUX_INPUTS &= ~(B_AUX_IN0);
-	app_regs.REG_AUX_INPUTS |= (read_AUX_INPUT0) ? B_AUX_IN0 : 0;
-	core_func_send_event(ADD_REG_AUX_INPUTS, true);
+	uint8_t aux_inputs_current_read = (read_AUX_INPUT0 ? B_AUX_IN0 : 0) | (read_AUX_INPUT1 ? B_AUX_IN1 : 0);
 	
-	if (read_AUX_INPUT0)
-		PORTH_OUTSET = 0x1F;
-	else
-		PORTH_OUTCLR = 0x1F;
+	app_regs.REG_AUX_INPUTS = 0;
+	
+	if ((aux_inputs_current_read ^ aux_inputs_previous_read) & B_AUX_IN0) { app_regs.REG_AUX_INPUTS |= B_AUX_IN0_CHANGE_MSK; }
+	if ((aux_inputs_current_read ^ aux_inputs_previous_read) & B_AUX_IN1) { app_regs.REG_AUX_INPUTS |= B_AUX_IN1_CHANGE_MSK; }
+	
+	if (app_regs.REG_AUX_INPUTS)
+	{
+		app_regs.REG_AUX_INPUTS |= (aux_inputs_current_read & (B_AUX_IN0 | B_AUX_IN1));
+		core_func_send_event(ADD_REG_AUX_INPUTS, true);
+	}
+	
+	aux_inputs_previous_read = aux_inputs_current_read;
 	
 	reti();
-}
-
-/************************************************************************/ 
-/* AUX_INPUT1                                                           */
-/************************************************************************/
-bool aux1_prev_state = false;
-ISR(PORTE_INT1_vect, ISR_NAKED)
-{	
-	if (read_AUX_INPUT1)
-	{
-		if (!aux1_prev_state)
-		{		
-			aux1_prev_state = true;
-			
-			app_regs.REG_AUX_INPUTS &= ~(B_AUX_IN1);
-			app_regs.REG_AUX_INPUTS |= (read_AUX_INPUT1) ? B_AUX_IN1 : 0;
-			core_func_send_event(ADD_REG_AUX_INPUTS, true);
-			
-			PORTH_OUTSET = 0xE0;
-			PORTJ_OUTSET = 0x07;
-		}
-	}
-	else
-	{
-		if (aux1_prev_state)
-		{
-			aux1_prev_state = false;
-			
-			app_regs.REG_AUX_INPUTS &= ~(B_AUX_IN1);
-			app_regs.REG_AUX_INPUTS |= (read_AUX_INPUT1) ? B_AUX_IN1 : 0;
-			core_func_send_event(ADD_REG_AUX_INPUTS, true);
-			
-			PORTH_OUTCLR = 0xE0;
-			PORTJ_OUTCLR = 0x07;
-		}
-	}
-		
-	reti();
-}
-
-void update_LEDs(void)
-{
-	PORTH_OUT = app_regs.REG_INPUTS;
-	if (read_IN8) {PORTJ_OUT |= 0x01;} else {PORTJ_OUT &= ~0x01;}
-	if (read_IN9) {PORTJ_OUT |= 0x02;} else {PORTJ_OUT &= ~0x02;}
-}
-
-void update_REG_INPUTS(void)
-{
-	app_regs.REG_INPUTS  = (read_IN0) ? B_IN0 : 0;
-	app_regs.REG_INPUTS |= (read_IN1) ? B_IN1 : 0;
-	app_regs.REG_INPUTS |= (read_IN2) ? B_IN2 : 0;
-	app_regs.REG_INPUTS |= (read_IN3) ? B_IN3 : 0;
-	app_regs.REG_INPUTS |= (read_IN4) ? B_IN4 : 0;
-	app_regs.REG_INPUTS |= (read_IN5) ? B_IN5 : 0;
-	app_regs.REG_INPUTS |= (read_IN6) ? B_IN6 : 0;
-	app_regs.REG_INPUTS |= (read_IN7) ? B_IN7 : 0;
-	app_regs.REG_INPUTS |= (read_IN8) ? B_IN8 : 0;
-	app_regs.REG_INPUTS |= (read_IN9) ? B_IN9 : 0;
 }
 
 /************************************************************************/ 
@@ -107,19 +82,25 @@ void update_REG_INPUTS(void)
 /************************************************************************/
 ISR(PORTD_INT0_vect, ISR_NAKED)
 {
-	update_REG_INPUTS();
-	core_func_send_event(ADD_REG_INPUTS, true);
-	update_LEDs();
+	check_for_event_and_update_LEDs();	
 	reti();
 }
 
 /************************************************************************/ 
-/* IN5-9                                                                */
+/* IN5-8                                                                */
 /************************************************************************/
 ISR(PORTC_INT0_vect, ISR_NAKED)
 {
-	update_REG_INPUTS();
-	core_func_send_event(ADD_REG_INPUTS, true);
-	update_LEDs();
+	check_for_event_and_update_LEDs();
 	reti();
 }
+
+/************************************************************************/ 
+/* IN9                                                                  */
+/************************************************************************/
+ISR(PORTE_INT1_vect, ISR_NAKED)
+{
+	check_for_event_and_update_LEDs();
+	reti();
+}
+

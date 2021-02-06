@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "InputExpander", "InputExpander\InputExpander.cproj", "{D4CC7258-F73C-4625-A4DA-7BA2E029F314}"
 EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "OutpuExpander", "OutputExpander\OutpuExpander.cproj", "{07D859B3-5DEC-45E3-AF27-8A430BF51D6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -15,6 +17,10 @@ Global
 		{D4CC7258-F73C-4625-A4DA-7BA2E029F314}.Debug|AVR.Build.0 = Debug|AVR
 		{D4CC7258-F73C-4625-A4DA-7BA2E029F314}.Release|AVR.ActiveCfg = Release|AVR
 		{D4CC7258-F73C-4625-A4DA-7BA2E029F314}.Release|AVR.Build.0 = Release|AVR
+		{07D859B3-5DEC-45E3-AF27-8A430BF51D6F}.Debug|AVR.ActiveCfg = Debug|AVR
+		{07D859B3-5DEC-45E3-AF27-8A430BF51D6F}.Debug|AVR.Build.0 = Debug|AVR
+		{07D859B3-5DEC-45E3-AF27-8A430BF51D6F}.Release|AVR.ActiveCfg = Release|AVR
+		{07D859B3-5DEC-45E3-AF27-8A430BF51D6F}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
