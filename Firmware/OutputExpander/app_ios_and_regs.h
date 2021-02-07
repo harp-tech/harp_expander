@@ -294,6 +294,12 @@ typedef struct
 	uint8_t REG_RESERVED3;
 	uint16_t REG_MAG_ENCODER_READ[2];
 	uint8_t REG_MAG_ENCODER_MODE;
+	uint8_t REG_RESERVED4;
+	uint8_t REG_RESERVED5;
+	uint16_t REG_SERVO_PERIOD_US;
+	uint16_t REG_SERVO0_PULSE_US;
+	uint16_t REG_SERVO1_PULSE_US;
+	uint16_t REG_SERVO2_PULSE_US;
 } AppRegs;
 
 /************************************************************************/
@@ -312,6 +318,12 @@ typedef struct
 #define ADD_REG_RESERVED3                   41 // U8     
 #define ADD_REG_MAG_ENCODER_READ            42 // U16    
 #define ADD_REG_MAG_ENCODER_MODE            43 // U8     
+#define ADD_REG_RESERVED4                   44 // U8     
+#define ADD_REG_RESERVED5                   45 // U8     
+#define ADD_REG_SERVO_PERIOD_US             46 // U16    
+#define ADD_REG_SERVO0_PULSE_US             47 // U16    
+#define ADD_REG_SERVO1_PULSE_US             48 // U16    
+#define ADD_REG_SERVO2_PULSE_US             49 // U16    
 
 /************************************************************************/
 /* PWM Generator registers' memory limits                               */
@@ -321,8 +333,8 @@ typedef struct
 /************************************************************************/
 /* Memory limits */
 #define APP_REGS_ADD_MIN                    0x20
-#define APP_REGS_ADD_MAX                    0x2B
-#define APP_NBYTES_OF_REG_BANK              19
+#define APP_REGS_ADD_MAX                    0x31
+#define APP_NBYTES_OF_REG_BANK              29
 
 /************************************************************************/
 /* Registers' bits                                                      */
@@ -349,7 +361,6 @@ typedef struct
 #define MSK_SERVO_MOTOR_3                  4            // 
 #define MSK_CAMERAS                        5            // 
 #define MSK_PWM_1                          6            // 
-#define MSK_PWM_2                          7            // 
 #define GM_MAG_ENCODER_MODE                7            // 
 #define MSK_AT_50SPS                       0            // 
 #define MSK_AT_100SPS                      1            // 

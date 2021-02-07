@@ -32,6 +32,12 @@ void app_read_REG_RESERVED2(void);
 void app_read_REG_RESERVED3(void);
 void app_read_REG_MAG_ENCODER_READ(void);
 void app_read_REG_MAG_ENCODER_MODE(void);
+void app_read_REG_RESERVED4(void);
+void app_read_REG_RESERVED5(void);
+void app_read_REG_SERVO_PERIOD_US(void);
+void app_read_REG_SERVO0_PULSE_US(void);
+void app_read_REG_SERVO1_PULSE_US(void);
+void app_read_REG_SERVO2_PULSE_US(void);
 
 bool app_write_REG_AUX_INPUTS(void *a);
 bool app_write_REG_OUTPUTS_SET(void *a);
@@ -45,6 +51,12 @@ bool app_write_REG_RESERVED2(void *a);
 bool app_write_REG_RESERVED3(void *a);
 bool app_write_REG_MAG_ENCODER_READ(void *a);
 bool app_write_REG_MAG_ENCODER_MODE(void *a);
+bool app_write_REG_RESERVED4(void *a);
+bool app_write_REG_RESERVED5(void *a);
+bool app_write_REG_SERVO_PERIOD_US(void *a);
+bool app_write_REG_SERVO0_PULSE_US(void *a);
+bool app_write_REG_SERVO1_PULSE_US(void *a);
+bool app_write_REG_SERVO2_PULSE_US(void *a);
 
 
 #endif /* _APP_FUNCTIONS_H_ */

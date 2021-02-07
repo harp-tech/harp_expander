@@ -112,7 +112,6 @@ void core_callback_reset_registers(void)
 	/* Initialize registers */
 	app_regs.REG_RISING_EDGE_ENABLE = B_IN0 | B_IN1 | B_IN2 | B_IN3 | B_IN4 | B_IN5 | B_IN6 | B_IN7 | B_IN8 | B_IN9;
 	app_regs.REG_FALLING_EDGE_ENABLE = B_IN0 | B_IN1 | B_IN2 | B_IN3 | B_IN4 | B_IN5 | B_IN6 | B_IN7 | B_IN8 | B_IN9;
-
 }
 
 void core_callback_registers_were_reinitialized(void)

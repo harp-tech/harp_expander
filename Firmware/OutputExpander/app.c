@@ -116,7 +116,10 @@ void core_callback_1st_config_hw_after_boot(void)
 void core_callback_reset_registers(void)
 {
 	/* Initialize registers */
-	
+	app_regs.REG_SERVO_PERIOD_US = 20000;	// 20 ms
+	app_regs.REG_SERVO0_PULSE_US = 1500;	// 1.5 ms
+	app_regs.REG_SERVO1_PULSE_US = 1500;	// 1.5 ms
+	app_regs.REG_SERVO2_PULSE_US = 1500;	// 1.5 ms
 }
 
 void core_callback_registers_were_reinitialized(void)
@@ -127,6 +130,11 @@ void core_callback_registers_were_reinitialized(void)
 	app_write_REG_EXPANSION_OPTIONS(&app_regs.REG_EXPANSION_OPTIONS);
 	
 	app_write_REG_MAG_ENCODER_MODE(&app_regs.REG_MAG_ENCODER_MODE);
+	
+	app_write_REG_SERVO_PERIOD_US(&app_regs.REG_SERVO_PERIOD_US);
+	app_write_REG_SERVO0_PULSE_US(&app_regs.REG_SERVO0_PULSE_US);
+	app_write_REG_SERVO1_PULSE_US(&app_regs.REG_SERVO1_PULSE_US);
+	app_write_REG_SERVO2_PULSE_US(&app_regs.REG_SERVO2_PULSE_US);
 }
 
 /************************************************************************/
@@ -161,6 +169,48 @@ void core_callback_visualen_to_on(void)
 			if (read_OUT7) set_LED_7;
 			if (read_OUT8) set_LED_8;
 			               set_LED_9;
+			break;
+			
+		case MSK_SERVO_MOTOR_1:
+			if (read_OUT0) set_LED_0;
+			if (read_OUT1) set_LED_1;
+			if (read_OUT2) set_LED_2;
+			if (read_OUT3) set_LED_3;
+			if (read_OUT4) set_LED_4;
+			               set_LED_5;
+			if (read_OUT6) set_LED_6;
+			if (read_OUT7) set_LED_7;
+			if (read_OUT8) set_LED_8;
+			if (read_OUT9) set_LED_9;
+			set_LED_9;
+			break;
+			
+		case MSK_SERVO_MOTOR_2:
+			if (read_OUT0) set_LED_0;
+			if (read_OUT1) set_LED_1;
+			if (read_OUT2) set_LED_2;
+			if (read_OUT3) set_LED_3;
+			if (read_OUT4) set_LED_4;
+			               set_LED_5;
+			               set_LED_6;
+			if (read_OUT7) set_LED_7;
+			if (read_OUT8) set_LED_8;
+			if (read_OUT9) set_LED_9;
+			set_LED_9;
+			break;
+			
+		case MSK_SERVO_MOTOR_3:
+			if (read_OUT0) set_LED_0;
+			if (read_OUT1) set_LED_1;
+			if (read_OUT2) set_LED_2;
+			if (read_OUT3) set_LED_3;
+			if (read_OUT4) set_LED_4;
+			               set_LED_5;
+			               set_LED_6;
+			               set_LED_7;
+			if (read_OUT8) set_LED_8;
+			if (read_OUT9) set_LED_9;
+			set_LED_9;
 			break;
 	 }
 	 
