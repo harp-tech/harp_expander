@@ -24,7 +24,11 @@ void check_for_event_and_update_LEDs(void)
 		app_regs.REG_INPUTS[0] = inputs_current_read;
 		app_regs.REG_INPUTS[1] = inputs_previous_read ^ inputs_current_read;
 		
-		core_func_send_event(ADD_REG_INPUTS, true);
+		if ((app_regs.REG_INPUTS[1] &   app_regs.REG_INPUTS[0]  & app_regs.REG_RISING_EDGE_ENABLE) ||
+		    (app_regs.REG_INPUTS[1] & (~app_regs.REG_INPUTS[0]) & app_regs.REG_FALLING_EDGE_ENABLE))
+			{
+				core_func_send_event(ADD_REG_INPUTS, true);
+			}
 		
 		inputs_previous_read = inputs_current_read;
 		
