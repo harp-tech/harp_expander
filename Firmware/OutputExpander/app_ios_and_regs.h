@@ -290,6 +290,10 @@ typedef struct
 	uint8_t REG_RESERVED0;
 	uint8_t REG_RESERVED1;
 	uint8_t REG_EXPANSION_OPTIONS;
+	uint8_t REG_RESERVED2;
+	uint8_t REG_RESERVED3;
+	uint16_t REG_MAG_ENCODER_READ[2];
+	uint8_t REG_MAG_ENCODER_MODE;
 } AppRegs;
 
 /************************************************************************/
@@ -304,6 +308,10 @@ typedef struct
 #define ADD_REG_RESERVED0                   37 // U8     
 #define ADD_REG_RESERVED1                   38 // U8     
 #define ADD_REG_EXPANSION_OPTIONS           39 // U8     Selects the current expansion board available in the EXPANSION port
+#define ADD_REG_RESERVED2                   40 // U8     
+#define ADD_REG_RESERVED3                   41 // U8     
+#define ADD_REG_MAG_ENCODER_READ            42 // U16    
+#define ADD_REG_MAG_ENCODER_MODE            43 // U8     
 
 /************************************************************************/
 /* PWM Generator registers' memory limits                               */
@@ -313,8 +321,8 @@ typedef struct
 /************************************************************************/
 /* Memory limits */
 #define APP_REGS_ADD_MIN                    0x20
-#define APP_REGS_ADD_MAX                    0x27
-#define APP_NBYTES_OF_REG_BANK              12
+#define APP_REGS_ADD_MAX                    0x2B
+#define APP_NBYTES_OF_REG_BANK              19
 
 /************************************************************************/
 /* Registers' bits                                                      */
@@ -342,5 +350,12 @@ typedef struct
 #define MSK_CAMERAS                        5            // 
 #define MSK_PWM_1                          6            // 
 #define MSK_PWM_2                          7            // 
+#define GM_MAG_ENCODER_MODE                7            // 
+#define MSK_AT_50SPS                       0            // 
+#define MSK_AT_100SPS                      1            // 
+#define MSK_AT_200SPS                      2            // 
+#define MSK_AT_250SPS                      3            // 
+#define MSK_AT_500SPS                      4            // 
+#define MSK_AT_1000SPS                     5            // 
 
 #endif /* _APP_REGS_H_ */

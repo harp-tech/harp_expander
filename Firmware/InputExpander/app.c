@@ -118,9 +118,9 @@ void core_callback_reset_registers(void)
 void core_callback_registers_were_reinitialized(void)
 {
 	/* Update registers if needed */
-	app_write_REG_EXPANSION_OPTIONS(&app_regs.REG_EXPANSION_OPTIONS);
-	app_regs.REG_INPUT_MODE = MSK_AT_1000FPS;
 	app_write_REG_INPUT_MODE(&app_regs.REG_INPUT_MODE);
+	
+	app_write_REG_EXPANSION_OPTIONS(&app_regs.REG_EXPANSION_OPTIONS);
 }
 
 /************************************************************************/
@@ -129,9 +129,15 @@ void core_callback_registers_were_reinitialized(void)
 void core_callback_visualen_to_on(void)
 {
 	/* Update visual indicators */
-	PORTH_OUT = (uint8_t) app_regs.REG_INPUTS[0];
-	if (app_regs.REG_INPUTS[0] & B_IN8) { set_LED_8; } else { clr_LED_8; }
-	if (app_regs.REG_INPUTS[0] & B_IN9) { set_LED_9; } else { clr_LED_9; }
+	switch (app_regs.REG_EXPANSION_OPTIONS)
+	{
+		case MSK_BREAKOUT:
+			PORTH_OUT = (uint8_t) app_regs.REG_INPUTS[0];
+			if (app_regs.REG_INPUTS[0] & B_IN8) { set_LED_8; } else { clr_LED_8; }
+			if (app_regs.REG_INPUTS[0] & B_IN9) { set_LED_9; } else { clr_LED_9; }
+			break;
+	}
+
 	set_LED_PWR;
 }
 

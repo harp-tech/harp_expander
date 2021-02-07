@@ -1,7 +1,7 @@
 # Harp Input Expander
 # Harp Output Expander
 
-Developed by OEPS and NeuroGEARS to expand the inputs and outputs of the current harp ecosystem.
+Harp board to expand the inputs and outputs of the current harp ecosystem.
 
 # Licensing
 

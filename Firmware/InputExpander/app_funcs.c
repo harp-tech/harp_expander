@@ -95,7 +95,8 @@ bool app_write_REG_INPUT_MODE(void *a)
 		case MSK_ON_INTERRUPTS:
 			inputs_previous_read  = (read_IN0 ? B_IN0 : 0) | (read_IN1 ? B_IN1 : 0) | (read_IN2 ? B_IN2 : 0) | (read_IN3 ? B_IN3 : 0) | (read_IN4 ? B_IN4 : 0);
 			inputs_previous_read |= (read_IN5 ? B_IN5 : 0) | (read_IN6 ? B_IN6 : 0) | (read_IN7 ? B_IN7 : 0) | (read_IN8 ? B_IN8 : 0) | (read_IN9 ? B_IN9 : 0);
-	
+			
+			/* Enable all the interrupts */
 			io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<4), false);                 // IN0
 			io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<3), false);                 // IN1
 			io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<2), false);                 // IN2
@@ -114,17 +115,10 @@ bool app_write_REG_INPUT_MODE(void *a)
 			/* Don't use the change mask */
 			app_regs.REG_INPUTS[1]  = 0;
 	
-			/* Disable interrupts */
-			io_set_int(&PORTD, INT_LEVEL_OFF, 0, (1<<4), false);                 // IN0
-			io_set_int(&PORTD, INT_LEVEL_OFF, 0, (1<<3), false);                 // IN1
-			io_set_int(&PORTD, INT_LEVEL_OFF, 0, (1<<2), false);                 // IN2
-			io_set_int(&PORTD, INT_LEVEL_OFF, 0, (1<<1), false);                 // IN3
-			io_set_int(&PORTD, INT_LEVEL_OFF, 0, (1<<0), false);                 // IN4
-			io_set_int(&PORTC, INT_LEVEL_OFF, 0, (1<<0), false);                 // IN5
-			io_set_int(&PORTC, INT_LEVEL_OFF, 0, (1<<1), false);                 // IN6
-			io_set_int(&PORTC, INT_LEVEL_OFF, 0, (1<<2), false);                 // IN7
-			io_set_int(&PORTC, INT_LEVEL_OFF, 0, (1<<3), false);                 // IN8
-			io_set_int(&PORTE, INT_LEVEL_OFF, 1, (1<<0), false);                 // IN9
+			/* Disable interrupts on PORTD N=0, PORTC N=0 and PORTE N=1*/
+			io_set_int(&PORTD, INT_LEVEL_OFF, 0, 0, true);
+			io_set_int(&PORTC, INT_LEVEL_OFF, 0, 0, true);
+			io_set_int(&PORTE, INT_LEVEL_OFF, 1, 0, true);
 	
 			break;
 	

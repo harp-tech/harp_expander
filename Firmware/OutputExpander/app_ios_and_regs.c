@@ -123,6 +123,10 @@ uint8_t app_regs_type[] = {
 	TYPE_U16,
 	TYPE_U8,
 	TYPE_U8,
+	TYPE_U8,
+	TYPE_U8,
+	TYPE_U8,
+	TYPE_U16,
 	TYPE_U8
 };
 
@@ -134,6 +138,10 @@ uint16_t app_regs_n_elements[] = {
 	1,
 	1,
 	1,
+	1,
+	1,
+	1,
+	2,
 	1
 };
 
@@ -145,5 +153,9 @@ uint8_t *app_regs_pointer[] = {
 	(uint8_t*)(&app_regs.REG_OUTPUTS_WRITE),
 	(uint8_t*)(&app_regs.REG_RESERVED0),
 	(uint8_t*)(&app_regs.REG_RESERVED1),
-	(uint8_t*)(&app_regs.REG_EXPANSION_OPTIONS)
+	(uint8_t*)(&app_regs.REG_EXPANSION_OPTIONS),
+	(uint8_t*)(&app_regs.REG_RESERVED2),
+	(uint8_t*)(&app_regs.REG_RESERVED3),
+	(uint8_t*)(app_regs.REG_MAG_ENCODER_READ),
+	(uint8_t*)(&app_regs.REG_MAG_ENCODER_MODE)
 };

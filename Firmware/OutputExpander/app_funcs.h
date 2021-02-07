@@ -28,6 +28,10 @@ void app_read_REG_OUTPUTS_WRITE(void);
 void app_read_REG_RESERVED0(void);
 void app_read_REG_RESERVED1(void);
 void app_read_REG_EXPANSION_OPTIONS(void);
+void app_read_REG_RESERVED2(void);
+void app_read_REG_RESERVED3(void);
+void app_read_REG_MAG_ENCODER_READ(void);
+void app_read_REG_MAG_ENCODER_MODE(void);
 
 bool app_write_REG_AUX_INPUTS(void *a);
 bool app_write_REG_OUTPUTS_SET(void *a);
@@ -37,6 +41,10 @@ bool app_write_REG_OUTPUTS_WRITE(void *a);
 bool app_write_REG_RESERVED0(void *a);
 bool app_write_REG_RESERVED1(void *a);
 bool app_write_REG_EXPANSION_OPTIONS(void *a);
+bool app_write_REG_RESERVED2(void *a);
+bool app_write_REG_RESERVED3(void *a);
+bool app_write_REG_MAG_ENCODER_READ(void *a);
+bool app_write_REG_MAG_ENCODER_MODE(void *a);
 
 
 #endif /* _APP_FUNCTIONS_H_ */

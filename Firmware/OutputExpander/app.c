@@ -9,6 +9,8 @@
 #define F_CPU 32000000
 #include <util/delay.h>
 
+#include "AD5048A.h"
+
 /************************************************************************/
 /* Declare application registers                                        */
 /************************************************************************/
@@ -121,7 +123,10 @@ void core_callback_registers_were_reinitialized(void)
 {
 	/* Update registers if needed */
 	app_write_REG_OUTPUTS_WRITE(&app_regs.REG_OUTPUTS_WRITE);
+	
 	app_write_REG_EXPANSION_OPTIONS(&app_regs.REG_EXPANSION_OPTIONS);
+	
+	app_write_REG_MAG_ENCODER_MODE(&app_regs.REG_MAG_ENCODER_MODE);
 }
 
 /************************************************************************/
@@ -129,17 +134,37 @@ void core_callback_registers_were_reinitialized(void)
 /************************************************************************/
 void core_callback_visualen_to_on(void)
 {
-	/* Update visual indicators */	
-	if (read_OUT0) set_LED_0;
-	if (read_OUT1) set_LED_1;
-	if (read_OUT2) set_LED_2;
-	if (read_OUT3) set_LED_3;
-	if (read_OUT4) set_LED_4;
-	if (read_OUT5) set_LED_5;
-	if (read_OUT6) set_LED_6;
-	if (read_OUT7) set_LED_7;
-	if (read_OUT8) set_LED_8;
-	if (read_OUT9) set_LED_9;
+	/* Update visual indicators */
+	 switch (app_regs.REG_EXPANSION_OPTIONS)
+	 {
+		 case MSK_BREAKOUT:
+			if (read_OUT0) set_LED_0;
+			if (read_OUT1) set_LED_1;
+			if (read_OUT2) set_LED_2;
+			if (read_OUT3) set_LED_3;
+			if (read_OUT4) set_LED_4;
+			if (read_OUT5) set_LED_5;
+			if (read_OUT6) set_LED_6;
+			if (read_OUT7) set_LED_7;
+			if (read_OUT8) set_LED_8;
+			if (read_OUT9) set_LED_9;
+			break;
+			
+		case MSK_MAGNETIC_ENCODER:
+			if (read_OUT0) set_LED_0;
+			if (read_OUT1) set_LED_1;
+			if (read_OUT2) set_LED_2;
+			if (read_OUT3) set_LED_3;
+			if (read_OUT4) set_LED_4;
+			               set_LED_5;
+			               set_LED_6;
+			if (read_OUT7) set_LED_7;
+			if (read_OUT8) set_LED_8;
+			               set_LED_9;
+			break;
+	 }
+	 
+	 set_LED_PWR;
 }
 
 void core_callback_visualen_to_off(void)
@@ -161,11 +186,25 @@ void core_callback_device_to_speed(void) {}
 /************************************************************************/
 /* Callbacks: 1 ms timer                                                */
 /************************************************************************/
+uint8_t magnetic_counter = 0;
+uint8_t magnetic_counter_divider;
+
 void core_callback_t_before_exec(void) {}
 void core_callback_t_after_exec(void) {}
-void core_callback_t_new_second(void) {}
+void core_callback_t_new_second(void) { magnetic_counter = magnetic_counter_divider-1; }
 void core_callback_t_500us(void) {}
-void core_callback_t_1ms(void) {}
+void core_callback_t_1ms(void)
+{
+	if (app_regs.REG_EXPANSION_OPTIONS == MSK_MAGNETIC_ENCODER)
+	{
+		if (++magnetic_counter == magnetic_counter_divider)
+		{
+			read_magnetic_encoder();
+			core_func_send_event(ADD_REG_MAG_ENCODER_READ, true);
+			magnetic_counter = 0;
+		}
+	}
+}
 
 /************************************************************************/
 /* Callbacks: uart control                                              */
