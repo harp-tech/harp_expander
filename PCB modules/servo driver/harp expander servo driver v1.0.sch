@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.5.1">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -6120,56 +6120,88 @@ In this library the device names are the same as the pin names of the symbols, t
 </groups>
 <parts>
 <part name="FRAME1" library="frames" deviceset="A4L-LOC" device="" value="page frame"/>
-<part name="X4" library="con-lsta" library_urn="urn:adsk.eagle:library:161" deviceset="FE06-1" device="" package3d_urn="urn:adsk.eagle:package:8191/1" value="aux_header"/>
+<part name="X4" library="con-lsta" library_urn="urn:adsk.eagle:library:161" deviceset="FE06-1" device="" package3d_urn="urn:adsk.eagle:package:8191/1" value="aux_header">
+<attribute name="MPN" value="n.a."/>
+</part>
 <part name="C11" library="rcl" deviceset="C-EU" device="C0603" value="1uF">
-<attribute name="MPN" value="?? 1u"/>
+<attribute name="DIGIKEY_PN" value="1276-1184-1-ND"/>
+<attribute name="MPN" value="CL10B105KA8NNNC"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="C10" library="rcl" deviceset="C-EU" device="C0603" value="10uF">
-<attribute name="MPN" value="GRM188R61A106ME69D"/>
+<attribute name="DIGIKEY_PN" value="587-3238-1-ND"/>
+<attribute name="MPN" value="EMK107BBJ106MA-T"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="C8" library="rcl" deviceset="C-EU" device="C0402" value="2.2nF">
-<attribute name="MPN" value="VJ0402Y222KXJCW1BC"/>
+<attribute name="DIGIKEY_PN" value="1276-1532-6-ND"/>
+<attribute name="MPN" value="CL05B222JB5NNNC"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="C7" library="rcl" deviceset="C-EU" device="C0603" value="2.2uF">
-<attribute name="MPN" value="GRM188R61E225MA12D "/>
+<attribute name="DIGIKEY_PN" value="490-12738-1-ND"/>
+<attribute name="MPN" value="GRM188R61E225MA12D"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="R1" library="rcl" deviceset="R-EU_" device="R0402" value="40.2k">
-<attribute name="MPN" value="CRCW040240K2FKED"/>
+<attribute name="DIGIKEY_PN" value="311-40.2KLRCT-ND"/>
+<attribute name="MPN" value="RC0402FR-0740K2L"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="R2" library="rcl" deviceset="R-EU_" device="R0402" value="10k">
-<attribute name="MPN" value="CRCW040210K0FKED"/>
+<attribute name="DIGIKEY_PN" value="541-3959-1-ND"/>
+<attribute name="MPN" value="CRCW040210K0FKEDC"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="C9" library="rcl" deviceset="C-EU" device="C0603" value="180nF">
-<attribute name="MPN" value="GRM188R71E184KA88D"/>
+<attribute name="DIGIKEY_PN" value="490-GCG188R91H184KA01DCT-ND"/>
+<attribute name="MPN" value="GCG188R91H184KA01D"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="C5" library="rcl" deviceset="C-EU" device="C0402" value="100nF">
-<attribute name="MPN" value="MC0402B104K160CT"/>
+<attribute name="DIGIKEY_PN" value="445-6899-2-ND"/>
+<attribute name="MPN" value="CGA2B3X7R1H104K050BB"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="C6" library="rcl" deviceset="C-EU" device="C0402" value="100nF">
-<attribute name="MPN" value="MC0402B104K160CT"/>
+<attribute name="DIGIKEY_PN" value="445-6899-2-ND"/>
+<attribute name="MPN" value="CGA2B3X7R1H104K050BB"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
-<part name="D3" library="diode" library_urn="urn:adsk.eagle:library:210" deviceset="MBRS130LT3" device="" package3d_urn="urn:adsk.eagle:package:43404/2" value="SSB43L-E3"/>
+<part name="D3" library="diode" library_urn="urn:adsk.eagle:library:210" deviceset="MBRS130LT3" device="" package3d_urn="urn:adsk.eagle:package:43404/2" value="SSB43L-E3">
+<attribute name="DIGIKEY_PN" value="SSB43L-E3/52TGICT-ND"/>
+<attribute name="MPN" value="SSB43L-E3/52T"/>
+<attribute name="VALUE2" value="DIODE SCHOTTKY 30V 4A DO214AA"/>
+</part>
 <part name="P+3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device="">
 <attribute name="VALUE2" value="+6.35V"/>
 </part>
-<part name="X1" library="harp expander servo driver v1.0" deviceset="CON_3.5MM_1X3" device=""/>
-<part name="X2" library="harp expander servo driver v1.0" deviceset="CON_3.5MM_1X3" device=""/>
-<part name="X3" library="harp expander servo driver v1.0" deviceset="CON_3.5MM_1X3" device=""/>
-<part name="PWR1" library="harp expander servo driver v1.0" deviceset="DC_JACK" device="2.1MM"/>
-<part name="U3" library="harp expander servo driver v1.0" deviceset="LT1765" device=""/>
+<part name="X1" library="harp expander servo driver v1.0" deviceset="CON_3.5MM_1X3" device="">
+<attribute name="DIGIKEY_PN" value="732-2770-ND"/>
+<attribute name="MPN" value="691322110003"/>
+</part>
+<part name="X2" library="harp expander servo driver v1.0" deviceset="CON_3.5MM_1X3" device="">
+<attribute name="DIGIKEY_PN" value="732-2770-ND"/>
+<attribute name="MPN" value="691322110003"/>
+</part>
+<part name="X3" library="harp expander servo driver v1.0" deviceset="CON_3.5MM_1X3" device="">
+<attribute name="DIGIKEY_PN" value="732-2770-ND"/>
+<attribute name="MPN" value="691322110003"/>
+</part>
+<part name="PWR1" library="harp expander servo driver v1.0" deviceset="DC_JACK" device="2.1MM">
+<attribute name="DIGIKEY_PN" value="163-179PH-EX MOUSER"/>
+<attribute name="MPN" value="163-179PH-EX"/>
+</part>
+<part name="U3" library="harp expander servo driver v1.0" deviceset="LT1765" device="">
+<attribute name="DESCRIPTION" value="Buck Switching Regulator Output 3A "/>
+<attribute name="DIGIKEY_PN" value="LT1765EFE#TRPBFCT-ND"/>
+<attribute name="MPN" value="LT1765EFE#TRPBF"/>
+</part>
 <part name="L1" library="harp expander servo driver v1.0" deviceset="L_SRR5028-2R6Y" device="">
-<attribute name="DESCRPT" value="Fixed Inductors 2.6uH 30% SMD 5028"/>
-<attribute name="MOUSER" value="652-SRR5028-2R6Y"/>
-<attribute name="VALUE2" value="2.6uL 1A"/>
+<attribute name="DIGIKEY_PN" value="SRR5028-2R6YCT-ND"/>
+<attribute name="MOUSER_PN" value="652-SRR5028-2R6Y"/>
+<attribute name="MPN" value="SRR5028-2R6Y"/>
+<attribute name="VALUE2" value="2.6uH 3A"/>
 </part>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -6186,12 +6218,14 @@ In this library the device names are the same as the pin names of the symbols, t
 <part name="GND18" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="P+4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="D2" library="harp expander servo driver v1.0" deviceset="SCHOTTKY-DIODE" device="SOD323" value="CMDSH-3">
-<attribute name="MPN" value="CMDSH-3 TR PBFREE"/>
+<attribute name="DIGIKEY_PN" value="1514-CMDSH-3TRPBFREECT-ND"/>
+<attribute name="MPN" value="CMDSH-3"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="GND19" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="D1" library="harp expander servo driver v1.0" deviceset="SCHOTTKY-DIODE" device="CASE457" value="MBRM120">
-<attribute name="MPN" value="MBRM120LT3G"/>
+<part name="D1" library="harp expander servo driver v1.0" deviceset="SCHOTTKY-DIODE" device="CASE457" value="BAT42W">
+<attribute name="DIGIKEY_PN" value="BAT42W-E3-08CT-ND"/>
+<attribute name="MPN" value="BAT42W-E3-08"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device="">
@@ -6207,6 +6241,7 @@ In this library the device names are the same as the pin names of the symbols, t
 <attribute name="VALUE2" value="+6.35V"/>
 </part>
 <part name="X5" library="con-3m" library_urn="urn:adsk.eagle:library:119" deviceset="2510-" device="" package3d_urn="urn:adsk.eagle:package:5571/1">
+<attribute name="DIGIKEY_PN" value="S9169-ND"/>
 <attribute name="MF" value="-"/>
 <attribute name="MPN" value="SBH11-PBPC-D05-ST-BK"/>
 <attribute name="OC_FARNELL" value="-"/>
@@ -6242,29 +6277,45 @@ In this library the device names are the same as the pin names of the symbols, t
 <part name="GND17" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="P+10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="C2" library="rcl" deviceset="C-EU" device="C0402" value="100nF">
-<attribute name="MPN" value="MC0402B104K160CT"/>
+<attribute name="DIGIKEY_PN" value="445-6899-2-ND"/>
+<attribute name="MPN" value="CGA2B3X7R1H104K050BB"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="C1" library="rcl" deviceset="C-EU" device="C0402" value="100nF">
-<attribute name="MPN" value="MC0402B104K160CT"/>
+<attribute name="DIGIKEY_PN" value="445-6899-2-ND"/>
+<attribute name="MPN" value="CGA2B3X7R1H104K050BB"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="C4" library="rcl" deviceset="C-EU" device="C0402" value="100nF">
-<attribute name="MPN" value="MC0402B104K160CT"/>
+<attribute name="DIGIKEY_PN" value="445-6899-2-ND"/>
+<attribute name="MPN" value="CGA2B3X7R1H104K050BB"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="C3" library="rcl" deviceset="C-EU" device="C0402" value="100nF">
-<attribute name="MPN" value="MC0402B104K160CT"/>
+<attribute name="DIGIKEY_PN" value="445-6899-2-ND"/>
+<attribute name="MPN" value="CGA2B3X7R1H104K050BB"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
-<part name="U1" library="harp expander servo driver v1.0" deviceset="SI8641AB" device="W" package3d_urn="urn:adsk.eagle:package:16487/2" value="SI8641AB-B-IS1R"/>
-<part name="U2" library="harp expander servo driver v1.0" deviceset="SI8641AB" device="W" package3d_urn="urn:adsk.eagle:package:16487/2" value="SI8641AB-B-IS1R"/>
+<part name="U1" library="harp expander servo driver v1.0" deviceset="SI8641AB" device="W" package3d_urn="urn:adsk.eagle:package:16487/2" value="SI8641AB-B-IS1R">
+<attribute name="DIGIKEY_PN" value="336-5212-1-ND"/>
+<attribute name="MOUSER_PN" value="634-SI8641AB-B-IS1R"/>
+<attribute name="MPN" value="SI8641AB-B-IS1R"/>
+</part>
+<part name="U2" library="harp expander servo driver v1.0" deviceset="SI8641AB" device="W" package3d_urn="urn:adsk.eagle:package:16487/2" value="SI8641AB-B-IS1R">
+<attribute name="DIGIKEY_PN" value="336-5212-1-ND"/>
+<attribute name="MOUSER_PN" value="634-SI8641AB-B-IS1R"/>
+<attribute name="MPN" value="SI8641AB-B-IS1R"/>
+</part>
 <part name="R3" library="rcl" deviceset="R-EU_" device="R0402" value="10k">
-<attribute name="MPN" value="CRCW040210K0FKED"/>
+<attribute name="DIGIKEY_PN" value="541-3959-1-ND"/>
+<attribute name="MPN" value="CRCW040210K0FKEDC"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="SUPPLY6" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND1" device=""/>
-<part name="U4" library="harp expander servo driver v1.0" deviceset="NCP718XSN500" device=""/>
+<part name="U4" library="harp expander servo driver v1.0" deviceset="NCP718XSN500" device="">
+<attribute name="DIGIKEY_PN" value="NCP718BSN500T1GOSCT-ND"/>
+<attribute name="MPN" value="NCP718BSN500T1G"/>
+</part>
 </parts>
 <sheets>
 <sheet>
@@ -6291,58 +6342,70 @@ Vout=6.35V =&gt; R1=43k
 <attribute name="VALUE" x="163.576" y="68.961" size="1.778" layer="96" rot="MR0"/>
 <attribute name="MPN" x="165.1" y="73.66" size="1.778" layer="96" rot="MR0" display="off"/>
 <attribute name="TYPE" x="165.1" y="73.66" size="1.778" layer="96" rot="MR0" display="off"/>
+<attribute name="DIGIKEY_PN" x="165.1" y="73.66" size="1.778" layer="96" rot="MR0" display="off"/>
 </instance>
 <instance part="C10" gate="G$1" x="116.84" y="157.48" smashed="yes" rot="MR0">
 <attribute name="NAME" x="115.316" y="157.861" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="115.316" y="152.781" size="1.778" layer="96" rot="MR0"/>
 <attribute name="MPN" x="116.84" y="157.48" size="1.778" layer="96" rot="MR0" display="off"/>
 <attribute name="TYPE" x="116.84" y="157.48" size="1.778" layer="96" rot="MR0" display="off"/>
+<attribute name="DIGIKEY_PN" x="116.84" y="157.48" size="1.778" layer="96" rot="MR0" display="off"/>
 </instance>
 <instance part="C8" gate="G$1" x="165.1" y="111.76" smashed="yes" rot="MR0">
 <attribute name="NAME" x="163.576" y="112.141" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="163.576" y="107.061" size="1.778" layer="96" rot="MR0"/>
 <attribute name="MPN" x="165.1" y="111.76" size="1.778" layer="96" rot="MR0" display="off"/>
 <attribute name="TYPE" x="165.1" y="111.76" size="1.778" layer="96" rot="MR0" display="off"/>
+<attribute name="DIGIKEY_PN" x="165.1" y="111.76" size="1.778" layer="96" rot="MR0" display="off"/>
 </instance>
 <instance part="C7" gate="G$1" x="210.82" y="144.78" smashed="yes" rot="MR0">
 <attribute name="NAME" x="209.296" y="145.161" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="209.296" y="140.081" size="1.778" layer="96" rot="MR0"/>
 <attribute name="MPN" x="210.82" y="144.78" size="1.778" layer="96" rot="MR0" display="off"/>
 <attribute name="TYPE" x="210.82" y="144.78" size="1.778" layer="96" rot="MR0" display="off"/>
+<attribute name="DIGIKEY_PN" x="210.82" y="144.78" size="1.778" layer="96" rot="MR0" display="off"/>
 </instance>
 <instance part="R1" gate="G$1" x="129.54" y="142.24" smashed="yes" rot="R90">
 <attribute name="NAME" x="124.714" y="142.9766" size="1.778" layer="95"/>
 <attribute name="VALUE" x="120.904" y="139.954" size="1.778" layer="96"/>
 <attribute name="MPN" x="129.54" y="142.24" size="1.778" layer="96" rot="R90" display="off"/>
 <attribute name="TYPE" x="129.54" y="142.24" size="1.778" layer="96" rot="R90" display="off"/>
+<attribute name="DIGIKEY_PN" x="129.54" y="142.24" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="R2" gate="G$1" x="129.54" y="127" smashed="yes" rot="R90">
 <attribute name="NAME" x="125.222" y="128.4986" size="1.778" layer="95"/>
 <attribute name="VALUE" x="123.698" y="125.984" size="1.778" layer="96"/>
 <attribute name="MPN" x="129.54" y="127" size="1.778" layer="96" rot="R90" display="off"/>
 <attribute name="TYPE" x="129.54" y="127" size="1.778" layer="96" rot="R90" display="off"/>
+<attribute name="DIGIKEY_PN" x="129.54" y="127" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="C9" gate="G$1" x="152.4" y="157.48" smashed="yes" rot="MR0">
 <attribute name="NAME" x="155.956" y="157.861" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="160.02" y="153.289" size="1.778" layer="96" rot="MR0"/>
 <attribute name="MPN" x="152.4" y="157.48" size="1.778" layer="96" rot="MR0" display="off"/>
 <attribute name="TYPE" x="152.4" y="157.48" size="1.778" layer="96" rot="MR0" display="off"/>
+<attribute name="DIGIKEY_PN" x="152.4" y="157.48" size="1.778" layer="96" rot="MR0" display="off"/>
 </instance>
 <instance part="C5" gate="G$1" x="109.22" y="157.48" smashed="yes" rot="MR0">
 <attribute name="NAME" x="107.696" y="157.861" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="107.696" y="152.781" size="1.778" layer="96" rot="MR0"/>
 <attribute name="MPN" x="109.22" y="157.48" size="1.778" layer="96" rot="MR0" display="off"/>
 <attribute name="TYPE" x="109.22" y="157.48" size="1.778" layer="96" rot="MR0" display="off"/>
+<attribute name="DIGIKEY_PN" x="109.22" y="157.48" size="1.778" layer="96" rot="MR0" display="off"/>
 </instance>
 <instance part="C6" gate="G$1" x="215.9" y="144.78" smashed="yes" rot="MR0">
 <attribute name="NAME" x="221.996" y="145.161" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="223.012" y="140.335" size="1.778" layer="96" rot="MR0"/>
 <attribute name="MPN" x="215.9" y="144.78" size="1.778" layer="96" rot="MR0" display="off"/>
 <attribute name="TYPE" x="215.9" y="144.78" size="1.778" layer="96" rot="MR0" display="off"/>
+<attribute name="DIGIKEY_PN" x="215.9" y="144.78" size="1.778" layer="96" rot="MR0" display="off"/>
 </instance>
 <instance part="D3" gate="G$1" x="226.06" y="149.86" smashed="yes" rot="R180">
 <attribute name="NAME" x="228.346" y="147.955" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="228.346" y="153.289" size="1.778" layer="96" rot="R180"/>
+<attribute name="MPN" x="226.06" y="149.86" size="1.778" layer="96" rot="R180" display="off"/>
+<attribute name="DIGIKEY_PN" x="226.06" y="149.86" size="1.778" layer="96" rot="R180" display="off"/>
+<attribute name="VALUE2" x="226.06" y="149.86" size="1.778" layer="96" rot="R180" display="off"/>
 </instance>
 <instance part="P+3" gate="VCC" x="109.22" y="167.64" smashed="yes">
 <attribute name="VALUE" x="114.3" y="171.704" size="1.778" layer="96" rot="R180"/>
@@ -6351,29 +6414,41 @@ Vout=6.35V =&gt; R1=43k
 <instance part="X1" gate="G$1" x="132.08" y="91.44" smashed="yes" rot="R180">
 <attribute name="VALUE" x="135.89" y="99.06" size="1.778" layer="96" rot="R180" display="off"/>
 <attribute name="NAME" x="135.89" y="98.806" size="1.778" layer="95" rot="R180"/>
+<attribute name="MPN" x="132.08" y="91.44" size="1.778" layer="96" rot="R180" display="off"/>
+<attribute name="DIGIKEY_PN" x="132.08" y="91.44" size="1.778" layer="96" rot="R180" display="off"/>
 </instance>
 <instance part="X2" gate="G$1" x="132.08" y="68.58" smashed="yes" rot="R180">
 <attribute name="VALUE" x="135.89" y="76.2" size="1.778" layer="96" rot="R180" display="off"/>
 <attribute name="NAME" x="136.144" y="75.946" size="1.778" layer="95" rot="R180"/>
+<attribute name="MPN" x="132.08" y="68.58" size="1.778" layer="96" rot="R180" display="off"/>
+<attribute name="DIGIKEY_PN" x="132.08" y="68.58" size="1.778" layer="96" rot="R180" display="off"/>
 </instance>
 <instance part="X3" gate="G$1" x="132.08" y="48.26" smashed="yes" rot="R180">
 <attribute name="VALUE" x="135.89" y="55.88" size="1.778" layer="96" rot="R180" display="off"/>
 <attribute name="NAME" x="136.652" y="56.134" size="1.778" layer="95" rot="R180"/>
+<attribute name="MPN" x="132.08" y="48.26" size="1.778" layer="96" rot="R180" display="off"/>
+<attribute name="DIGIKEY_PN" x="132.08" y="48.26" size="1.778" layer="96" rot="R180" display="off"/>
 </instance>
 <instance part="PWR1" gate="G$1" x="246.38" y="149.86" smashed="yes" rot="MR0">
 <attribute name="NAME" x="251.46" y="152.4" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="251.46" y="142.24" size="1.778" layer="96" rot="MR0"/>
+<attribute name="MPN" x="246.38" y="149.86" size="1.778" layer="96" rot="MR0" display="off"/>
+<attribute name="DIGIKEY_PN" x="246.38" y="149.86" size="1.778" layer="96" rot="MR0" display="off"/>
 </instance>
 <instance part="U3" gate="U$" x="180.34" y="134.62" smashed="yes" rot="MR0">
 <attribute name="NAME" x="195.58" y="157.48" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="180.34" y="137.16" size="1.778" layer="96" rot="MR0"/>
+<attribute name="MPN" x="180.34" y="134.62" size="1.778" layer="96" rot="MR0" display="off"/>
+<attribute name="DIGIKEY_PN" x="180.34" y="134.62" size="1.778" layer="96" rot="MR0" display="off"/>
+<attribute name="DESCRIPTION" x="180.34" y="134.62" size="1.778" layer="96" rot="MR0" display="off"/>
 </instance>
 <instance part="L1" gate="G$1" x="139.7" y="149.86" smashed="yes" rot="R90">
 <attribute name="NAME" x="134.62" y="153.67" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="149.86" y="148.59" size="1.778" layer="96" rot="R180"/>
 <attribute name="VALUE2" x="139.7" y="149.86" size="1.778" layer="96" rot="R90" display="off"/>
-<attribute name="MOUSER" x="139.7" y="149.86" size="1.778" layer="96" rot="R90" display="off"/>
-<attribute name="DESCRPT" x="139.7" y="149.86" size="1.778" layer="96" rot="R90" display="off"/>
+<attribute name="MOUSER_PN" x="139.7" y="149.86" size="1.778" layer="96" rot="R90" display="off"/>
+<attribute name="DIGIKEY_PN" x="139.7" y="149.86" size="1.778" layer="96" rot="R90" display="off"/>
+<attribute name="MPN" x="139.7" y="149.86" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="GND1" gate="1" x="231.14" y="134.62" smashed="yes">
 <attribute name="VALUE" x="228.6" y="132.08" size="1.778" layer="96"/>
@@ -6422,6 +6497,7 @@ Vout=6.35V =&gt; R1=43k
 <attribute name="VALUE" x="142.494" y="164.211" size="1.778" layer="96"/>
 <attribute name="MPN" x="144.78" y="162.56" size="1.778" layer="96" display="off"/>
 <attribute name="TYPE" x="144.78" y="162.56" size="1.778" layer="96" display="off"/>
+<attribute name="DIGIKEY_PN" x="144.78" y="162.56" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="GND19" gate="1" x="203.2" y="124.46" smashed="yes">
 <attribute name="VALUE" x="200.66" y="121.92" size="1.778" layer="96"/>
@@ -6431,6 +6507,7 @@ Vout=6.35V =&gt; R1=43k
 <attribute name="VALUE" x="154.686" y="138.049" size="1.778" layer="96" rot="R180"/>
 <attribute name="MPN" x="152.4" y="139.7" size="1.778" layer="96" rot="R90" display="off"/>
 <attribute name="TYPE" x="152.4" y="139.7" size="1.778" layer="96" rot="R90" display="off"/>
+<attribute name="DIGIKEY_PN" x="152.4" y="139.7" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="P+1" gate="VCC" x="205.74" y="88.9" smashed="yes">
 <attribute name="VALUE" x="210.82" y="92.964" size="1.778" layer="96" rot="R180"/>
@@ -6466,6 +6543,7 @@ Vout=6.35V =&gt; R1=43k
 </instance>
 <instance part="X5" gate="-6" x="45.72" y="152.4" smashed="yes" rot="MR0" grouprefs="2X5_HEADER">
 <attribute name="NAME" x="46.99" y="153.289" size="1.778" layer="95" rot="MR180"/>
+<attribute name="DIGIKEY_PN" x="45.72" y="152.4" size="1.778" layer="96" rot="MR0" display="off"/>
 </instance>
 <instance part="X5" gate="-7" x="45.72" y="149.86" smashed="yes" rot="MR0" grouprefs="2X5_HEADER">
 <attribute name="NAME" x="46.99" y="150.749" size="1.778" layer="95" rot="MR180"/>
@@ -6546,38 +6624,49 @@ Vout=6.35V =&gt; R1=43k
 <attribute name="VALUE" x="83.312" y="117.475" size="1.778" layer="96" rot="MR0"/>
 <attribute name="MPN" x="76.2" y="121.92" size="1.778" layer="96" rot="MR0" display="off"/>
 <attribute name="TYPE" x="76.2" y="121.92" size="1.778" layer="96" rot="MR0" display="off"/>
+<attribute name="DIGIKEY_PN" x="76.2" y="121.92" size="1.778" layer="96" rot="MR0" display="off"/>
 </instance>
 <instance part="C1" gate="G$1" x="27.94" y="121.92" smashed="yes" rot="MR0">
 <attribute name="NAME" x="23.876" y="119.761" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="24.892" y="117.475" size="1.778" layer="96" rot="MR0"/>
 <attribute name="MPN" x="27.94" y="121.92" size="1.778" layer="96" rot="MR0" display="off"/>
 <attribute name="TYPE" x="27.94" y="121.92" size="1.778" layer="96" rot="MR0" display="off"/>
+<attribute name="DIGIKEY_PN" x="27.94" y="121.92" size="1.778" layer="96" rot="MR0" display="off"/>
 </instance>
 <instance part="C4" gate="G$1" x="76.2" y="58.42" smashed="yes" rot="MR0">
 <attribute name="NAME" x="82.296" y="56.261" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="83.312" y="53.975" size="1.778" layer="96" rot="MR0"/>
 <attribute name="MPN" x="76.2" y="58.42" size="1.778" layer="96" rot="MR0" display="off"/>
 <attribute name="TYPE" x="76.2" y="58.42" size="1.778" layer="96" rot="MR0" display="off"/>
+<attribute name="DIGIKEY_PN" x="76.2" y="58.42" size="1.778" layer="96" rot="MR0" display="off"/>
 </instance>
 <instance part="C3" gate="G$1" x="27.94" y="58.42" smashed="yes" rot="MR0">
 <attribute name="NAME" x="23.876" y="56.261" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="24.892" y="53.975" size="1.778" layer="96" rot="MR0"/>
 <attribute name="MPN" x="27.94" y="58.42" size="1.778" layer="96" rot="MR0" display="off"/>
 <attribute name="TYPE" x="27.94" y="58.42" size="1.778" layer="96" rot="MR0" display="off"/>
+<attribute name="DIGIKEY_PN" x="27.94" y="58.42" size="1.778" layer="96" rot="MR0" display="off"/>
 </instance>
 <instance part="U1" gate="G$1" x="50.8" y="99.06" smashed="yes">
 <attribute name="NAME" x="38.608" y="128.651" size="1.778" layer="95"/>
 <attribute name="VALUE" x="40.132" y="125.222" size="1.778" layer="96"/>
+<attribute name="MPN" x="50.8" y="99.06" size="1.778" layer="96" display="off"/>
+<attribute name="DIGIKEY_PN" x="50.8" y="99.06" size="1.778" layer="96" display="off"/>
+<attribute name="MOUSER_PN" x="50.8" y="99.06" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="U2" gate="G$1" x="50.8" y="35.56" smashed="yes">
 <attribute name="NAME" x="38.608" y="65.151" size="1.778" layer="95"/>
 <attribute name="VALUE" x="40.132" y="61.722" size="1.778" layer="96"/>
+<attribute name="MPN" x="50.8" y="35.56" size="1.778" layer="96" display="off"/>
+<attribute name="DIGIKEY_PN" x="50.8" y="35.56" size="1.778" layer="96" display="off"/>
+<attribute name="MOUSER_PN" x="50.8" y="35.56" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="R3" gate="G$1" x="27.94" y="30.48" smashed="yes" rot="R180">
 <attribute name="NAME" x="27.178" y="34.0614" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="33.782" y="34.036" size="1.778" layer="96" rot="R180"/>
 <attribute name="MPN" x="27.94" y="30.48" size="1.778" layer="96" rot="R180" display="off"/>
 <attribute name="TYPE" x="27.94" y="30.48" size="1.778" layer="96" rot="R180" display="off"/>
+<attribute name="DIGIKEY_PN" x="27.94" y="30.48" size="1.778" layer="96" rot="R180" display="off"/>
 </instance>
 <instance part="SUPPLY6" gate="G$1" x="20.32" y="27.94" smashed="yes">
 <attribute name="VALUE" x="13.081" y="27.305" size="1.778" layer="96"/>
@@ -6585,6 +6674,8 @@ Vout=6.35V =&gt; R1=43k
 <instance part="U4" gate="G$1" x="185.42" y="76.2" smashed="yes" rot="MR0">
 <attribute name="NAME" x="195.58" y="82.55" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="187.706" y="71.374" size="1.778" layer="96" rot="MR0"/>
+<attribute name="MPN" x="185.42" y="76.2" size="1.778" layer="96" rot="MR0" display="off"/>
+<attribute name="DIGIKEY_PN" x="185.42" y="76.2" size="1.778" layer="96" rot="MR0" display="off"/>
 </instance>
 </instances>
 <busses>
