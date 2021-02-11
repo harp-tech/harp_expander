@@ -62,6 +62,7 @@ void check_for_event_and_update_LEDs(void)
 /************************************************************************/ 
 /* AUX_INPUT0-1                                                         */
 /************************************************************************/
+//#define FOR_TESTS
 uint8_t aux_inputs_previous_read = 0;
 
 ISR(PORTE_INT0_vect, ISR_NAKED)
@@ -77,6 +78,23 @@ ISR(PORTE_INT0_vect, ISR_NAKED)
 	{
 		app_regs.REG_AUX_INPUTS |= (aux_inputs_current_read & (B_AUX_IN0 | B_AUX_IN1));
 		core_func_send_event(ADD_REG_AUX_INPUTS, true);
+		
+		#ifdef FOR_TESTS
+			if (app_regs.REG_AUX_INPUTS & B_AUX_IN0_CHANGE_MSK) {
+				if (app_regs.REG_AUX_INPUTS & B_AUX_IN0) {
+					set_LED_0; set_LED_1; set_LED_2; set_LED_3; set_LED_4;
+				} else {
+					clr_LED_0; clr_LED_1; clr_LED_2; clr_LED_3; clr_LED_4;
+				}
+			}
+			if (app_regs.REG_AUX_INPUTS & B_AUX_IN1_CHANGE_MSK) {
+				if (app_regs.REG_AUX_INPUTS & B_AUX_IN1) {
+					set_LED_5; set_LED_6; set_LED_7; set_LED_8; set_LED_9;
+				} else {
+					clr_LED_5; clr_LED_6; clr_LED_7; clr_LED_8; clr_LED_9;
+				}
+			}
+		#endif
 	}
 	
 	aux_inputs_previous_read = aux_inputs_current_read;
