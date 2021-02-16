@@ -332,9 +332,9 @@ bool app_write_REG_EXPANSION_OPTIONS(void *a)
 			TCC0_CTRLA = TC_CLKSEL_OFF_gc;							// Make sure timer is stopped to make reset
 			TCC0_CTRLFSET = TC_CMD_RESET_gc;						// Timer reset (registers to initial value)			
 			TCC0_PER = (app_regs.REG_SERVO_PERIOD_US >> 1) - 1;		// Set up target
-			TCC0_CCA = (app_regs.REG_SERVO0_PULSE_US >> 1) - 1;		// Set duty cycle A
-			TCC0_CCB = (app_regs.REG_SERVO1_PULSE_US >> 1) - 1;		// Set duty cycle B
-			TCC0_CCC = (app_regs.REG_SERVO2_PULSE_US >> 1) - 1;		// Set duty cycle C			
+			TCC0_CCA = (app_regs.REG_SERVO0_PULSE_US >> 1);		// Set duty cycle A
+			TCC0_CCB = (app_regs.REG_SERVO1_PULSE_US >> 1);		// Set duty cycle B
+			TCC0_CCC = (app_regs.REG_SERVO2_PULSE_US >> 1);		// Set duty cycle C			
 			TCC0_CTRLB = TC0_CCAEN_bm | TC_WGMODE_SINGLESLOPE_gc;	// Enable channel A and single slope mode
 			TCC0_CTRLB |= TC0_CCBEN_bm;								// Enable channel B
 			TCC0_CTRLB |= TC0_CCCEN_bm;								// Enable channel C			
@@ -468,8 +468,12 @@ bool app_write_REG_SERVO0_PULSE_US(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 	
-	if (app_regs.REG_EXPANSION_OPTIONS == MSK_SERVO_MOTOR_1)
-		TCC0_CCA = (reg >> 1) - 1;
+	if ((app_regs.REG_EXPANSION_OPTIONS == MSK_SERVO_MOTOR_1) ||
+		(app_regs.REG_EXPANSION_OPTIONS == MSK_SERVO_MOTOR_2) ||
+		(app_regs.REG_EXPANSION_OPTIONS == MSK_SERVO_MOTOR_3))
+		{
+			TCC0_CCA = (reg >> 1);
+		}
 	
 	app_regs.REG_SERVO0_PULSE_US = reg;
 	return true;
@@ -484,8 +488,11 @@ bool app_write_REG_SERVO1_PULSE_US(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 	
-	if (app_regs.REG_EXPANSION_OPTIONS == MSK_SERVO_MOTOR_2)
-		TCC0_CCB = (reg >> 1) - 1;
+	if ((app_regs.REG_EXPANSION_OPTIONS == MSK_SERVO_MOTOR_2) ||
+		(app_regs.REG_EXPANSION_OPTIONS == MSK_SERVO_MOTOR_3))
+		{	
+			TCC0_CCB = (reg >> 1);
+		}
 
 	app_regs.REG_SERVO1_PULSE_US = reg;
 	return true;
@@ -501,7 +508,7 @@ bool app_write_REG_SERVO2_PULSE_US(void *a)
 	uint16_t reg = *((uint16_t*)a);
 	
 	if (app_regs.REG_EXPANSION_OPTIONS == MSK_SERVO_MOTOR_3)
-		TCC0_CCC = (reg >> 1) - 1;
+		TCC0_CCC = (reg >> 1);
 
 	app_regs.REG_SERVO2_PULSE_US = reg;
 	return true;
