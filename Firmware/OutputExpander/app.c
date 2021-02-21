@@ -77,7 +77,7 @@ void core_callback_1st_config_hw_after_boot(void)
 	init_ios();
 	
 	/* Check if device is an harp output expander hardware */
-	if (read_IS_OUTPUT)
+	if (!read_IS_OUTPUT)
 		core_func_catastrophic_error_detected();
 	
 	/* Initialize hardware */
