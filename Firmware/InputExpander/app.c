@@ -35,7 +35,7 @@ void hwbp_app_initialize(void)
     
    	/* Start core */
     core_func_start_core(
-        2096,
+        1106,
         hwH, hwL,
         fwH, fwL,
         ass,
@@ -71,7 +71,7 @@ void core_callback_1st_config_hw_after_boot(void)
 	init_ios();
 	
 	/* Check if device is an harp input expander hardware */
-	if (!read_IS_INPUT)
+	if (read_IS_INPUT)
 		core_func_catastrophic_error_detected();
 	
 	/* Initialize hardware */
@@ -114,12 +114,17 @@ void core_callback_reset_registers(void)
 	app_regs.REG_FALLING_EDGE_ENABLE = B_IN0 | B_IN1 | B_IN2 | B_IN3 | B_IN4 | B_IN5 | B_IN6 | B_IN7 | B_IN8 | B_IN9;
 }
 
+extern void check_for_event_and_update_LEDs(void);
+
 void core_callback_registers_were_reinitialized(void)
 {
-	/* Update registers if needed */
+	check_for_event_and_update_LEDs();
+	
 	app_write_REG_INPUT_MODE(&app_regs.REG_INPUT_MODE);
 	
 	app_write_REG_EXPANSION_OPTIONS(&app_regs.REG_EXPANSION_OPTIONS);
+	
+	
 }
 
 /************************************************************************/

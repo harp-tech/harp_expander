@@ -287,7 +287,10 @@ bool app_write_REG_EXPANSION_OPTIONS(void *a)
 			}
 			break;
 				
-		case MSK_SERVO_MOTOR_1:		
+		case MSK_SERVO_MOTOR_1:
+			io_set_int(&PORTE, INT_LEVEL_LOW, 0, (1<<2), false);	// Add AUX_INPUT0 to interrupt on PORTE INT N=0
+			io_set_int(&PORTE, INT_LEVEL_LOW, 0, (1<<5), false);	// Add AUX_INPUT1 to interrupt on PORTE INT N=0
+		
 			if (core_bool_is_visual_enabled())
 			{
 				set_LED_5;	// PWM servo 0
@@ -300,10 +303,13 @@ bool app_write_REG_EXPANSION_OPTIONS(void *a)
 			TCC0_PER = (app_regs.REG_SERVO_PERIOD_US >> 1) - 1;		// Set up target
 			TCC0_CCA = (app_regs.REG_SERVO0_PULSE_US >> 1) - 1;		// Set duty cycle A			
 			TCC0_CTRLB = TC0_CCAEN_bm | TC_WGMODE_SINGLESLOPE_gc;	// Enable channel A and single slope mode
-			TCC0_CTRLA = TIMER_PRESCALER_DIV64;						// Start timer			
+			TCC0_CTRLA = TIMER_PRESCALER_DIV64;						// Start timer
 			break;
 		
-		case MSK_SERVO_MOTOR_2:		
+		case MSK_SERVO_MOTOR_2:
+			io_set_int(&PORTE, INT_LEVEL_LOW, 0, (1<<2), false);	// Add AUX_INPUT0 to interrupt on PORTE INT N=0
+			io_set_int(&PORTE, INT_LEVEL_LOW, 0, (1<<5), false);	// Add AUX_INPUT1 to interrupt on PORTE INT N=0
+		
 			if (core_bool_is_visual_enabled())
 			{
 				set_LED_5;	// PWM servo 0
@@ -321,7 +327,10 @@ bool app_write_REG_EXPANSION_OPTIONS(void *a)
 			TCC0_CTRLA = TIMER_PRESCALER_DIV64;						// Start timer			
 			break;
 		
-		case MSK_SERVO_MOTOR_3:		
+		case MSK_SERVO_MOTOR_3:
+			io_set_int(&PORTE, INT_LEVEL_LOW, 0, (1<<2), false);	// Add AUX_INPUT0 to interrupt on PORTE INT N=0
+			io_set_int(&PORTE, INT_LEVEL_LOW, 0, (1<<5), false);	// Add AUX_INPUT1 to interrupt on PORTE INT N=0
+			
 			if (core_bool_is_visual_enabled())
 			{
 				set_LED_5;	// PWM servo 0

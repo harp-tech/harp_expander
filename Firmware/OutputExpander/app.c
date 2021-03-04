@@ -77,7 +77,7 @@ void core_callback_1st_config_hw_after_boot(void)
 	init_ios();
 	
 	/* Check if device is an harp output expander hardware */
-	if (read_IS_OUTPUT)
+	if (!read_IS_OUTPUT)
 		core_func_catastrophic_error_detected();
 	
 	/* Initialize hardware */
@@ -120,6 +120,8 @@ void core_callback_reset_registers(void)
 	app_regs.REG_SERVO0_PULSE_US = 1500;	// 1.5 ms
 	app_regs.REG_SERVO1_PULSE_US = 1500;	// 1.5 ms
 	app_regs.REG_SERVO2_PULSE_US = 1500;	// 1.5 ms
+	
+	app_regs.REG_MAG_ENCODER_MODE = MSK_AT_100SPS;
 }
 
 void core_callback_registers_were_reinitialized(void)
