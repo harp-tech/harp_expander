@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <Authors>Filipe Carvalho, Gonçalo Lopes</Authors>
+    <Copyright>Copyright © Filipe Carvalho, Gonçalo Lopes 2021</Copyright>
+    <PackageProjectUrl>https://github.com/harp-tech/harp_expander</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/harp-tech/harp_expander/blob/master/Bonsai/LICENSE</PackageLicenseUrl>
+    <PackageIconUrl>https://github.com/bonsai-rx/harp/raw/master/Resources/Harp.png</PackageIconUrl>
+    <PackageOutputPath>..\bin\$(Configuration)</PackageOutputPath>
+    <IncludeSymbols Condition="'$(Configuration)'=='Release'">true</IncludeSymbols>
+    <SymbolPackageFormat Condition="'$(Configuration)'=='Release'">snupkg</SymbolPackageFormat>
+    <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/harp-tech/harp_expander.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <LangVersion>8.0</LangVersion>
+    <Features>strict</Features>
+  </PropertyGroup>
+</Project>
