@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Title>Bonsai - Harp Expander Library</Title>
+    <Description>Bonsai Library containing interfaces for data acquisition and control of Harp Expander devices.</Description>
+    <GenerateDocumentationFile Condition="'$(Configuration)'=='Release'">true</GenerateDocumentationFile>
+    <PackageTags>Bonsai Rx Harp Expander Hardware Protocol</PackageTags>
+    <TargetFramework>net462</TargetFramework>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bonsai.Harp" Version="3.3.0" />
+  </ItemGroup>
+
+</Project>
