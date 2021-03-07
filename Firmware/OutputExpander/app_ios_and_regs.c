@@ -117,6 +117,8 @@ AppRegs app_regs;
 
 uint8_t app_regs_type[] = {
 	TYPE_U8,
+	TYPE_U8,
+	TYPE_U8,
 	TYPE_U16,
 	TYPE_U16,
 	TYPE_U16,
@@ -147,6 +149,8 @@ uint16_t app_regs_n_elements[] = {
 	1,
 	1,
 	1,
+	1,
+	1,
 	2,
 	1,
 	1,
@@ -159,6 +163,8 @@ uint16_t app_regs_n_elements[] = {
 
 uint8_t *app_regs_pointer[] = {
 	(uint8_t*)(&app_regs.REG_AUX_INPUTS),
+	(uint8_t*)(&app_regs.REG_AUX_INPUTS_RISING_EDGE_ENABLE),
+	(uint8_t*)(&app_regs.REG_AUX_INPUTS_FALLING_EDGE_ENABLE),
 	(uint8_t*)(&app_regs.REG_OUTPUTS_SET),
 	(uint8_t*)(&app_regs.REG_OUTPUTS_CLEAR),
 	(uint8_t*)(&app_regs.REG_OUTPUTS_TOGGLE),

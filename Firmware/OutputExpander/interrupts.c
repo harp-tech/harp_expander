@@ -43,7 +43,12 @@ ISR(PORTE_INT0_vect, ISR_NAKED)
 	if (app_regs.REG_AUX_INPUTS)
 	{
 		app_regs.REG_AUX_INPUTS |= (aux_inputs_current_read & (B_AUX_IN0 | B_AUX_IN1));
-		core_func_send_event(ADD_REG_AUX_INPUTS, true);
+		
+		if ((((app_regs.REG_AUX_INPUTS >> 4) & 3) &  (app_regs.REG_AUX_INPUTS & 3) & app_regs.REG_AUX_INPUTS_RISING_EDGE_ENABLE) ||
+		    (((app_regs.REG_AUX_INPUTS >> 4) & 3) & ~(app_regs.REG_AUX_INPUTS & 3) & app_regs.REG_AUX_INPUTS_FALLING_EDGE_ENABLE))
+		{
+			core_func_send_event(ADD_REG_AUX_INPUTS, true);
+		}
 	}
 	
 	aux_inputs_previous_read = aux_inputs_current_read;

@@ -6,8 +6,8 @@ void init_ios(void);
 /************************************************************************/
 /* Definition of input pins                                             */
 /************************************************************************/
-// AUX_INPUT0             Description: Auxiliar input 0
-// AUX_INPUT1             Description: Auxiliar input 1
+// AUX_INPUT0             Description: Auxiliary input 0
+// AUX_INPUT1             Description: Auxiliary input 1
 // IS_INPUT               Description: Check for the right hardware
 // IN0                    Description: Input 0
 // IN1                    Description: Input 1
@@ -233,6 +233,8 @@ void init_ios(void);
 typedef struct
 {
 	uint8_t REG_AUX_INPUTS;
+	uint8_t REG_AUX_INPUTS_RISING_EDGE_ENABLE;
+	uint8_t REG_AUX_INPUTS_FALLING_EDGE_ENABLE;
 	uint16_t REG_INPUTS[2];
 	uint16_t REG_RISING_EDGE_ENABLE;
 	uint16_t REG_FALLING_EDGE_ENABLE;
@@ -246,14 +248,16 @@ typedef struct
 /* Registers' address                                                   */
 /************************************************************************/
 /* Registers */
-#define ADD_REG_AUX_INPUTS                  32 // U8     State of the auxiliar inputs
-#define ADD_REG_INPUTS                      33 // U16    State of the inputs [0] , change masks [1]
-#define ADD_REG_RISING_EDGE_ENABLE          34 // U16    Enables the rising edge detection of the correspondet input (bitmask)
-#define ADD_REG_FALLING_EDGE_ENABLE         35 // U16    Enables the falling edge detection of the correspondet input (bitmask)
-#define ADD_REG_INPUT_MODE                  36 // U8     Configures the input mode
-#define ADD_REG_RESERVED0                   37 // U8     
-#define ADD_REG_RESERVED1                   38 // U8     
-#define ADD_REG_EXPANSION_OPTIONS           39 // U8     Selects the current expansion board available in the EXPANSION port
+#define ADD_REG_AUX_INPUTS                  32 // U8     State of the auxiliary inputs
+#define ADD_REG_AUX_INPUTS_RISING_EDGE_ENABLE 33 // U8     Enables the rising edge detection of the correspondet auxiliar input (bitmask)
+#define ADD_REG_AUX_INPUTS_FALLING_EDGE_ENABLE 34 // U8     Enables the falling edge detection of the correspondet auxiliar input (bitmask)
+#define ADD_REG_INPUTS                      35 // U16    State of the inputs [0] , change masks [1]
+#define ADD_REG_RISING_EDGE_ENABLE          36 // U16    Enables the rising edge detection of the correspondet input (bitmask)
+#define ADD_REG_FALLING_EDGE_ENABLE         37 // U16    Enables the falling edge detection of the correspondet input (bitmask)
+#define ADD_REG_INPUT_MODE                  38 // U8     Configures the input mode
+#define ADD_REG_RESERVED0                   39 // U8     
+#define ADD_REG_RESERVED1                   40 // U8     
+#define ADD_REG_EXPANSION_OPTIONS           41 // U8     Selects the current expansion board available in the EXPANSION port
 
 /************************************************************************/
 /* PWM Generator registers' memory limits                               */
@@ -263,8 +267,8 @@ typedef struct
 /************************************************************************/
 /* Memory limits */
 #define APP_REGS_ADD_MIN                    0x20
-#define APP_REGS_ADD_MAX                    0x27
-#define APP_NBYTES_OF_REG_BANK              13
+#define APP_REGS_ADD_MAX                    0x29
+#define APP_NBYTES_OF_REG_BANK              15
 
 /************************************************************************/
 /* Registers' bits                                                      */

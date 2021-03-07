@@ -10,6 +10,8 @@ extern AppRegs app_regs;
 
 void (*app_func_rd_pointer[])(void) = {
 	&app_read_REG_AUX_INPUTS,
+	&app_read_REG_AUX_INPUTS_RISING_EDGE_ENABLE,
+	&app_read_REG_AUX_INPUTS_FALLING_EDGE_ENABLE,
 	&app_read_REG_OUTPUTS_SET,
 	&app_read_REG_OUTPUTS_CLEAR,
 	&app_read_REG_OUTPUTS_TOGGLE,
@@ -31,6 +33,8 @@ void (*app_func_rd_pointer[])(void) = {
 
 bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_AUX_INPUTS,
+	&app_write_REG_AUX_INPUTS_RISING_EDGE_ENABLE,
+	&app_write_REG_AUX_INPUTS_FALLING_EDGE_ENABLE,
 	&app_write_REG_OUTPUTS_SET,
 	&app_write_REG_OUTPUTS_CLEAR,
 	&app_write_REG_OUTPUTS_TOGGLE,
@@ -60,6 +64,32 @@ void app_read_REG_AUX_INPUTS(void)
 }
 
 bool app_write_REG_AUX_INPUTS(void *a) { return false; }
+
+
+/************************************************************************/
+/* REG_AUX_INPUTS_RISING_EDGE_ENABLE                                    */
+/************************************************************************/
+void app_read_REG_AUX_INPUTS_RISING_EDGE_ENABLE(void) {}
+bool app_write_REG_AUX_INPUTS_RISING_EDGE_ENABLE(void *a)
+{
+	uint8_t reg = *((uint8_t*)a);
+
+	app_regs.REG_AUX_INPUTS_RISING_EDGE_ENABLE = reg;
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_AUX_INPUTS_FALLING_EDGE_ENABLE                                   */
+/************************************************************************/
+void app_read_REG_AUX_INPUTS_FALLING_EDGE_ENABLE(void) {}
+bool app_write_REG_AUX_INPUTS_FALLING_EDGE_ENABLE(void *a)
+{
+	uint8_t reg = *((uint8_t*)a);
+
+	app_regs.REG_AUX_INPUTS_FALLING_EDGE_ENABLE = reg;
+	return true;
+}
 
 
 /************************************************************************/

@@ -21,6 +21,8 @@
 /* Prototypes                                                           */
 /************************************************************************/
 void app_read_REG_AUX_INPUTS(void);
+void app_read_REG_AUX_INPUTS_RISING_EDGE_ENABLE(void);
+void app_read_REG_AUX_INPUTS_FALLING_EDGE_ENABLE(void);
 void app_read_REG_OUTPUTS_SET(void);
 void app_read_REG_OUTPUTS_CLEAR(void);
 void app_read_REG_OUTPUTS_TOGGLE(void);
@@ -40,6 +42,8 @@ void app_read_REG_SERVO1_PULSE_US(void);
 void app_read_REG_SERVO2_PULSE_US(void);
 
 bool app_write_REG_AUX_INPUTS(void *a);
+bool app_write_REG_AUX_INPUTS_RISING_EDGE_ENABLE(void *a);
+bool app_write_REG_AUX_INPUTS_FALLING_EDGE_ENABLE(void *a);
 bool app_write_REG_OUTPUTS_SET(void *a);
 bool app_write_REG_OUTPUTS_CLEAR(void *a);
 bool app_write_REG_OUTPUTS_TOGGLE(void *a);

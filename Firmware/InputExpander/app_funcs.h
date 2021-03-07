@@ -21,6 +21,8 @@
 /* Prototypes                                                           */
 /************************************************************************/
 void app_read_REG_AUX_INPUTS(void);
+void app_read_REG_AUX_INPUTS_RISING_EDGE_ENABLE(void);
+void app_read_REG_AUX_INPUTS_FALLING_EDGE_ENABLE(void);
 void app_read_REG_INPUTS(void);
 void app_read_REG_RISING_EDGE_ENABLE(void);
 void app_read_REG_FALLING_EDGE_ENABLE(void);
@@ -30,6 +32,8 @@ void app_read_REG_RESERVED1(void);
 void app_read_REG_EXPANSION_OPTIONS(void);
 
 bool app_write_REG_AUX_INPUTS(void *a);
+bool app_write_REG_AUX_INPUTS_RISING_EDGE_ENABLE(void *a);
+bool app_write_REG_AUX_INPUTS_FALLING_EDGE_ENABLE(void *a);
 bool app_write_REG_INPUTS(void *a);
 bool app_write_REG_RISING_EDGE_ENABLE(void *a);
 bool app_write_REG_FALLING_EDGE_ENABLE(void *a);

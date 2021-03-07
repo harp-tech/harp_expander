@@ -75,9 +75,14 @@ ISR(PORTE_INT0_vect, ISR_NAKED)
 	if ((aux_inputs_current_read ^ aux_inputs_previous_read) & B_AUX_IN1) { app_regs.REG_AUX_INPUTS |= B_AUX_IN1_CHANGE_MSK; }
 	
 	if (app_regs.REG_AUX_INPUTS)
-	{
+	{			
 		app_regs.REG_AUX_INPUTS |= (aux_inputs_current_read & (B_AUX_IN0 | B_AUX_IN1));
-		core_func_send_event(ADD_REG_AUX_INPUTS, true);
+		
+		if ((((app_regs.REG_AUX_INPUTS >> 4) & 3) &  (app_regs.REG_AUX_INPUTS & 3) & app_regs.REG_AUX_INPUTS_RISING_EDGE_ENABLE) ||
+		    (((app_regs.REG_AUX_INPUTS >> 4) & 3) & ~(app_regs.REG_AUX_INPUTS & 3) & app_regs.REG_AUX_INPUTS_FALLING_EDGE_ENABLE))
+		{
+			core_func_send_event(ADD_REG_AUX_INPUTS, true);
+		}
 		
 		#ifdef FOR_TESTS
 			if (app_regs.REG_AUX_INPUTS & B_AUX_IN0_CHANGE_MSK) {

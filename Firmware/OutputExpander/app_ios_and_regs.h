@@ -6,8 +6,8 @@ void init_ios(void);
 /************************************************************************/
 /* Definition of input pins                                             */
 /************************************************************************/
-// AUX_INPUT0             Description: Auxiliar input 0
-// AUX_INPUT1             Description: Auxiliar input 1
+// AUX_INPUT0             Description: Auxiliary input 0
+// AUX_INPUT1             Description: Auxiliary input 1
 // IS_OUTPUT              Description: Check for the right hardware
 // PA0                    Description: 
 // PA1                    Description: 
@@ -283,6 +283,8 @@ void init_ios(void);
 typedef struct
 {
 	uint8_t REG_AUX_INPUTS;
+	uint8_t REG_AUX_INPUTS_RISING_EDGE_ENABLE;
+	uint8_t REG_AUX_INPUTS_FALLING_EDGE_ENABLE;
 	uint16_t REG_OUTPUTS_SET;
 	uint16_t REG_OUTPUTS_CLEAR;
 	uint16_t REG_OUTPUTS_TOGGLE;
@@ -306,24 +308,26 @@ typedef struct
 /* Registers' address                                                   */
 /************************************************************************/
 /* Registers */
-#define ADD_REG_AUX_INPUTS                  32 // U8     State of the auxiliar inputs
-#define ADD_REG_OUTPUTS_SET                 33 // U16    Set the outputs
-#define ADD_REG_OUTPUTS_CLEAR               34 // U16    Clear the outputs
-#define ADD_REG_OUTPUTS_TOGGLE              35 // U16    Toggle the outputs
-#define ADD_REG_OUTPUTS_WRITE               36 // U16    Write to all outputs at once
-#define ADD_REG_RESERVED0                   37 // U8     
-#define ADD_REG_RESERVED1                   38 // U8     
-#define ADD_REG_EXPANSION_OPTIONS           39 // U8     Selects the current expansion board available in the EXPANSION port
-#define ADD_REG_RESERVED2                   40 // U8     
-#define ADD_REG_RESERVED3                   41 // U8     
-#define ADD_REG_MAG_ENCODER_READ            42 // U16    
-#define ADD_REG_MAG_ENCODER_MODE            43 // U8     
-#define ADD_REG_RESERVED4                   44 // U8     
-#define ADD_REG_RESERVED5                   45 // U8     
-#define ADD_REG_SERVO_PERIOD_US             46 // U16    
-#define ADD_REG_SERVO0_PULSE_US             47 // U16    
-#define ADD_REG_SERVO1_PULSE_US             48 // U16    
-#define ADD_REG_SERVO2_PULSE_US             49 // U16    
+#define ADD_REG_AUX_INPUTS                  32 // U8     State of the auxiliary inputs
+#define ADD_REG_AUX_INPUTS_RISING_EDGE_ENABLE 33 // U8     Enables the rising edge detection of the correspondet auxiliar input (bitmask)
+#define ADD_REG_AUX_INPUTS_FALLING_EDGE_ENABLE 34 // U8     Enables the falling edge detection of the correspondet auxiliar input (bitmask)
+#define ADD_REG_OUTPUTS_SET                 35 // U16    Set the outputs
+#define ADD_REG_OUTPUTS_CLEAR               36 // U16    Clear the outputs
+#define ADD_REG_OUTPUTS_TOGGLE              37 // U16    Toggle the outputs
+#define ADD_REG_OUTPUTS_WRITE               38 // U16    Write to all outputs at once
+#define ADD_REG_RESERVED0                   39 // U8     
+#define ADD_REG_RESERVED1                   40 // U8     
+#define ADD_REG_EXPANSION_OPTIONS           41 // U8     Selects the current expansion board available in the EXPANSION port
+#define ADD_REG_RESERVED2                   42 // U8     
+#define ADD_REG_RESERVED3                   43 // U8     
+#define ADD_REG_MAG_ENCODER_READ            44 // U16    
+#define ADD_REG_MAG_ENCODER_MODE            45 // U8     
+#define ADD_REG_RESERVED4                   46 // U8     
+#define ADD_REG_RESERVED5                   47 // U8     
+#define ADD_REG_SERVO_PERIOD_US             48 // U16    
+#define ADD_REG_SERVO0_PULSE_US             49 // U16    
+#define ADD_REG_SERVO1_PULSE_US             50 // U16    
+#define ADD_REG_SERVO2_PULSE_US             51 // U16    
 
 /************************************************************************/
 /* PWM Generator registers' memory limits                               */
@@ -333,8 +337,8 @@ typedef struct
 /************************************************************************/
 /* Memory limits */
 #define APP_REGS_ADD_MIN                    0x20
-#define APP_REGS_ADD_MAX                    0x31
-#define APP_NBYTES_OF_REG_BANK              29
+#define APP_REGS_ADD_MAX                    0x33
+#define APP_NBYTES_OF_REG_BANK              31
 
 /************************************************************************/
 /* Registers' bits                                                      */

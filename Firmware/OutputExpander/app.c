@@ -115,7 +115,10 @@ void core_callback_1st_config_hw_after_boot(void)
 
 void core_callback_reset_registers(void)
 {
-	/* Initialize registers */
+	/* Initialize registers */	
+	app_regs.REG_AUX_INPUTS_RISING_EDGE_ENABLE = B_AUX_IN0 | B_AUX_IN1;
+	app_regs.REG_AUX_INPUTS_FALLING_EDGE_ENABLE = B_AUX_IN0 | B_AUX_IN1;
+	
 	app_regs.REG_SERVO_PERIOD_US = 20000;	// 20 ms
 	app_regs.REG_SERVO0_PULSE_US = 1500;	// 1.5 ms
 	app_regs.REG_SERVO1_PULSE_US = 1500;	// 1.5 ms
