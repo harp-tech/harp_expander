@@ -291,6 +291,41 @@ typedef struct
 	uint16_t REG_OUTPUTS_WRITE;
 	uint8_t REG_RESERVED0;
 	uint8_t REG_RESERVED1;
+	uint8_t REG_PWM_AND_STIM_ENABLE;
+	float REG_PWM0_FREQ;
+	float REG_PWM0_DUTYCYCLE;
+	uint16_t REG_PWM0_COUNT;
+	float REG_PWM0_REAL_FREQ;
+	float REG_PWM0_REAL_DUTYCYCLE;
+	uint8_t REG_PWM0_MODE;
+	uint8_t REG_PWM0_TRIG;
+	uint8_t REG_PWM0_CONF_EVENT;
+	float REG_PWM1_FREQ;
+	float REG_PWM1_DUTYCYCLE;
+	uint16_t REG_PWM1_COUNT;
+	float REG_PWM1_REAL_FREQ;
+	float REG_PWM1_REAL_DUTYCYCLE;
+	uint8_t REG_PWM1_MODE;
+	uint8_t REG_PWM1_TRIG;
+	uint8_t REG_PWM1_CONF_EVENT;
+	float REG_PWM2_FREQ;
+	float REG_PWM2_DUTYCYCLE;
+	uint16_t REG_PWM2_COUNT;
+	float REG_PWM2_REAL_FREQ;
+	float REG_PWM2_REAL_DUTYCYCLE;
+	uint8_t REG_PWM2_MODE;
+	uint8_t REG_PWM2_TRIG;
+	uint8_t REG_PWM2_CONF_EVENT;
+	uint8_t REG_PWM_START;
+	uint8_t REG_PWM_STOP;
+	uint8_t REG_PWM_RISE_EVENT;
+	uint16_t REG_STIM0_PULSES_T_ON;
+	uint16_t REG_STIM0_PULSES_T_OFF;
+	uint16_t REG_STIM0_PULSES_T_TOTAL;
+	uint8_t REG_STIM0_PULSES_MODE;
+	uint8_t REG_STIM0_PULSES_TRIG;
+	uint8_t REG_STIM_START;
+	uint8_t REG_STIM_STOP;
 	uint8_t REG_EXPANSION_OPTIONS;
 	uint8_t REG_RESERVED2;
 	uint8_t REG_RESERVED3;
@@ -317,17 +352,52 @@ typedef struct
 #define ADD_REG_OUTPUTS_WRITE               38 // U16    Write to all outputs at once
 #define ADD_REG_RESERVED0                   39 // U8     
 #define ADD_REG_RESERVED1                   40 // U8     
-#define ADD_REG_EXPANSION_OPTIONS           41 // U8     Selects the current expansion board available in the EXPANSION port
-#define ADD_REG_RESERVED2                   42 // U8     
-#define ADD_REG_RESERVED3                   43 // U8     
-#define ADD_REG_MAG_ENCODER_READ            44 // U16    
-#define ADD_REG_MAG_ENCODER_MODE            45 // U8     
-#define ADD_REG_RESERVED4                   46 // U8     
-#define ADD_REG_RESERVED5                   47 // U8     
-#define ADD_REG_SERVO_PERIOD_US             48 // U16    
-#define ADD_REG_SERVO0_PULSE_US             49 // U16    
-#define ADD_REG_SERVO1_PULSE_US             50 // U16    
-#define ADD_REG_SERVO2_PULSE_US             51 // U16    
+#define ADD_REG_PWM_AND_STIM_ENABLE         41 // U8     
+#define ADD_REG_PWM0_FREQ                   42 // FLOAT  Frequency of PWM0. Maximum frequency is 1000Hz
+#define ADD_REG_PWM0_DUTYCYCLE              43 // FLOAT  Duty cycle fro PWM0. Maximum value is 100%
+#define ADD_REG_PWM0_COUNT                  44 // U16    Number of pulses on PWM0
+#define ADD_REG_PWM0_REAL_FREQ              45 // FLOAT  Real frequency that will be preformed at PWM0
+#define ADD_REG_PWM0_REAL_DUTYCYCLE         46 // FLOAT  Real duty cycle that will be preformed at PWM0
+#define ADD_REG_PWM0_MODE                   47 // U8     Mode configuration for PWM0
+#define ADD_REG_PWM0_TRIG                   48 // U8     Configuration of hardware trigger for PWM0
+#define ADD_REG_PWM0_CONF_EVENT             49 // U8     
+#define ADD_REG_PWM1_FREQ                   50 // FLOAT  Frequency of PWM1. Maximum frequency is 1000Hz
+#define ADD_REG_PWM1_DUTYCYCLE              51 // FLOAT  Duty cycle fro PWM1. Maximum value is 100%
+#define ADD_REG_PWM1_COUNT                  52 // U16    Number of pulses on PWM1
+#define ADD_REG_PWM1_REAL_FREQ              53 // FLOAT  Real frequency that will be preformed at PWM1
+#define ADD_REG_PWM1_REAL_DUTYCYCLE         54 // FLOAT  Real duty cycle that will be preformed at PWM1
+#define ADD_REG_PWM1_MODE                   55 // U8     Mode configuration for PWM1
+#define ADD_REG_PWM1_TRIG                   56 // U8     Configuration of hardware trigger for PWM1
+#define ADD_REG_PWM1_CONF_EVENT             57 // U8     
+#define ADD_REG_PWM2_FREQ                   58 // FLOAT  Frequency of PWM2. Maximum frequency is 1000Hz
+#define ADD_REG_PWM2_DUTYCYCLE              59 // FLOAT  Duty cycle fro PWM2. Maximum value is 100%
+#define ADD_REG_PWM2_COUNT                  60 // U16    Number of pulses on PWM2
+#define ADD_REG_PWM2_REAL_FREQ              61 // FLOAT  Real frequency that will be preformed at PWM2
+#define ADD_REG_PWM2_REAL_DUTYCYCLE         62 // FLOAT  Real duty cycle that will be preformed at PWM2
+#define ADD_REG_PWM2_MODE                   63 // U8     Mode configuration for PWM2
+#define ADD_REG_PWM2_TRIG                   64 // U8     Configuration of hardware trigger for PWM2
+#define ADD_REG_PWM2_CONF_EVENT             65 // U8     
+#define ADD_REG_PWM_START                   66 // U8     
+#define ADD_REG_PWM_STOP                    67 // U8     
+#define ADD_REG_PWM_RISE_EVENT              68 // U8     
+#define ADD_REG_STIM0_PULSES_T_ON           69 // U16    
+#define ADD_REG_STIM0_PULSES_T_OFF          70 // U16    
+#define ADD_REG_STIM0_PULSES_T_TOTAL        71 // U16    
+#define ADD_REG_STIM0_PULSES_MODE           72 // U8     
+#define ADD_REG_STIM0_PULSES_TRIG           73 // U8     
+#define ADD_REG_STIM_START                  74 // U8     
+#define ADD_REG_STIM_STOP                   75 // U8     
+#define ADD_REG_EXPANSION_OPTIONS           76 // U8     Selects the current expansion board available in the EXPANSION port
+#define ADD_REG_RESERVED2                   77 // U8     
+#define ADD_REG_RESERVED3                   78 // U8     
+#define ADD_REG_MAG_ENCODER_READ            79 // U16    
+#define ADD_REG_MAG_ENCODER_MODE            80 // U8     
+#define ADD_REG_RESERVED4                   81 // U8     
+#define ADD_REG_RESERVED5                   82 // U8     
+#define ADD_REG_SERVO_PERIOD_US             83 // U16    
+#define ADD_REG_SERVO0_PULSE_US             84 // U16    
+#define ADD_REG_SERVO1_PULSE_US             85 // U16    
+#define ADD_REG_SERVO2_PULSE_US             86 // U16    
 
 /************************************************************************/
 /* PWM Generator registers' memory limits                               */
@@ -337,8 +407,8 @@ typedef struct
 /************************************************************************/
 /* Memory limits */
 #define APP_REGS_ADD_MIN                    0x20
-#define APP_REGS_ADD_MAX                    0x33
-#define APP_NBYTES_OF_REG_BANK              31
+#define APP_REGS_ADD_MAX                    0x56
+#define APP_NBYTES_OF_REG_BANK              108
 
 /************************************************************************/
 /* Registers' bits                                                      */
@@ -357,6 +427,46 @@ typedef struct
 #define B_OUT7                             (1<<7)       // Digital OUT7
 #define B_OUT8                             (1<<8)       // Digital OUT8
 #define B_OUT9                             (1<<9)       // Digital OUT9
+#define B_PWM0_EN_OUT1                     (1<<0)       // 
+#define B_PWM0_EN_OUT2                     (1<<1)       // 
+#define B_PWM1_EN_OUT6                     (1<<2)       // 
+#define B_PWM1_EN_OUT7                     (1<<3)       // 
+#define B_PWM2_EN_OUT9                     (1<<4)       // 
+#define B_STIM0_EN_OUT0                    (1<<5)       // 
+#define B_STIM0_EN_OUT5                    (1<<6)       // 
+#define GM_PWM_MODE                        3            // 
+#define MSK_PWM_MODE_INFINITE              0            // 
+#define MSK_PWM_MODE_COUNT                 1            // 
+#define GM_PWM_TRIG                        255          // 
+#define MSK_PWM_TRIG_SW                    (0<<0)       // 
+#define MSK_PWM_TRIG_AUX0_RISE_START       (1<<0)       // 
+#define MSK_PWM_TRIG_AUX0_FALL_START       (2<<0)       // 
+#define MSK_PWM_TRIG_AUX0_ON_WHILE_HIGH    (3<<0)       // 
+#define MSK_PWM_TRIG_AUX0_ON_WHILE_LOW     (4<<0)       // 
+#define MSK_PWM_TRIG_AUX1_RISE_START       (0<<4)       // 
+#define MSK_PWM_TRIG_AUX1_FALL_START       (1<<4)       // 
+#define MSK_PWM_TRIG_AUX1_ON_WHILE_HIGH    (2<<4)       // 
+#define MSK_PWM_TRIG_AUX1_ON_WHILE_LOW     (3<<4)       // 
+#define GM_PWM_EVENT                       1            // 
+#define MSK_PWM_RISE_EVENT_DIS             (0<<0)       // 
+#define MSK_PWM_RISE_EVENT_EN              (1<<0)       // 
+#define B_PWM0                             (1<<0)       // 
+#define B_PWM1                             (1<<1)       // 
+#define B_PWM2                             (1<<2)       // 
+#define GM_STIM_MODE                       3            // 
+#define MSK_STIM_MODE_INFINITE             0            // 
+#define MSK_STIM_MODE_COUNT                1            // 
+#define GM_STIM_TRIG                       255          // 
+#define MSK_STIM_TRIG_SW                   (0<<0)       // 
+#define MSK_STIM_TRIG_AUX0_RISE_START      (1<<0)       // 
+#define MSK_STIM_TRIG_AUX0_FALL_START      (2<<0)       // 
+#define MSK_STIM_TRIG_AUX0_ON_WHILE_HIGH   (3<<0)       // 
+#define MSK_STIM_TRIG_AUX0_ON_WHILE_LOW    (4<<0)       // 
+#define MSK_STIM_TRIG_AUX1_RISE_START      (0<<4)       // 
+#define MSK_STIM_TRIG_AUX1_FALL_START      (1<<4)       // 
+#define MSK_STIM_TRIG_AUX1_ON_WHILE_HIGH   (2<<4)       // 
+#define MSK_STIM_TRIG_AUX1_ON_WHILE_LOW    (3<<4)       // 
+#define B_STIM0                            (1<<0)       // 
 #define GM_EXPANSION_OPTIONS               7            // 
 #define MSK_BREAKOUT                       0            // 
 #define MSK_MAGNETIC_ENCODER               1            // 
