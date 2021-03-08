@@ -146,6 +146,75 @@ bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_SERVO2_PULSE_US
 };
 
+/************************************************************************/
+/* Get decimal divider from prescaler                                   */
+/************************************************************************/
+uint16_t get_divider(uint8_t prescaler)
+{
+	switch(prescaler)
+	{
+		case TIMER_PRESCALER_DIV1: return 1;
+		case TIMER_PRESCALER_DIV2: return 2;
+		case TIMER_PRESCALER_DIV4: return 4;
+		case TIMER_PRESCALER_DIV8: return 8;
+		case TIMER_PRESCALER_DIV64: return 64;
+		case TIMER_PRESCALER_DIV256: return 256;
+		case TIMER_PRESCALER_DIV1024: return 1024;
+		default: return 0;
+	}
+}
+
+uint8_t prescaler0, prescaler1, prescaler2;
+uint16_t target_count0, target_count1, target_count2;
+uint16_t duty_cycle0, duty_cycle1, duty_cycle2;
+
+/************************************************************************/
+/* Calculate real values (frequency and duty cycle)                     */
+/************************************************************************/
+void update_reals_pwm0(void)
+{
+	if (calculate_timer_16bits(32000000, app_regs.REG_PWM0_FREQ, &prescaler0, &target_count0))
+	{
+		app_regs.REG_PWM0_REAL_FREQ = 32000000.0 / ((uint32_t)(get_divider(prescaler0)) * (uint32_t)target_count0);
+		app_regs.REG_PWM0_REAL_DUTYCYCLE = 100.0 * ((float)((uint16_t)(app_regs.REG_PWM0_DUTYCYCLE/100.0 * target_count0 + 0.5)) / target_count0);
+		duty_cycle0 = app_regs.REG_PWM0_DUTYCYCLE/100.0 * target_count0 + 0.5;
+	}
+	else
+	{
+		app_regs.REG_PWM0_REAL_FREQ = 0;
+		app_regs.REG_PWM0_REAL_DUTYCYCLE = 0;
+	}
+}
+
+void update_reals_pwm1(void)
+{
+	if (calculate_timer_16bits(32000000, app_regs.REG_PWM1_FREQ, &prescaler0, &target_count0))
+	{
+		app_regs.REG_PWM1_REAL_FREQ = 32000000.0 / ((uint32_t)(get_divider(prescaler0)) * (uint32_t)target_count0);
+		app_regs.REG_PWM1_REAL_DUTYCYCLE = 100.0 * ((float)((uint16_t)(app_regs.REG_PWM1_DUTYCYCLE/100.0 * target_count0 + 0.5)) / target_count0);
+		duty_cycle0 = app_regs.REG_PWM1_DUTYCYCLE/100.0 * target_count0 + 0.5;
+	}
+	else
+	{
+		app_regs.REG_PWM1_REAL_FREQ = 0;
+		app_regs.REG_PWM1_REAL_DUTYCYCLE = 0;
+	}
+}
+
+void update_reals_pwm2(void)
+{
+	if (calculate_timer_16bits(32000000, app_regs.REG_PWM2_FREQ, &prescaler0, &target_count0))
+	{
+		app_regs.REG_PWM2_REAL_FREQ = 32000000.0 / ((uint32_t)(get_divider(prescaler0)) * (uint32_t)target_count0);
+		app_regs.REG_PWM2_REAL_DUTYCYCLE = 100.0 * ((float)((uint16_t)(app_regs.REG_PWM2_DUTYCYCLE/100.0 * target_count0 + 0.5)) / target_count0);
+		duty_cycle0 = app_regs.REG_PWM2_DUTYCYCLE/100.0 * target_count0 + 0.5;
+	}
+	else
+	{
+		app_regs.REG_PWM2_REAL_FREQ = 0;
+		app_regs.REG_PWM2_REAL_DUTYCYCLE = 0;
+	}
+}
 
 /************************************************************************/
 /* REG_AUX_INPUTS                                                       */
@@ -393,7 +462,7 @@ bool app_write_REG_PWM0_FREQ(void *a)
 	if (reg < 0.5)  return false;	
 
 	app_regs.REG_PWM0_FREQ = reg;
-	update_reals_ch0();
+	update_reals_pwm0();
 	
 	return true;
 }
@@ -411,7 +480,7 @@ bool app_write_REG_PWM0_DUTYCYCLE(void *a)
 	if (reg < 1)   return false;
 	
 	app_regs.REG_PWM0_DUTYCYCLE = reg;
-	update_reals_ch0();
+	update_reals_pwm0();
 	
 	return true;
 }
@@ -425,7 +494,7 @@ bool app_write_REG_PWM0_COUNT(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 	
-	if (reg < 1)    return false;
+	if (reg < 1) return false;
 
 	app_regs.REG_PWM0_COUNT = reg;
 	return true;
@@ -501,6 +570,8 @@ bool app_write_REG_PWM1_FREQ(void *a)
 	if (reg < 0.5)  return false;
 
 	app_regs.REG_PWM1_FREQ = reg;
+	update_reals_pwm1();
+	
 	return true;
 }
 
@@ -517,6 +588,8 @@ bool app_write_REG_PWM1_DUTYCYCLE(void *a)
 	if (reg < 1)   return false;
 	
 	app_regs.REG_PWM1_DUTYCYCLE = reg;
+	update_reals_pwm1();
+	
 	return true;
 }
 
@@ -605,6 +678,8 @@ bool app_write_REG_PWM2_FREQ(void *a)
 	if (reg < 0.5)  return false;
 
 	app_regs.REG_PWM2_FREQ = reg;
+	update_reals_pwm2();
+	
 	return true;
 }
 
@@ -621,6 +696,8 @@ bool app_write_REG_PWM2_DUTYCYCLE(void *a)
 	if (reg < 1)   return false;
 
 	app_regs.REG_PWM2_DUTYCYCLE = reg;
+	update_reals_pwm2();
+	
 	return true;
 }
 

@@ -119,6 +119,10 @@ void core_callback_reset_registers(void)
 	app_regs.REG_AUX_INPUTS_RISING_EDGE_ENABLE = B_AUX_IN0 | B_AUX_IN1;
 	app_regs.REG_AUX_INPUTS_FALLING_EDGE_ENABLE = B_AUX_IN0 | B_AUX_IN1;
 	
+	app_regs.REG_PWM0_REAL_DUTYCYCLE = 50;
+	app_regs.REG_PWM1_REAL_DUTYCYCLE = 50;
+	app_regs.REG_PWM2_REAL_DUTYCYCLE = 50;
+	
 	app_regs.REG_SERVO_PERIOD_US = 20000;	// 20 ms
 	app_regs.REG_SERVO0_PULSE_US = 1500;	// 1.5 ms
 	app_regs.REG_SERVO1_PULSE_US = 1500;	// 1.5 ms
