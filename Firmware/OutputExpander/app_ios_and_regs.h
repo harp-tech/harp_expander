@@ -291,7 +291,7 @@ typedef struct
 	uint16_t REG_OUTPUTS_WRITE;
 	uint8_t REG_RESERVED0;
 	uint8_t REG_RESERVED1;
-	uint8_t REG_PWM_AND_STIM_ENABLE;
+	uint16_t REG_PWM_AND_STIM_ENABLE;
 	float REG_PWM0_FREQ;
 	float REG_PWM0_DUTYCYCLE;
 	uint16_t REG_PWM0_COUNT;
@@ -363,7 +363,7 @@ typedef struct
 #define ADD_REG_OUTPUTS_WRITE               38 // U16    Write to all outputs at once
 #define ADD_REG_RESERVED0                   39 // U8     
 #define ADD_REG_RESERVED1                   40 // U8     
-#define ADD_REG_PWM_AND_STIM_ENABLE         41 // U8     
+#define ADD_REG_PWM_AND_STIM_ENABLE         41 // U16    
 #define ADD_REG_PWM0_FREQ                   42 // FLOAT  Frequency of PWM0. Maximum frequency is 1000Hz
 #define ADD_REG_PWM0_DUTYCYCLE              43 // FLOAT  Duty cycle fro PWM0. Maximum value is 100%
 #define ADD_REG_PWM0_COUNT                  44 // U16    Number of pulses on PWM0
@@ -430,7 +430,7 @@ typedef struct
 /* Memory limits */
 #define APP_REGS_ADD_MIN                    0x20
 #define APP_REGS_ADD_MAX                    0x61
-#define APP_NBYTES_OF_REG_BANK              130
+#define APP_NBYTES_OF_REG_BANK              131
 
 /************************************************************************/
 /* Registers' bits                                                      */
@@ -451,15 +451,18 @@ typedef struct
 #define B_OUT9                             (1<<9)       // Digital OUT9
 #define B_PWM0_EN_OUT1                     (1<<0)       // 
 #define B_PWM0_EN_OUT2                     (1<<1)       // 
-#define B_PWM1_EN_OUT6                     (1<<2)       // 
-#define B_PWM1_EN_OUT7                     (1<<3)       // 
-#define B_PWM2_EN_OUT9                     (1<<4)       // 
-#define B_STIM0_EN_OUT0                    (1<<5)       // 
-#define B_STIM0_EN_OUT5                    (1<<6)       // 
+#define B_PWM0_EN_OUT3                     (1<<2)       // 
+#define B_PWM1_EN_OUT6                     (1<<3)       // 
+#define B_PWM1_EN_OUT7                     (1<<4)       // 
+#define B_PWM1_EN_OUT8                     (1<<5)       // 
+#define B_PWM2_EN_OUT9                     (1<<6)       // 
+#define B_STIM0_EN_OUT0                    (1<<7)       // 
+#define B_STIM0_EN_OUT5                    (1<<8)       // 
 #define GM_PWM_MODE                        3            // 
 #define MSK_PWM_MODE_INFINITE              0            // 
 #define MSK_PWM_MODE_COUNT                 1            // 
-#define GM_PWM_TRIG                        255          // 
+#define GM_PWM_TRIG_AUX0                   0x0F         // 
+#define GM_PWM_TRIG_AUX1                   0xF0         // 
 #define MSK_PWM_TRIG_SW                    (0<<0)       // 
 #define MSK_PWM_TRIG_AUX0_RISE_START       (1<<0)       // 
 #define MSK_PWM_TRIG_AUX0_FALL_START       (2<<0)       // 
@@ -484,10 +487,10 @@ typedef struct
 #define MSK_STIM_TRIG_AUX0_FALL_START      (2<<0)       // 
 #define MSK_STIM_TRIG_AUX0_ON_WHILE_HIGH   (3<<0)       // 
 #define MSK_STIM_TRIG_AUX0_ON_WHILE_LOW    (4<<0)       // 
-#define MSK_STIM_TRIG_AUX1_RISE_START      (0<<4)       // 
-#define MSK_STIM_TRIG_AUX1_FALL_START      (1<<4)       // 
-#define MSK_STIM_TRIG_AUX1_ON_WHILE_HIGH   (2<<4)       // 
-#define MSK_STIM_TRIG_AUX1_ON_WHILE_LOW    (3<<4)       // 
+#define MSK_STIM_TRIG_AUX1_RISE_START      (1<<4)       // 
+#define MSK_STIM_TRIG_AUX1_FALL_START      (2<<4)       // 
+#define MSK_STIM_TRIG_AUX1_ON_WHILE_HIGH   (3<<4)       // 
+#define MSK_STIM_TRIG_AUX1_ON_WHILE_LOW    (4<<4)       // 
 #define B_STIM0                            (1<<0)       // 
 #define B_STIM0                            (1<<0)       // 
 #define GM_EXPANSION_OPTIONS               7            // 
@@ -496,8 +499,6 @@ typedef struct
 #define MSK_SERVO_MOTOR_1                  2            // 
 #define MSK_SERVO_MOTOR_2                  3            // 
 #define MSK_SERVO_MOTOR_3                  4            // 
-#define MSK_CAMERAS                        5            // 
-#define MSK_PWM_1                          6            // 
 #define GM_MAG_ENCODER_MODE                7            // 
 #define MSK_AT_50SPS                       0            // 
 #define MSK_AT_100SPS                      1            // 

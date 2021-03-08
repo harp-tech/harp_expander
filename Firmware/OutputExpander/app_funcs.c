@@ -168,6 +168,11 @@ uint8_t prescaler0, prescaler1, prescaler2;
 uint16_t target_count0, target_count1, target_count2;
 uint16_t duty_cycle0, duty_cycle1, duty_cycle2;
 
+uint16_t tcount0, tcount1, tcount2;
+uint16_t pwm_and_stim_enable = 0;
+
+bool stop_pwm0, stop_pwm1, stop_pwm2;
+
 /************************************************************************/
 /* Calculate real values (frequency and duty cycle)                     */
 /************************************************************************/
@@ -188,11 +193,11 @@ void update_reals_pwm0(void)
 
 void update_reals_pwm1(void)
 {
-	if (calculate_timer_16bits(32000000, app_regs.REG_PWM1_FREQ, &prescaler0, &target_count0))
+	if (calculate_timer_16bits(32000000, app_regs.REG_PWM1_FREQ, &prescaler1, &target_count1))
 	{
-		app_regs.REG_PWM1_REAL_FREQ = 32000000.0 / ((uint32_t)(get_divider(prescaler0)) * (uint32_t)target_count0);
-		app_regs.REG_PWM1_REAL_DUTYCYCLE = 100.0 * ((float)((uint16_t)(app_regs.REG_PWM1_DUTYCYCLE/100.0 * target_count0 + 0.5)) / target_count0);
-		duty_cycle0 = app_regs.REG_PWM1_DUTYCYCLE/100.0 * target_count0 + 0.5;
+		app_regs.REG_PWM1_REAL_FREQ = 32000000.0 / ((uint32_t)(get_divider(prescaler1)) * (uint32_t)target_count1);
+		app_regs.REG_PWM1_REAL_DUTYCYCLE = 100.0 * ((float)((uint16_t)(app_regs.REG_PWM1_DUTYCYCLE/100.0 * target_count1 + 0.5)) / target_count1);
+		duty_cycle1 = app_regs.REG_PWM1_DUTYCYCLE/100.0 * target_count1 + 0.5;
 	}
 	else
 	{
@@ -203,11 +208,11 @@ void update_reals_pwm1(void)
 
 void update_reals_pwm2(void)
 {
-	if (calculate_timer_16bits(32000000, app_regs.REG_PWM2_FREQ, &prescaler0, &target_count0))
+	if (calculate_timer_16bits(32000000, app_regs.REG_PWM2_FREQ, &prescaler2, &target_count2))
 	{
-		app_regs.REG_PWM2_REAL_FREQ = 32000000.0 / ((uint32_t)(get_divider(prescaler0)) * (uint32_t)target_count0);
-		app_regs.REG_PWM2_REAL_DUTYCYCLE = 100.0 * ((float)((uint16_t)(app_regs.REG_PWM2_DUTYCYCLE/100.0 * target_count0 + 0.5)) / target_count0);
-		duty_cycle0 = app_regs.REG_PWM2_DUTYCYCLE/100.0 * target_count0 + 0.5;
+		app_regs.REG_PWM2_REAL_FREQ = 32000000.0 / ((uint32_t)(get_divider(prescaler2)) * (uint32_t)target_count2);
+		app_regs.REG_PWM2_REAL_DUTYCYCLE = 100.0 * ((float)((uint16_t)(app_regs.REG_PWM2_DUTYCYCLE/100.0 * target_count2 + 0.5)) / target_count2);
+		duty_cycle2 = app_regs.REG_PWM2_DUTYCYCLE/100.0 * target_count2 + 0.5;
 	}
 	else
 	{
@@ -444,7 +449,7 @@ bool app_write_REG_RESERVED1(void *a)
 void app_read_REG_PWM_AND_STIM_ENABLE(void) {}
 bool app_write_REG_PWM_AND_STIM_ENABLE(void *a)
 {
-	app_regs.REG_PWM_AND_STIM_ENABLE = *((uint8_t*)a);;
+	app_regs.REG_PWM_AND_STIM_ENABLE = *((uint16_t*)a);;
 	return true;
 }
 
@@ -782,6 +787,118 @@ bool app_write_REG_PWM_START(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 
+	bool start_pwm0 = false;
+	bool start_pwm1 = false;
+	bool start_pwm2 = false;
+		
+	if (reg & B_PWM0)
+	{
+		tcount0 = app_regs.REG_PWM0_COUNT;
+			
+		TCD0_CTRLA = TC_CLKSEL_OFF_gc;		// Make sure timer is stopped to make reset
+		TCD0_CTRLFSET = TC_CMD_RESET_gc;	// Timer reset (registers to initial value)
+		TCD0_PER = target_count0 - 1;		// Set up target
+		TCD0_CCA = duty_cycle0;				// Set duty cycle A
+		TCD0_CCB = duty_cycle0;				// Set duty cycle B
+		TCD0_CCC = duty_cycle0;				// Set duty cycle C
+		TCD0_CCD = duty_cycle0;				// Set duty cycle D
+		TCD0_INTCTRLA = INT_LEVEL_LOW;		// Interrupt overflow
+		TCD0_INTCTRLB = INT_LEVEL_LOW;		// Interrupt prescaler A
+		TCD0_CTRLB = TC_WGMODE_SINGLESLOPE_gc;	// Enable single slope mode
+		
+		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM0_EN_OUT1)
+		{
+			start_pwm0 = true;
+			TCD0_CTRLB |= TC0_CCDEN_bm;		// Enable channel D
+			pwm_and_stim_enable |= B_PWM0_EN_OUT1;
+		}
+		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM0_EN_OUT2)
+		{
+			start_pwm0 = true;
+			TCD0_CTRLB |= TC0_CCCEN_bm;		// Enable channel C
+			pwm_and_stim_enable |= B_PWM0_EN_OUT2;
+		}
+		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM0_EN_OUT3)
+		{
+			start_pwm0 = true;
+			TCD0_CTRLB |= TC0_CCBEN_bm;		// Enable channel B
+			pwm_and_stim_enable |= B_PWM0_EN_OUT3;
+		}
+	}
+				
+	if (reg & B_PWM1)
+	{
+		tcount1 = app_regs.REG_PWM1_COUNT;
+			
+		TCC0_CTRLA = TC_CLKSEL_OFF_gc;		// Make sure timer is stopped to make reset
+		TCC0_CTRLFSET = TC_CMD_RESET_gc;	// Timer reset (registers to initial value)
+		TCC0_PER = target_count1 - 1;		// Set up target
+		TCC0_CCA = duty_cycle1;				// Set duty cycle A
+		TCC0_CCB = duty_cycle1;				// Set duty cycle B
+		TCC0_CCC = duty_cycle1;				// Set duty cycle C
+		TCC0_CCD = duty_cycle1;				// Set duty cycle D
+		TCC0_INTCTRLA = INT_LEVEL_LOW;		// Interrupt overflow
+		TCC0_INTCTRLB = INT_LEVEL_LOW;		// Interrupt prescaler A
+		TCC0_CTRLB = TC_WGMODE_SINGLESLOPE_gc;	// Enable single slope mode
+				
+		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM1_EN_OUT6 && (
+			(app_regs.REG_EXPANSION_OPTIONS == MSK_BREAKOUT)
+			))
+			{
+				start_pwm1 = true;
+				TCC0_CTRLB |= TC0_CCBEN_bm;	// Enable channel B
+				pwm_and_stim_enable |= B_PWM1_EN_OUT6;
+			}
+		   
+		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM1_EN_OUT7 && (
+			(app_regs.REG_EXPANSION_OPTIONS == MSK_BREAKOUT) ||
+			(app_regs.REG_EXPANSION_OPTIONS == MSK_MAGNETIC_ENCODER)
+			))
+			{
+				start_pwm1 = true;
+				TCC0_CTRLB |= TC0_CCCEN_bm;	// Enable channel C
+				pwm_and_stim_enable |= B_PWM1_EN_OUT7;
+			}
+		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM1_EN_OUT8 && (
+			(app_regs.REG_EXPANSION_OPTIONS == MSK_BREAKOUT) ||
+			(app_regs.REG_EXPANSION_OPTIONS == MSK_MAGNETIC_ENCODER)
+			))
+			{
+				start_pwm1 = true;
+				TCC0_CTRLB |= TC0_CCDEN_bm;	// Enable channel D
+				pwm_and_stim_enable |= B_PWM1_EN_OUT8;
+			}
+	}
+
+	if (reg & B_PWM2)
+	{
+		tcount2 = app_regs.REG_PWM2_COUNT;
+			
+		TCE0_CTRLA = TC_CLKSEL_OFF_gc;		// Make sure timer is stopped to make reset
+		TCE0_CTRLFSET = TC_CMD_RESET_gc;	// Timer reset (registers to initial value)
+		TCE0_PER = target_count2 - 1;		// Set up target
+		TCE0_CCA = duty_cycle2;				// Set duty cycle A		
+		TCE0_INTCTRLA = INT_LEVEL_LOW;		// Interrupt overflow
+		TCE0_INTCTRLB = INT_LEVEL_LOW;		// Interrupt prescaler A
+		TCE0_CTRLB = TC_WGMODE_SINGLESLOPE_gc;	// Enable single slope mode
+		
+		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM2_EN_OUT9 && (
+			(app_regs.REG_EXPANSION_OPTIONS == MSK_BREAKOUT) ||
+			(app_regs.REG_EXPANSION_OPTIONS == MSK_SERVO_MOTOR_1) ||
+			(app_regs.REG_EXPANSION_OPTIONS == MSK_SERVO_MOTOR_2) ||
+			(app_regs.REG_EXPANSION_OPTIONS == MSK_SERVO_MOTOR_3)
+			))
+			{
+				start_pwm2 = true;
+				TCE0_CTRLB |= TC0_CCAEN_bm;	// Enable channel A				
+				pwm_and_stim_enable |= B_PWM2_EN_OUT9;
+			}
+	}
+		
+	if (start_pwm0) { TCD0_CTRLA = prescaler0; stop_pwm0 = false; }
+	if (start_pwm1) { TCC0_CTRLA = prescaler1; stop_pwm1 = false; }
+	if (start_pwm2) { TCE0_CTRLA = prescaler2; stop_pwm2 = false; }
+	
 	app_regs.REG_PWM_START = reg;
 	return true;
 }
@@ -794,6 +911,10 @@ void app_read_REG_PWM_STOP(void) {}
 bool app_write_REG_PWM_STOP(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
+	
+	if (reg & B_PWM0) stop_pwm0 = true;
+	if (reg & B_PWM1) stop_pwm1 = true;
+	if (reg & B_PWM2) stop_pwm2 = true;
 
 	app_regs.REG_PWM_STOP = reg;
 	return true;
@@ -887,6 +1008,13 @@ void app_read_REG_STIM_START(void) {}
 bool app_write_REG_STIM_START(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
+
+	// Verificar se o app_regs.REG_EXPANSION_OPTIONS permite (apenas no OUT5)
+	/*
+	STIM0 TCE0
+	0
+	5
+	*/
 
 	app_regs.REG_STIM_START = reg;
 	return true;
@@ -1081,7 +1209,7 @@ bool app_write_REG_EXPANSION_OPTIONS(void *a)
 			TCC0_CTRLA = TC_CLKSEL_OFF_gc;							// Make sure timer is stopped to make reset
 			TCC0_CTRLFSET = TC_CMD_RESET_gc;						// Timer reset (registers to initial value)			
 			TCC0_PER = (app_regs.REG_SERVO_PERIOD_US >> 1) - 1;		// Set up target
-			TCC0_CCA = (app_regs.REG_SERVO0_PULSE_US >> 1) - 1;		// Set duty cycle A			
+			TCC0_CCA = (app_regs.REG_SERVO0_PULSE_US >> 1);			// Set duty cycle A			
 			TCC0_CTRLB = TC0_CCAEN_bm | TC_WGMODE_SINGLESLOPE_gc;	// Enable channel A and single slope mode
 			TCC0_CTRLA = TIMER_PRESCALER_DIV64;						// Start timer
 			break;
@@ -1100,8 +1228,8 @@ bool app_write_REG_EXPANSION_OPTIONS(void *a)
 			TCC0_CTRLA = TC_CLKSEL_OFF_gc;							// Make sure timer is stopped to make reset
 			TCC0_CTRLFSET = TC_CMD_RESET_gc;						// Timer reset (registers to initial value)			
 			TCC0_PER = (app_regs.REG_SERVO_PERIOD_US >> 1) - 1;		// Set up target
-			TCC0_CCA = (app_regs.REG_SERVO0_PULSE_US >> 1) - 1;		// Set duty cycle A
-			TCC0_CCB = (app_regs.REG_SERVO1_PULSE_US >> 1) - 1;		// Set duty cycle B			
+			TCC0_CCA = (app_regs.REG_SERVO0_PULSE_US >> 1);			// Set duty cycle A
+			TCC0_CCB = (app_regs.REG_SERVO1_PULSE_US >> 1);			// Set duty cycle B			
 			TCC0_CTRLB = TC0_CCAEN_bm | TC_WGMODE_SINGLESLOPE_gc;	// Enable channel A and single slope mode
 			TCC0_CTRLB |= TC0_CCBEN_bm;								// Enable channel B			
 			TCC0_CTRLA = TIMER_PRESCALER_DIV64;						// Start timer			
@@ -1128,12 +1256,6 @@ bool app_write_REG_EXPANSION_OPTIONS(void *a)
 			TCC0_CTRLB |= TC0_CCBEN_bm;								// Enable channel B
 			TCC0_CTRLB |= TC0_CCCEN_bm;								// Enable channel C			
 			TCC0_CTRLA = TIMER_PRESCALER_DIV64;						// Start timer			
-			break;			
-		
-		case MSK_CAMERAS:
-			break;
-			
-		case MSK_PWM_1:
 			break;
 		
 		default:

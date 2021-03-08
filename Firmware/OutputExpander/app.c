@@ -70,6 +70,11 @@ void core_callback_catastrophic_error_detected(void)
 /************************************************************************/
 #define T_STARTUP_ON  50
 #define T_STARTUP_OFF 0
+
+extern void update_reals_pwm0(void);
+extern void update_reals_pwm1(void);
+extern void update_reals_pwm2(void);
+
 void core_callback_1st_config_hw_after_boot(void)
 {
 	/* Initialize IOs */
@@ -119,10 +124,27 @@ void core_callback_reset_registers(void)
 	app_regs.REG_AUX_INPUTS_RISING_EDGE_ENABLE = B_AUX_IN0 | B_AUX_IN1;
 	app_regs.REG_AUX_INPUTS_FALLING_EDGE_ENABLE = B_AUX_IN0 | B_AUX_IN1;
 	
-	app_regs.REG_PWM0_REAL_DUTYCYCLE = 50;
-	app_regs.REG_PWM1_REAL_DUTYCYCLE = 50;
-	app_regs.REG_PWM2_REAL_DUTYCYCLE = 50;
+	app_regs.REG_PWM0_FREQ = 10;
+	app_regs.REG_PWM0_DUTYCYCLE = 50;
+	app_regs.REG_PWM0_COUNT = 10;
+	app_regs.REG_PWM0_MODE = MSK_STIM_MODE_COUNT;
+	app_regs.REG_PWM0_CONF_EVENT = MSK_PWM_RISE_EVENT_DIS;
+	app_regs.REG_PWM0_TRIG = MSK_STIM_TRIG_SW;
 	
+	app_regs.REG_PWM1_FREQ = 10;
+	app_regs.REG_PWM1_DUTYCYCLE = 50;
+	app_regs.REG_PWM1_COUNT = 10;
+	app_regs.REG_PWM1_MODE = MSK_STIM_MODE_COUNT;
+	app_regs.REG_PWM1_CONF_EVENT = MSK_PWM_RISE_EVENT_DIS;
+	app_regs.REG_PWM1_TRIG = MSK_STIM_TRIG_SW;
+	
+	app_regs.REG_PWM2_FREQ = 10;
+	app_regs.REG_PWM2_DUTYCYCLE = 50;
+	app_regs.REG_PWM2_COUNT = 10;
+	app_regs.REG_PWM2_MODE = MSK_STIM_MODE_COUNT;
+	app_regs.REG_PWM2_CONF_EVENT = MSK_PWM_RISE_EVENT_DIS;
+	app_regs.REG_PWM2_TRIG = MSK_STIM_TRIG_SW;
+
 	app_regs.REG_SERVO_PERIOD_US = 20000;	// 20 ms
 	app_regs.REG_SERVO0_PULSE_US = 1500;	// 1.5 ms
 	app_regs.REG_SERVO1_PULSE_US = 1500;	// 1.5 ms
@@ -134,7 +156,11 @@ void core_callback_reset_registers(void)
 void core_callback_registers_were_reinitialized(void)
 {
 	/* Update registers if needed */
-	app_write_REG_OUTPUTS_WRITE(&app_regs.REG_OUTPUTS_WRITE);
+	app_write_REG_OUTPUTS_WRITE(&app_regs.REG_OUTPUTS_WRITE);	
+
+	update_reals_pwm0();
+	update_reals_pwm1();
+	update_reals_pwm2();
 	
 	app_write_REG_EXPANSION_OPTIONS(&app_regs.REG_EXPANSION_OPTIONS);
 	
@@ -237,7 +263,19 @@ void core_callback_visualen_to_off(void)
 /************************************************************************/
 /* Callbacks: Change on the operation mode                              */
 /************************************************************************/
-void core_callback_device_to_standby(void) {}
+extern uint16_t pwm_and_stim_enable;
+
+void core_callback_device_to_standby(void)
+{
+	if (pwm_and_stim_enable & B_PWM0_EN_OUT1) { timer_type0_stop(&TCD0); clr_OUT1; clr_LED_1; }
+	if (pwm_and_stim_enable & B_PWM0_EN_OUT2) { timer_type0_stop(&TCD0); clr_OUT2; clr_LED_2; }
+	if (pwm_and_stim_enable & B_PWM0_EN_OUT3) { timer_type0_stop(&TCD0); clr_OUT3; clr_LED_3; }	
+	if (pwm_and_stim_enable & B_PWM1_EN_OUT6) { timer_type0_stop(&TCC0); clr_OUT6; clr_LED_6; }
+	if (pwm_and_stim_enable & B_PWM1_EN_OUT7) { timer_type0_stop(&TCC0); clr_OUT7; clr_LED_7; }
+	if (pwm_and_stim_enable & B_PWM1_EN_OUT8) { timer_type0_stop(&TCC0); clr_OUT8; clr_LED_8; }	
+	if (pwm_and_stim_enable & B_PWM2_EN_OUT9) { timer_type0_stop(&TCE0); clr_OUT9; clr_LED_9; }
+	
+}
 void core_callback_device_to_active(void) {}
 void core_callback_device_to_enchanced_active(void) {}
 void core_callback_device_to_speed(void) {}
