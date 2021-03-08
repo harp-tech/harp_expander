@@ -46,13 +46,24 @@ void (*app_func_rd_pointer[])(void) = {
 	&app_read_REG_PWM_START,
 	&app_read_REG_PWM_STOP,
 	&app_read_REG_PWM_RISE_EVENT,
-	&app_read_REG_STIM0_PULSES_T_ON,
-	&app_read_REG_STIM0_PULSES_T_OFF,
-	&app_read_REG_STIM0_PULSES_T_TOTAL,
-	&app_read_REG_STIM0_PULSES_MODE,
-	&app_read_REG_STIM0_PULSES_TRIG,
+	&app_read_REG_STIM0_T_ON,
+	&app_read_REG_STIM0_T_OFF,
+	&app_read_REG_STIM0_COUNT,
+	&app_read_REG_STIM0_MODE,
+	&app_read_REG_STIM0_TRIG,
 	&app_read_REG_STIM_START,
 	&app_read_REG_STIM_STOP,
+	&app_read_REG_PULSE_ENABLE,
+	&app_read_REG_PULSE_OUT0,
+	&app_read_REG_PULSE_OUT1,
+	&app_read_REG_PULSE_OUT2,
+	&app_read_REG_PULSE_OUT3,
+	&app_read_REG_PULSE_OUT4,
+	&app_read_REG_PULSE_OUT5,
+	&app_read_REG_PULSE_OUT6,
+	&app_read_REG_PULSE_OUT7,
+	&app_read_REG_PULSE_OUT8,
+	&app_read_REG_PULSE_OUT9,
 	&app_read_REG_EXPANSION_OPTIONS,
 	&app_read_REG_RESERVED2,
 	&app_read_REG_RESERVED3,
@@ -104,13 +115,24 @@ bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_PWM_START,
 	&app_write_REG_PWM_STOP,
 	&app_write_REG_PWM_RISE_EVENT,
-	&app_write_REG_STIM0_PULSES_T_ON,
-	&app_write_REG_STIM0_PULSES_T_OFF,
-	&app_write_REG_STIM0_PULSES_T_TOTAL,
-	&app_write_REG_STIM0_PULSES_MODE,
-	&app_write_REG_STIM0_PULSES_TRIG,
+	&app_write_REG_STIM0_T_ON,
+	&app_write_REG_STIM0_T_OFF,
+	&app_write_REG_STIM0_COUNT,
+	&app_write_REG_STIM0_MODE,
+	&app_write_REG_STIM0_TRIG,
 	&app_write_REG_STIM_START,
 	&app_write_REG_STIM_STOP,
+	&app_write_REG_PULSE_ENABLE,
+	&app_write_REG_PULSE_OUT0,
+	&app_write_REG_PULSE_OUT1,
+	&app_write_REG_PULSE_OUT2,
+	&app_write_REG_PULSE_OUT3,
+	&app_write_REG_PULSE_OUT4,
+	&app_write_REG_PULSE_OUT5,
+	&app_write_REG_PULSE_OUT6,
+	&app_write_REG_PULSE_OUT7,
+	&app_write_REG_PULSE_OUT8,
+	&app_write_REG_PULSE_OUT9,
 	&app_write_REG_EXPANSION_OPTIONS,
 	&app_write_REG_RESERVED2,
 	&app_write_REG_RESERVED3,
@@ -368,9 +390,11 @@ bool app_write_REG_PWM0_FREQ(void *a)
 	float reg = *((float*)a);
 	
 	if (reg > 1000) return false;
-	if (reg < 1)    return false;
+	if (reg < 0.5)  return false;	
 
 	app_regs.REG_PWM0_FREQ = reg;
+	update_reals_ch0();
+	
 	return true;
 }
 
@@ -387,6 +411,8 @@ bool app_write_REG_PWM0_DUTYCYCLE(void *a)
 	if (reg < 1)   return false;
 	
 	app_regs.REG_PWM0_DUTYCYCLE = reg;
+	update_reals_ch0();
+	
 	return true;
 }
 
@@ -472,7 +498,7 @@ bool app_write_REG_PWM1_FREQ(void *a)
 	float reg = *((float*)a);
 	
 	if (reg > 1000) return false;
-	if (reg < 1)    return false;
+	if (reg < 0.5)  return false;
 
 	app_regs.REG_PWM1_FREQ = reg;
 	return true;
@@ -576,7 +602,7 @@ bool app_write_REG_PWM2_FREQ(void *a)
 	float reg = *((float*)a);
 	
 	if (reg > 1000) return false;
-	if (reg < 1)    return false;
+	if (reg < 0.5)  return false;
 
 	app_regs.REG_PWM2_FREQ = reg;
 	return true;
@@ -705,74 +731,74 @@ bool app_write_REG_PWM_RISE_EVENT(void *a) { return false; }
 
 
 /************************************************************************/
-/* REG_STIM0_PULSES_T_ON                                                */
+/* REG_STIM0_T_ON                                                */
 /************************************************************************/
-void app_read_REG_STIM0_PULSES_T_ON(void) {}
-bool app_write_REG_STIM0_PULSES_T_ON(void *a)
+void app_read_REG_STIM0_T_ON(void) {}
+bool app_write_REG_STIM0_T_ON(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 	
 	if (reg < 1) return false;
 
-	app_regs.REG_STIM0_PULSES_T_ON = reg;
+	app_regs.REG_STIM0_T_ON = reg;
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_STIM0_PULSES_T_OFF                                               */
+/* REG_STIM0_T_OFF                                               */
 /************************************************************************/
-void app_read_REG_STIM0_PULSES_T_OFF(void) {}
-bool app_write_REG_STIM0_PULSES_T_OFF(void *a)
+void app_read_REG_STIM0_T_OFF(void) {}
+bool app_write_REG_STIM0_T_OFF(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 	
 	if (reg < 1) return false;
 
-	app_regs.REG_STIM0_PULSES_T_OFF = reg;
+	app_regs.REG_STIM0_T_OFF = reg;
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_STIM0_PULSES_T_TOTAL                                             */
+/* REG_STIM0_COUNT                                               */
 /************************************************************************/
-void app_read_REG_STIM0_PULSES_T_TOTAL(void) {}
-bool app_write_REG_STIM0_PULSES_T_TOTAL(void *a)
+void app_read_REG_STIM0_COUNT(void) {}
+bool app_write_REG_STIM0_COUNT(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 
 	if (reg < 1) return false;
 
-	app_regs.REG_STIM0_PULSES_T_TOTAL = reg;
+	app_regs.REG_STIM0_COUNT = reg;
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_STIM0_PULSES_MODE                                                */
+/* REG_STIM0_MODE                                                */
 /************************************************************************/
-void app_read_REG_STIM0_PULSES_MODE(void) {}
-bool app_write_REG_STIM0_PULSES_MODE(void *a)
+void app_read_REG_STIM0_MODE(void) {}
+bool app_write_REG_STIM0_MODE(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 	
 	if (~reg & GM_STIM_MODE) return false;
 
-	app_regs.REG_STIM0_PULSES_MODE = reg;
+	app_regs.REG_STIM0_MODE = reg;
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_STIM0_PULSES_TRIG                                                */
+/* REG_STIM0_TRIG                                                */
 /************************************************************************/
-void app_read_REG_STIM0_PULSES_TRIG(void) {}
-bool app_write_REG_STIM0_PULSES_TRIG(void *a)
+void app_read_REG_STIM0_TRIG(void) {}
+bool app_write_REG_STIM0_TRIG(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 
-	app_regs.REG_STIM0_PULSES_TRIG = reg;
+	app_regs.REG_STIM0_TRIG = reg;
 	return true;
 }
 
@@ -799,6 +825,127 @@ bool app_write_REG_STIM_STOP(void *a)
 	uint8_t reg = *((uint8_t*)a);
 
 	app_regs.REG_STIM_STOP = reg;
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_PULSE_ENABLE                                                     */
+/************************************************************************/
+void app_read_REG_PULSE_ENABLE(void) {}
+bool app_write_REG_PULSE_ENABLE(void *a)
+{
+	app_regs.REG_PULSE_ENABLE = *((uint16_t*)a);
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_PULSE_OUT0                                                       */
+/************************************************************************/
+void app_read_REG_PULSE_OUT0(void) {}
+bool app_write_REG_PULSE_OUT0(void *a)
+{
+	app_regs.REG_PULSE_OUT0 = *((uint16_t*)a);
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_PULSE_OUT1                                                       */
+/************************************************************************/
+void app_read_REG_PULSE_OUT1(void) {}
+bool app_write_REG_PULSE_OUT1(void *a)
+{
+	app_regs.REG_PULSE_OUT1 = *((uint16_t*)a);
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_PULSE_OUT2                                                       */
+/************************************************************************/
+void app_read_REG_PULSE_OUT2(void) {}
+bool app_write_REG_PULSE_OUT2(void *a)
+{
+	app_regs.REG_PULSE_OUT2 = *((uint16_t*)a);
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_PULSE_OUT3                                                       */
+/************************************************************************/
+void app_read_REG_PULSE_OUT3(void) {}
+bool app_write_REG_PULSE_OUT3(void *a)
+{
+	app_regs.REG_PULSE_OUT3 = *((uint16_t*)a);
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_PULSE_OUT4                                                       */
+/************************************************************************/
+void app_read_REG_PULSE_OUT4(void) {}
+bool app_write_REG_PULSE_OUT4(void *a)
+{
+	app_regs.REG_PULSE_OUT4 = *((uint16_t*)a);
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_PULSE_OUT5                                                       */
+/************************************************************************/
+void app_read_REG_PULSE_OUT5(void) {}
+bool app_write_REG_PULSE_OUT5(void *a)
+{
+	app_regs.REG_PULSE_OUT5 = *((uint16_t*)a);
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_PULSE_OUT6                                                       */
+/************************************************************************/
+void app_read_REG_PULSE_OUT6(void) {}
+bool app_write_REG_PULSE_OUT6(void *a)
+{
+	app_regs.REG_PULSE_OUT6 = *((uint16_t*)a);
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_PULSE_OUT7                                                       */
+/************************************************************************/
+void app_read_REG_PULSE_OUT7(void) {}
+bool app_write_REG_PULSE_OUT7(void *a)
+{
+	app_regs.REG_PULSE_OUT7 = *((uint16_t*)a);
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_PULSE_OUT8                                                       */
+/************************************************************************/
+void app_read_REG_PULSE_OUT8(void) {}
+bool app_write_REG_PULSE_OUT8(void *a)
+{
+	app_regs.REG_PULSE_OUT8 = *((uint16_t*)a);
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_PULSE_OUT9                                                       */
+/************************************************************************/
+void app_read_REG_PULSE_OUT9(void) {}
+bool app_write_REG_PULSE_OUT9(void *a)
+{
+	app_regs.REG_PULSE_OUT9 = *((uint16_t*)a);
 	return true;
 }
 

@@ -319,13 +319,24 @@ typedef struct
 	uint8_t REG_PWM_START;
 	uint8_t REG_PWM_STOP;
 	uint8_t REG_PWM_RISE_EVENT;
-	uint16_t REG_STIM0_PULSES_T_ON;
-	uint16_t REG_STIM0_PULSES_T_OFF;
-	uint16_t REG_STIM0_PULSES_T_TOTAL;
-	uint8_t REG_STIM0_PULSES_MODE;
-	uint8_t REG_STIM0_PULSES_TRIG;
+	uint16_t REG_STIM0_T_ON;
+	uint16_t REG_STIM0_T_OFF;
+	uint16_t REG_STIM0_COUNT;
+	uint8_t REG_STIM0_MODE;
+	uint8_t REG_STIM0_TRIG;
 	uint8_t REG_STIM_START;
 	uint8_t REG_STIM_STOP;
+	uint16_t REG_PULSE_ENABLE;
+	uint16_t REG_PULSE_OUT0;
+	uint16_t REG_PULSE_OUT1;
+	uint16_t REG_PULSE_OUT2;
+	uint16_t REG_PULSE_OUT3;
+	uint16_t REG_PULSE_OUT4;
+	uint16_t REG_PULSE_OUT5;
+	uint16_t REG_PULSE_OUT6;
+	uint16_t REG_PULSE_OUT7;
+	uint16_t REG_PULSE_OUT8;
+	uint16_t REG_PULSE_OUT9;
 	uint8_t REG_EXPANSION_OPTIONS;
 	uint8_t REG_RESERVED2;
 	uint8_t REG_RESERVED3;
@@ -380,24 +391,35 @@ typedef struct
 #define ADD_REG_PWM_START                   66 // U8     
 #define ADD_REG_PWM_STOP                    67 // U8     
 #define ADD_REG_PWM_RISE_EVENT              68 // U8     
-#define ADD_REG_STIM0_PULSES_T_ON           69 // U16    
-#define ADD_REG_STIM0_PULSES_T_OFF          70 // U16    
-#define ADD_REG_STIM0_PULSES_T_TOTAL        71 // U16    
-#define ADD_REG_STIM0_PULSES_MODE           72 // U8     
-#define ADD_REG_STIM0_PULSES_TRIG           73 // U8     
+#define ADD_REG_STIM0_T_ON                  69 // U16    
+#define ADD_REG_STIM0_T_OFF                 70 // U16    
+#define ADD_REG_STIM0_COUNT                 71 // U16    
+#define ADD_REG_STIM0_MODE                  72 // U8     
+#define ADD_REG_STIM0_TRIG                  73 // U8     
 #define ADD_REG_STIM_START                  74 // U8     
 #define ADD_REG_STIM_STOP                   75 // U8     
-#define ADD_REG_EXPANSION_OPTIONS           76 // U8     Selects the current expansion board available in the EXPANSION port
-#define ADD_REG_RESERVED2                   77 // U8     
-#define ADD_REG_RESERVED3                   78 // U8     
-#define ADD_REG_MAG_ENCODER_READ            79 // U16    
-#define ADD_REG_MAG_ENCODER_MODE            80 // U8     
-#define ADD_REG_RESERVED4                   81 // U8     
-#define ADD_REG_RESERVED5                   82 // U8     
-#define ADD_REG_SERVO_PERIOD_US             83 // U16    
-#define ADD_REG_SERVO0_PULSE_US             84 // U16    
-#define ADD_REG_SERVO1_PULSE_US             85 // U16    
-#define ADD_REG_SERVO2_PULSE_US             86 // U16    
+#define ADD_REG_PULSE_ENABLE                76 // U16    Bitmask of pulse enable for each digital output
+#define ADD_REG_PULSE_OUT0                  77 // U16    Pulse time in ms
+#define ADD_REG_PULSE_OUT1                  78 // U16    Pulse time in ms
+#define ADD_REG_PULSE_OUT2                  79 // U16    Pulse time in ms
+#define ADD_REG_PULSE_OUT3                  80 // U16    Pulse time in ms
+#define ADD_REG_PULSE_OUT4                  81 // U16    Pulse time in ms
+#define ADD_REG_PULSE_OUT5                  82 // U16    Pulse time in ms
+#define ADD_REG_PULSE_OUT6                  83 // U16    Pulse time in ms
+#define ADD_REG_PULSE_OUT7                  84 // U16    Pulse time in ms
+#define ADD_REG_PULSE_OUT8                  85 // U16    Pulse time in ms
+#define ADD_REG_PULSE_OUT9                  86 // U16    Pulse time in ms
+#define ADD_REG_EXPANSION_OPTIONS           87 // U8     Selects the current expansion board available in the EXPANSION port
+#define ADD_REG_RESERVED2                   88 // U8     
+#define ADD_REG_RESERVED3                   89 // U8     
+#define ADD_REG_MAG_ENCODER_READ            90 // U16    
+#define ADD_REG_MAG_ENCODER_MODE            91 // U8     
+#define ADD_REG_RESERVED4                   92 // U8     
+#define ADD_REG_RESERVED5                   93 // U8     
+#define ADD_REG_SERVO_PERIOD_US             94 // U16    
+#define ADD_REG_SERVO0_PULSE_US             95 // U16    
+#define ADD_REG_SERVO1_PULSE_US             96 // U16    
+#define ADD_REG_SERVO2_PULSE_US             97 // U16    
 
 /************************************************************************/
 /* PWM Generator registers' memory limits                               */
@@ -407,8 +429,8 @@ typedef struct
 /************************************************************************/
 /* Memory limits */
 #define APP_REGS_ADD_MIN                    0x20
-#define APP_REGS_ADD_MAX                    0x56
-#define APP_NBYTES_OF_REG_BANK              108
+#define APP_REGS_ADD_MAX                    0x61
+#define APP_NBYTES_OF_REG_BANK              130
 
 /************************************************************************/
 /* Registers' bits                                                      */
@@ -466,6 +488,7 @@ typedef struct
 #define MSK_STIM_TRIG_AUX1_FALL_START      (1<<4)       // 
 #define MSK_STIM_TRIG_AUX1_ON_WHILE_HIGH   (2<<4)       // 
 #define MSK_STIM_TRIG_AUX1_ON_WHILE_LOW    (3<<4)       // 
+#define B_STIM0                            (1<<0)       // 
 #define B_STIM0                            (1<<0)       // 
 #define GM_EXPANSION_OPTIONS               7            // 
 #define MSK_BREAKOUT                       0            // 
