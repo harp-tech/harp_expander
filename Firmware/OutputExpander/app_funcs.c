@@ -528,7 +528,7 @@ bool app_write_REG_PWM0_MODE(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 	
-	if (~reg & GM_PWM_MODE) return false;
+	if (reg & ~GM_PWM_MODE) return false;
 
 	app_regs.REG_PWM0_MODE = reg;
 	return true;
@@ -636,7 +636,7 @@ bool app_write_REG_PWM1_MODE(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 	
-	if (~reg & GM_PWM_MODE) return false;
+	if (reg & ~GM_PWM_MODE) return false;
 
 	app_regs.REG_PWM1_MODE = reg;
 	return true;
@@ -744,7 +744,7 @@ bool app_write_REG_PWM2_MODE(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 	
-	if (~reg & GM_PWM_MODE) return false;
+	if (reg & ~GM_PWM_MODE) return false;
 
 	app_regs.REG_PWM2_MODE = reg;
 	return true;
@@ -859,10 +859,7 @@ bool app_write_REG_PWM_START(void *a)
 				TCC0_CTRLB |= TC0_CCCEN_bm;	// Enable channel C
 				pwm_and_stim_enable |= B_PWM1_EN_OUT7;
 			}
-		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM1_EN_OUT8 && (
-			(app_regs.REG_EXPANSION_OPTIONS == MSK_BREAKOUT) ||
-			(app_regs.REG_EXPANSION_OPTIONS == MSK_MAGNETIC_ENCODER)
-			))
+		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM1_EN_OUT8)
 			{
 				start_pwm1 = true;
 				TCC0_CTRLB |= TC0_CCDEN_bm;	// Enable channel D
