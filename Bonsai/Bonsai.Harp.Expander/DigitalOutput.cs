@@ -41,7 +41,7 @@ namespace Bonsai.Harp.Expander
 
         HarpMessage CreateCommand()
         {
-            return HarpCommand.WriteByte(OutputExpander.Registers.OutputSet + (byte)Command, (byte)Mask);
+            return HarpCommand.WriteUInt16(OutputExpander.Registers.OutputSet + (byte)Command, (ushort)Mask);
         }
     }
 
