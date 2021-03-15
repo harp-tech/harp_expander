@@ -35,8 +35,8 @@ namespace Bonsai.Harp.Expander
             public const byte RisingEdgeEnable = 34; // U16    Enables the rising edge detection of the correspondent input (bitmask)
             public const byte FallingEdgeEnable = 35; // U16    Enables the falling edge detection of the correspondent input (bitmask)
             public const byte InputMode = 36; // U8     Configures the input mode
-            public const byte Reserved0 = 37; // U8     
-            public const byte Reserved1 = 38; // U8     
+            public const byte Reserved0 = 37; // U8
+            public const byte Reserved1 = 38; // U8
             public const byte ExpansionOptions = 39; // U8     Selects the current expansion board available in the EXPANSION port
         }
     }
