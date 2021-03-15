@@ -39,14 +39,8 @@ namespace Bonsai.Harp.Expander
             public const byte Reserved0 = 39; // U8
             public const byte Reserved1 = 40; // U8
             public const byte PwmEnable = 41; // U16     Selects the current expansion board available in the EXPANSION port
-            public const byte Pwm0Frequency = 42; // FLOAT
-            public const byte Pwm0DutyCycle = 43; // FLOAT
-            public const byte Pwm0Count = 44; // U16
-            public const byte Pwm0ActualFrequency = 45; // FLOAT
-            public const byte Pwm0ActualDutyCycle = 46; // FLOAT
-            public const byte Pwm0Mode = 47; // U8
-            public const byte Pwm0Trigger = 48; // U8
-            public const byte Pwm0ConfigureEvent = 49; // U8
+            public const byte Pwm0 = 42; // See below for register offsets
+            public const byte Pwm1 = 50; // See below for register offsets
             public const byte PwmStart = 66; // U8
             public const byte PwmStop = 67; // U8
             public const byte PwmRiseEvent = 68; // U8
@@ -57,6 +51,15 @@ namespace Bonsai.Harp.Expander
             public const byte Servo0PulseUs = 95; // U16
             public const byte Servo1PulseUs = 96; // U16
             public const byte Servo2PulseUs = 97; // U16
+
+            public const byte PwmFrequency = 0; // FLOAT
+            public const byte PwmDutyCycle = 1; // FLOAT
+            public const byte PwmCount = 2; // U16
+            public const byte PwmActualFrequency = 3; // FLOAT
+            public const byte PwmActualDutyCycle = 4; // FLOAT
+            public const byte PwmMode = 5; // U8
+            public const byte PwmTrigger = 6; // U8
+            public const byte PwmConfigureEvent = 7; // U8
         }
     }
 }

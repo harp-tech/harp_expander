@@ -23,17 +23,18 @@ namespace Bonsai.Harp.Expander
 
         IEnumerable<HarpMessage> CreatePwmCommand()
         {
+            var pwmOffset = Mask >= PwmEnableFlags.PwmOutput6 ? OutputExpander.Registers.Pwm1 : OutputExpander.Registers.Pwm0;
             yield return HarpCommand.WriteUInt16(OutputExpander.Registers.PwmEnable, (ushort)Mask);
-            yield return HarpCommand.WriteSingle(OutputExpander.Registers.Pwm0Frequency, Frequency);
-            yield return HarpCommand.WriteSingle(OutputExpander.Registers.Pwm0DutyCycle, DutyCycle);
+            yield return HarpCommand.WriteSingle(pwmOffset + OutputExpander.Registers.PwmFrequency, Frequency);
+            yield return HarpCommand.WriteSingle(pwmOffset + OutputExpander.Registers.PwmDutyCycle, DutyCycle);
             if (Count > 0)
             {
-                yield return HarpCommand.WriteUInt16(OutputExpander.Registers.Pwm0Count, (ushort)Count);
-                yield return HarpCommand.WriteByte(OutputExpander.Registers.Pwm0Mode, 1);
+                yield return HarpCommand.WriteUInt16(pwmOffset + OutputExpander.Registers.PwmCount, (ushort)Count);
+                yield return HarpCommand.WriteByte(pwmOffset + OutputExpander.Registers.PwmMode, 1);
             }
-            else yield return HarpCommand.WriteByte(OutputExpander.Registers.Pwm0Mode, 0);
-            yield return HarpCommand.WriteByte(OutputExpander.Registers.Pwm0Trigger, 0);
-            yield return HarpCommand.WriteByte(OutputExpander.Registers.Pwm0ConfigureEvent, 1);
+            else yield return HarpCommand.WriteByte(pwmOffset + OutputExpander.Registers.PwmMode, 0);
+            yield return HarpCommand.WriteByte(pwmOffset + OutputExpander.Registers.PwmTrigger, 0);
+            yield return HarpCommand.WriteByte(pwmOffset + OutputExpander.Registers.PwmConfigureEvent, 1);
         }
 
         public override IObservable<HarpMessage> Generate()
