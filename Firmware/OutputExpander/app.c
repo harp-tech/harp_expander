@@ -32,7 +32,7 @@ void hwbp_app_initialize(void)
     uint8_t hwH = 1;
     uint8_t hwL = 0;
     uint8_t fwH = 2;
-    uint8_t fwL = 0;
+    uint8_t fwL = 1;
     uint8_t ass = 0;
     
    	/* Start core */
@@ -263,17 +263,17 @@ void core_callback_visualen_to_off(void)
 /************************************************************************/
 /* Callbacks: Change on the operation mode                              */
 /************************************************************************/
-extern uint16_t pwm_and_stim_enable;
+extern uint16_t pwm_and_stim_enabled;
 
 void core_callback_device_to_standby(void)
 {
-	if (pwm_and_stim_enable & B_PWM0_EN_OUT1) { timer_type0_stop(&TCD0); clr_OUT1; clr_LED_1; }
-	if (pwm_and_stim_enable & B_PWM0_EN_OUT2) { timer_type0_stop(&TCD0); clr_OUT2; clr_LED_2; }
-	if (pwm_and_stim_enable & B_PWM0_EN_OUT3) { timer_type0_stop(&TCD0); clr_OUT3; clr_LED_3; }	
-	if (pwm_and_stim_enable & B_PWM1_EN_OUT6) { timer_type0_stop(&TCC0); clr_OUT6; clr_LED_6; }
-	if (pwm_and_stim_enable & B_PWM1_EN_OUT7) { timer_type0_stop(&TCC0); clr_OUT7; clr_LED_7; }
-	if (pwm_and_stim_enable & B_PWM1_EN_OUT8) { timer_type0_stop(&TCC0); clr_OUT8; clr_LED_8; }	
-	if (pwm_and_stim_enable & B_PWM2_EN_OUT9) { timer_type0_stop(&TCE0); clr_OUT9; clr_LED_9; }
+	if (pwm_and_stim_enabled & B_PWM0_EN_OUT1) { timer_type0_stop(&TCD0); clr_OUT1; clr_LED_1; }
+	if (pwm_and_stim_enabled & B_PWM0_EN_OUT2) { timer_type0_stop(&TCD0); clr_OUT2; clr_LED_2; }
+	if (pwm_and_stim_enabled & B_PWM0_EN_OUT3) { timer_type0_stop(&TCD0); clr_OUT3; clr_LED_3; }	
+	if (pwm_and_stim_enabled & B_PWM1_EN_OUT6) { timer_type0_stop(&TCC0); clr_OUT6; clr_LED_6; }
+	if (pwm_and_stim_enabled & B_PWM1_EN_OUT7) { timer_type0_stop(&TCC0); clr_OUT7; clr_LED_7; }
+	if (pwm_and_stim_enabled & B_PWM1_EN_OUT8) { timer_type0_stop(&TCC0); clr_OUT8; clr_LED_8; }	
+	if (pwm_and_stim_enabled & B_PWM2_EN_OUT9) { timer_type0_stop(&TCE0); clr_OUT9; clr_LED_9; }
 	
 }
 void core_callback_device_to_active(void) {}

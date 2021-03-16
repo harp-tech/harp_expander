@@ -289,9 +289,9 @@ typedef struct
 	uint16_t REG_OUTPUTS_CLEAR;
 	uint16_t REG_OUTPUTS_TOGGLE;
 	uint16_t REG_OUTPUTS_WRITE;
-	uint8_t REG_RESERVED0;
-	uint8_t REG_RESERVED1;
 	uint16_t REG_PWM_AND_STIM_ENABLE;
+	uint16_t REG_PWM_AND_STIM_DISABLE;
+	uint16_t REG_PWM_AND_STIM_WRITE;
 	float REG_PWM0_FREQ;
 	float REG_PWM0_DUTYCYCLE;
 	uint16_t REG_PWM0_COUNT;
@@ -361,9 +361,9 @@ typedef struct
 #define ADD_REG_OUTPUTS_CLEAR               36 // U16    Clear the outputs
 #define ADD_REG_OUTPUTS_TOGGLE              37 // U16    Toggle the outputs
 #define ADD_REG_OUTPUTS_WRITE               38 // U16    Write to all outputs at once
-#define ADD_REG_RESERVED0                   39 // U8     
-#define ADD_REG_RESERVED1                   40 // U8     
-#define ADD_REG_PWM_AND_STIM_ENABLE         41 // U16    
+#define ADD_REG_PWM_AND_STIM_ENABLE         39 // U16    
+#define ADD_REG_PWM_AND_STIM_DISABLE        40 // U16    
+#define ADD_REG_PWM_AND_STIM_WRITE          41 // U16    
 #define ADD_REG_PWM0_FREQ                   42 // FLOAT  Frequency of PWM0. Maximum frequency is 1000Hz
 #define ADD_REG_PWM0_DUTYCYCLE              43 // FLOAT  Duty cycle fro PWM0. Maximum value is 100%
 #define ADD_REG_PWM0_COUNT                  44 // U16    Number of pulses on PWM0
@@ -430,7 +430,7 @@ typedef struct
 /* Memory limits */
 #define APP_REGS_ADD_MIN                    0x20
 #define APP_REGS_ADD_MAX                    0x61
-#define APP_NBYTES_OF_REG_BANK              131
+#define APP_NBYTES_OF_REG_BANK              133
 
 /************************************************************************/
 /* Registers' bits                                                      */
@@ -468,10 +468,10 @@ typedef struct
 #define MSK_PWM_TRIG_AUX0_FALL_START       (2<<0)       // 
 #define MSK_PWM_TRIG_AUX0_ON_WHILE_HIGH    (3<<0)       // 
 #define MSK_PWM_TRIG_AUX0_ON_WHILE_LOW     (4<<0)       // 
-#define MSK_PWM_TRIG_AUX1_RISE_START       (0<<4)       // 
-#define MSK_PWM_TRIG_AUX1_FALL_START       (1<<4)       // 
-#define MSK_PWM_TRIG_AUX1_ON_WHILE_HIGH    (2<<4)       // 
-#define MSK_PWM_TRIG_AUX1_ON_WHILE_LOW     (3<<4)       // 
+#define MSK_PWM_TRIG_AUX1_RISE_START       (1<<4)       // 
+#define MSK_PWM_TRIG_AUX1_FALL_START       (2<<4)       // 
+#define MSK_PWM_TRIG_AUX1_ON_WHILE_HIGH    (3<<4)       // 
+#define MSK_PWM_TRIG_AUX1_ON_WHILE_LOW     (4<<4)       // 
 #define GM_PWM_EVENT                       1            // 
 #define MSK_PWM_RISE_EVENT_DIS             (0<<0)       // 
 #define MSK_PWM_RISE_EVENT_EN              (1<<0)       // 
@@ -487,10 +487,10 @@ typedef struct
 #define MSK_STIM_TRIG_AUX0_FALL_START      (2<<0)       // 
 #define MSK_STIM_TRIG_AUX0_ON_WHILE_HIGH   (3<<0)       // 
 #define MSK_STIM_TRIG_AUX0_ON_WHILE_LOW    (4<<0)       // 
-#define MSK_STIM_TRIG_AUX1_RISE_START      (1<<4)       // 
-#define MSK_STIM_TRIG_AUX1_FALL_START      (2<<4)       // 
-#define MSK_STIM_TRIG_AUX1_ON_WHILE_HIGH   (3<<4)       // 
-#define MSK_STIM_TRIG_AUX1_ON_WHILE_LOW    (4<<4)       // 
+#define MSK_STIM_TRIG_AUX1_RISE_START      (0<<4)       // 
+#define MSK_STIM_TRIG_AUX1_FALL_START      (1<<4)       // 
+#define MSK_STIM_TRIG_AUX1_ON_WHILE_HIGH   (2<<4)       // 
+#define MSK_STIM_TRIG_AUX1_ON_WHILE_LOW    (3<<4)       // 
 #define B_STIM0                            (1<<0)       // 
 #define B_STIM0                            (1<<0)       // 
 #define GM_EXPANSION_OPTIONS               7            // 

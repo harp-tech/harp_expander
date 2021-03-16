@@ -149,7 +149,7 @@ ISR(PORTE_INT0_vect, ISR_NAKED)
 /************************************************************************/
 /* PWM0                                                                 */
 /************************************************************************/
-extern uint16_t pwm_and_stim_enable;
+extern uint16_t pwm_and_stim_enabled;
 extern uint16_t tcount0, tcount1, tcount2;
 extern bool stop_pwm0, stop_pwm1, stop_pwm2;
 
@@ -163,9 +163,9 @@ ISR(TCD0_OVF_vect, ISR_NAKED)
 
 	if (core_bool_is_visual_enabled())
 	{
-		if (pwm_and_stim_enable & B_PWM0_EN_OUT1) set_LED_1;
-		if (pwm_and_stim_enable & B_PWM0_EN_OUT2) set_LED_2;
-		if (pwm_and_stim_enable & B_PWM0_EN_OUT3) set_LED_3;
+		if (pwm_and_stim_enabled & B_PWM0_EN_OUT1) set_LED_1;
+		if (pwm_and_stim_enabled & B_PWM0_EN_OUT2) set_LED_2;
+		if (pwm_and_stim_enabled & B_PWM0_EN_OUT3) set_LED_3;
 	}
 	reti();
 }
@@ -174,18 +174,18 @@ ISR(TCD0_CCA_vect, ISR_NAKED)
 {
 	if (core_bool_is_visual_enabled())
 	{
-		if (pwm_and_stim_enable & B_PWM0_EN_OUT1) clr_LED_1;
-		if (pwm_and_stim_enable & B_PWM0_EN_OUT2) clr_LED_2;
-		if (pwm_and_stim_enable & B_PWM0_EN_OUT3) clr_LED_3;
+		if (pwm_and_stim_enabled & B_PWM0_EN_OUT1) clr_LED_1;
+		if (pwm_and_stim_enabled & B_PWM0_EN_OUT2) clr_LED_2;
+		if (pwm_and_stim_enabled & B_PWM0_EN_OUT3) clr_LED_3;
 	}
 	
 	if (stop_pwm0)
 	{
-		if (pwm_and_stim_enable & B_PWM0_EN_OUT1) clr_OUT1;
-		if (pwm_and_stim_enable & B_PWM0_EN_OUT2) clr_OUT2;
-		if (pwm_and_stim_enable & B_PWM0_EN_OUT3) clr_OUT3;
+		if (pwm_and_stim_enabled & B_PWM0_EN_OUT1) clr_OUT1;
+		if (pwm_and_stim_enabled & B_PWM0_EN_OUT2) clr_OUT2;
+		if (pwm_and_stim_enabled & B_PWM0_EN_OUT3) clr_OUT3;
 		
-		pwm_and_stim_enable &= ~(B_PWM0_EN_OUT1 | B_PWM0_EN_OUT2 |B_PWM0_EN_OUT3);
+		pwm_and_stim_enabled &= ~(B_PWM0_EN_OUT1 | B_PWM0_EN_OUT2 |B_PWM0_EN_OUT3);
 		
 		timer_type0_stop(&TCD0);
 	}
@@ -194,11 +194,11 @@ ISR(TCD0_CCA_vect, ISR_NAKED)
 	{
 		if (--tcount0 == 0)
 		{
-			if (pwm_and_stim_enable & B_PWM0_EN_OUT1) clr_OUT1;
-			if (pwm_and_stim_enable & B_PWM0_EN_OUT2) clr_OUT2;
-			if (pwm_and_stim_enable & B_PWM0_EN_OUT3) clr_OUT3;
+			if (pwm_and_stim_enabled & B_PWM0_EN_OUT1) clr_OUT1;
+			if (pwm_and_stim_enabled & B_PWM0_EN_OUT2) clr_OUT2;
+			if (pwm_and_stim_enabled & B_PWM0_EN_OUT3) clr_OUT3;
 			
-			pwm_and_stim_enable &= ~(B_PWM0_EN_OUT1 | B_PWM0_EN_OUT2 |B_PWM0_EN_OUT3);
+			pwm_and_stim_enabled &= ~(B_PWM0_EN_OUT1 | B_PWM0_EN_OUT2 |B_PWM0_EN_OUT3);
 			
 			timer_type0_stop(&TCD0);
 		}
@@ -219,9 +219,9 @@ ISR(TCC0_OVF_vect, ISR_NAKED)
 
 	if (core_bool_is_visual_enabled())
 	{
-		if (pwm_and_stim_enable & B_PWM1_EN_OUT6) set_LED_6;
-		if (pwm_and_stim_enable & B_PWM1_EN_OUT7) set_LED_7;
-		if (pwm_and_stim_enable & B_PWM1_EN_OUT8) set_LED_8;
+		if (pwm_and_stim_enabled & B_PWM1_EN_OUT6) set_LED_6;
+		if (pwm_and_stim_enabled & B_PWM1_EN_OUT7) set_LED_7;
+		if (pwm_and_stim_enabled & B_PWM1_EN_OUT8) set_LED_8;
 	}
 	reti();
 }
@@ -230,18 +230,18 @@ ISR(TCC0_CCA_vect, ISR_NAKED)
 {
 	if (core_bool_is_visual_enabled())
 	{
-		if (pwm_and_stim_enable & B_PWM1_EN_OUT6) clr_LED_6;
-		if (pwm_and_stim_enable & B_PWM1_EN_OUT7) clr_LED_7;
-		if (pwm_and_stim_enable & B_PWM1_EN_OUT8) clr_LED_8;
+		if (pwm_and_stim_enabled & B_PWM1_EN_OUT6) clr_LED_6;
+		if (pwm_and_stim_enabled & B_PWM1_EN_OUT7) clr_LED_7;
+		if (pwm_and_stim_enabled & B_PWM1_EN_OUT8) clr_LED_8;
 	}
 	
 	if (stop_pwm1)
 	{
-		if (pwm_and_stim_enable & B_PWM1_EN_OUT6) clr_OUT6;
-		if (pwm_and_stim_enable & B_PWM1_EN_OUT7) clr_OUT7;
-		if (pwm_and_stim_enable & B_PWM1_EN_OUT8) clr_OUT8;
+		if (pwm_and_stim_enabled & B_PWM1_EN_OUT6) clr_OUT6;
+		if (pwm_and_stim_enabled & B_PWM1_EN_OUT7) clr_OUT7;
+		if (pwm_and_stim_enabled & B_PWM1_EN_OUT8) clr_OUT8;
 		
-		pwm_and_stim_enable &= ~(B_PWM1_EN_OUT6 | B_PWM1_EN_OUT7 | B_PWM1_EN_OUT8);
+		pwm_and_stim_enabled &= ~(B_PWM1_EN_OUT6 | B_PWM1_EN_OUT7 | B_PWM1_EN_OUT8);
 		
 		timer_type0_stop(&TCC0);
 	}
@@ -250,11 +250,11 @@ ISR(TCC0_CCA_vect, ISR_NAKED)
 	{
 		if (--tcount1 == 0)
 		{
-			if (pwm_and_stim_enable & B_PWM1_EN_OUT6) clr_OUT6;
-			if (pwm_and_stim_enable & B_PWM1_EN_OUT7) clr_OUT7;
-			if (pwm_and_stim_enable & B_PWM1_EN_OUT8) clr_OUT8;
+			if (pwm_and_stim_enabled & B_PWM1_EN_OUT6) clr_OUT6;
+			if (pwm_and_stim_enabled & B_PWM1_EN_OUT7) clr_OUT7;
+			if (pwm_and_stim_enabled & B_PWM1_EN_OUT8) clr_OUT8;
 			
-			pwm_and_stim_enable &= ~(B_PWM1_EN_OUT6 | B_PWM1_EN_OUT7 | B_PWM1_EN_OUT8);
+			pwm_and_stim_enabled &= ~(B_PWM1_EN_OUT6 | B_PWM1_EN_OUT7 | B_PWM1_EN_OUT8);
 			
 			timer_type0_stop(&TCC0);
 		}
@@ -275,7 +275,7 @@ ISR(TCE0_OVF_vect, ISR_NAKED)
 
 	if (core_bool_is_visual_enabled())
 	{
-		if (pwm_and_stim_enable & B_PWM2_EN_OUT9) set_LED_9;
+		if (pwm_and_stim_enabled & B_PWM2_EN_OUT9) set_LED_9;
 	}
 	reti();
 }
@@ -284,14 +284,14 @@ ISR(TCE0_CCA_vect, ISR_NAKED)
 {
 	if (core_bool_is_visual_enabled())
 	{
-		if (pwm_and_stim_enable & B_PWM2_EN_OUT9) clr_LED_9;
+		if (pwm_and_stim_enabled & B_PWM2_EN_OUT9) clr_LED_9;
 	}
 	
 	if (stop_pwm2)
 	{
-		if (pwm_and_stim_enable & B_PWM2_EN_OUT9) clr_OUT9;
+		if (pwm_and_stim_enabled & B_PWM2_EN_OUT9) clr_OUT9;
 		
-		pwm_and_stim_enable &= ~(B_PWM2_EN_OUT9);
+		pwm_and_stim_enabled &= ~(B_PWM2_EN_OUT9);
 		
 		timer_type0_stop(&TCE0);
 	}
@@ -300,9 +300,9 @@ ISR(TCE0_CCA_vect, ISR_NAKED)
 	{
 		if (--tcount2 == 0)
 		{
-			if (pwm_and_stim_enable & B_PWM2_EN_OUT9) clr_OUT9;
+			if (pwm_and_stim_enabled & B_PWM2_EN_OUT9) clr_OUT9;
 			
-			pwm_and_stim_enable &= ~(B_PWM2_EN_OUT9);
+			pwm_and_stim_enabled &= ~(B_PWM2_EN_OUT9);
 			
 			timer_type0_stop(&TCE0);
 		}

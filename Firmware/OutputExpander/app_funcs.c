@@ -16,9 +16,9 @@ void (*app_func_rd_pointer[])(void) = {
 	&app_read_REG_OUTPUTS_CLEAR,
 	&app_read_REG_OUTPUTS_TOGGLE,
 	&app_read_REG_OUTPUTS_WRITE,
-	&app_read_REG_RESERVED0,
-	&app_read_REG_RESERVED1,
 	&app_read_REG_PWM_AND_STIM_ENABLE,
+	&app_read_REG_PWM_AND_STIM_DISABLE,
+	&app_read_REG_PWM_AND_STIM_WRITE,
 	&app_read_REG_PWM0_FREQ,
 	&app_read_REG_PWM0_DUTYCYCLE,
 	&app_read_REG_PWM0_COUNT,
@@ -85,9 +85,9 @@ bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_OUTPUTS_CLEAR,
 	&app_write_REG_OUTPUTS_TOGGLE,
 	&app_write_REG_OUTPUTS_WRITE,
-	&app_write_REG_RESERVED0,
-	&app_write_REG_RESERVED1,
 	&app_write_REG_PWM_AND_STIM_ENABLE,
+	&app_write_REG_PWM_AND_STIM_DISABLE,
+	&app_write_REG_PWM_AND_STIM_WRITE,
 	&app_write_REG_PWM0_FREQ,
 	&app_write_REG_PWM0_DUTYCYCLE,
 	&app_write_REG_PWM0_COUNT,
@@ -169,7 +169,7 @@ uint16_t target_count0, target_count1, target_count2;
 uint16_t duty_cycle0, duty_cycle1, duty_cycle2;
 
 uint16_t tcount0, tcount1, tcount2;
-uint16_t pwm_and_stim_enable = 0;
+uint16_t pwm_and_stim_enabled = 0;
 
 bool stop_pwm0, stop_pwm1, stop_pwm2;
 
@@ -418,38 +418,59 @@ bool app_write_REG_OUTPUTS_WRITE(void *a)
 
 
 /************************************************************************/
-/* REG_RESERVED0                                                        */
-/************************************************************************/
-void app_read_REG_RESERVED0(void) {}
-bool app_write_REG_RESERVED0(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_RESERVED0 = reg;
-	return true;
-}
-
-
-/************************************************************************/
-/* REG_RESERVED1                                                        */
-/************************************************************************/
-void app_read_REG_RESERVED1(void) {}
-bool app_write_REG_RESERVED1(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_RESERVED1 = reg;
-	return true;
-}
-
-
-/************************************************************************/
 /* REG_PWM_AND_STIM_ENABLE                                              */
 /************************************************************************/
-void app_read_REG_PWM_AND_STIM_ENABLE(void) {}
+void app_read_REG_PWM_AND_STIM_ENABLE(void)
+{
+	app_regs.REG_PWM_AND_STIM_ENABLE = app_regs.REG_PWM_AND_STIM_WRITE;
+}
+
 bool app_write_REG_PWM_AND_STIM_ENABLE(void *a)
 {
-	app_regs.REG_PWM_AND_STIM_ENABLE = *((uint16_t*)a);;
+	uint16_t reg = *((uint16_t*)a);
+	
+	app_regs.REG_PWM_AND_STIM_WRITE |= reg;
+
+	app_regs.REG_PWM_AND_STIM_ENABLE = reg;
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_PWM_AND_STIM_DISABLE                                             */
+/************************************************************************/
+void app_read_REG_PWM_AND_STIM_DISABLE(void)
+{
+	app_regs.REG_PWM_AND_STIM_DISABLE = ~app_regs.REG_PWM_AND_STIM_WRITE;
+	
+	uint8_t mask = 0;
+	mask |= B_PWM0_EN_OUT1 | B_PWM0_EN_OUT2 | B_PWM0_EN_OUT3;	
+	mask |= B_PWM1_EN_OUT6 | B_PWM1_EN_OUT7 | B_PWM1_EN_OUT8;
+	mask |= B_PWM2_EN_OUT9;
+	mask |= B_STIM0_EN_OUT0 | B_STIM0_EN_OUT5;
+	
+	app_regs.REG_PWM_AND_STIM_DISABLE &= mask;
+}
+bool app_write_REG_PWM_AND_STIM_DISABLE(void *a)
+{
+	uint16_t reg = *((uint16_t*)a);
+
+	app_regs.REG_PWM_AND_STIM_WRITE &= ~reg;
+	
+	app_regs.REG_PWM_AND_STIM_DISABLE = reg;
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_PWM_AND_STIM_WRITE                                               */
+/************************************************************************/
+void app_read_REG_PWM_AND_STIM_WRITE(void) {}
+bool app_write_REG_PWM_AND_STIM_WRITE(void *a)
+{
+	uint16_t reg = *((uint16_t*)a);
+	
+	app_regs.REG_PWM_AND_STIM_WRITE = reg;
 	return true;
 }
 
@@ -794,6 +815,7 @@ bool app_write_REG_PWM_START(void *a)
 	if (reg & B_PWM0)
 	{
 		tcount0 = app_regs.REG_PWM0_COUNT;
+		pwm_and_stim_enabled &= ~(B_PWM0_EN_OUT1 | B_PWM0_EN_OUT2 | B_PWM0_EN_OUT3);
 			
 		TCD0_CTRLA = TC_CLKSEL_OFF_gc;		// Make sure timer is stopped to make reset
 		TCD0_CTRLFSET = TC_CMD_RESET_gc;	// Timer reset (registers to initial value)
@@ -806,29 +828,30 @@ bool app_write_REG_PWM_START(void *a)
 		TCD0_INTCTRLB = INT_LEVEL_LOW;		// Interrupt prescaler A
 		TCD0_CTRLB = TC_WGMODE_SINGLESLOPE_gc;	// Enable single slope mode
 		
-		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM0_EN_OUT1)
+		if (app_regs.REG_PWM_AND_STIM_WRITE & B_PWM0_EN_OUT1)
 		{
 			start_pwm0 = true;
 			TCD0_CTRLB |= TC0_CCDEN_bm;		// Enable channel D
-			pwm_and_stim_enable |= B_PWM0_EN_OUT1;
+			pwm_and_stim_enabled |= B_PWM0_EN_OUT1;
 		}
-		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM0_EN_OUT2)
+		if (app_regs.REG_PWM_AND_STIM_WRITE & B_PWM0_EN_OUT2)
 		{
 			start_pwm0 = true;
 			TCD0_CTRLB |= TC0_CCCEN_bm;		// Enable channel C
-			pwm_and_stim_enable |= B_PWM0_EN_OUT2;
+			pwm_and_stim_enabled |= B_PWM0_EN_OUT2;
 		}
-		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM0_EN_OUT3)
+		if (app_regs.REG_PWM_AND_STIM_WRITE & B_PWM0_EN_OUT3)
 		{
 			start_pwm0 = true;
 			TCD0_CTRLB |= TC0_CCBEN_bm;		// Enable channel B
-			pwm_and_stim_enable |= B_PWM0_EN_OUT3;
+			pwm_and_stim_enabled |= B_PWM0_EN_OUT3;
 		}
 	}
 				
 	if (reg & B_PWM1)
 	{
 		tcount1 = app_regs.REG_PWM1_COUNT;
+		pwm_and_stim_enabled &= ~(B_PWM1_EN_OUT6 | B_PWM1_EN_OUT7 | B_PWM1_EN_OUT8);
 			
 		TCC0_CTRLA = TC_CLKSEL_OFF_gc;		// Make sure timer is stopped to make reset
 		TCC0_CTRLFSET = TC_CMD_RESET_gc;	// Timer reset (registers to initial value)
@@ -841,35 +864,39 @@ bool app_write_REG_PWM_START(void *a)
 		TCC0_INTCTRLB = INT_LEVEL_LOW;		// Interrupt prescaler A
 		TCC0_CTRLB = TC_WGMODE_SINGLESLOPE_gc;	// Enable single slope mode
 				
-		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM1_EN_OUT6 && (
+		if (app_regs.REG_PWM_AND_STIM_WRITE & B_PWM1_EN_OUT6 && (
 			(app_regs.REG_EXPANSION_OPTIONS == MSK_BREAKOUT)
 			))
 			{
 				start_pwm1 = true;
 				TCC0_CTRLB |= TC0_CCBEN_bm;	// Enable channel B
-				pwm_and_stim_enable |= B_PWM1_EN_OUT6;
+				pwm_and_stim_enabled |= B_PWM1_EN_OUT6;
 			}
 		   
-		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM1_EN_OUT7 && (
+		if (app_regs.REG_PWM_AND_STIM_WRITE & B_PWM1_EN_OUT7 && (
 			(app_regs.REG_EXPANSION_OPTIONS == MSK_BREAKOUT) ||
 			(app_regs.REG_EXPANSION_OPTIONS == MSK_MAGNETIC_ENCODER)
 			))
 			{
 				start_pwm1 = true;
 				TCC0_CTRLB |= TC0_CCCEN_bm;	// Enable channel C
-				pwm_and_stim_enable |= B_PWM1_EN_OUT7;
+				pwm_and_stim_enabled |= B_PWM1_EN_OUT7;
 			}
-		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM1_EN_OUT8)
+		if (app_regs.REG_PWM_AND_STIM_WRITE & B_PWM1_EN_OUT8 && (
+		(app_regs.REG_EXPANSION_OPTIONS == MSK_BREAKOUT) ||
+		(app_regs.REG_EXPANSION_OPTIONS == MSK_MAGNETIC_ENCODER)
+		))
 			{
 				start_pwm1 = true;
 				TCC0_CTRLB |= TC0_CCDEN_bm;	// Enable channel D
-				pwm_and_stim_enable |= B_PWM1_EN_OUT8;
+				pwm_and_stim_enabled |= B_PWM1_EN_OUT8;
 			}
 	}
 
 	if (reg & B_PWM2)
 	{
 		tcount2 = app_regs.REG_PWM2_COUNT;
+		pwm_and_stim_enabled &= ~(B_PWM2_EN_OUT9);
 			
 		TCE0_CTRLA = TC_CLKSEL_OFF_gc;		// Make sure timer is stopped to make reset
 		TCE0_CTRLFSET = TC_CMD_RESET_gc;	// Timer reset (registers to initial value)
@@ -879,7 +906,7 @@ bool app_write_REG_PWM_START(void *a)
 		TCE0_INTCTRLB = INT_LEVEL_LOW;		// Interrupt prescaler A
 		TCE0_CTRLB = TC_WGMODE_SINGLESLOPE_gc;	// Enable single slope mode
 		
-		if (app_regs.REG_PWM_AND_STIM_ENABLE & B_PWM2_EN_OUT9 && (
+		if (app_regs.REG_PWM_AND_STIM_WRITE & B_PWM2_EN_OUT9 && (
 			(app_regs.REG_EXPANSION_OPTIONS == MSK_BREAKOUT) ||
 			(app_regs.REG_EXPANSION_OPTIONS == MSK_SERVO_MOTOR_1) ||
 			(app_regs.REG_EXPANSION_OPTIONS == MSK_SERVO_MOTOR_2) ||
@@ -888,7 +915,7 @@ bool app_write_REG_PWM_START(void *a)
 			{
 				start_pwm2 = true;
 				TCE0_CTRLB |= TC0_CCAEN_bm;	// Enable channel A				
-				pwm_and_stim_enable |= B_PWM2_EN_OUT9;
+				pwm_and_stim_enabled |= B_PWM2_EN_OUT9;
 			}
 	}
 		
