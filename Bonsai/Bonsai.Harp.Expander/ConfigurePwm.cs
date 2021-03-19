@@ -24,7 +24,7 @@ namespace Bonsai.Harp.Expander
         IEnumerable<HarpMessage> CreatePwmCommand()
         {
             var pwmOffset = Mask >= PwmEnableFlags.PwmOutput6 ? OutputExpander.Registers.Pwm1 : OutputExpander.Registers.Pwm0;
-            yield return HarpCommand.WriteUInt16(OutputExpander.Registers.PwmEnable, (ushort)Mask);
+            yield return HarpCommand.WriteUInt16(OutputExpander.Registers.PwmStimEnable, (ushort)Mask);
             yield return HarpCommand.WriteSingle(pwmOffset + OutputExpander.Registers.PwmFrequency, Frequency);
             yield return HarpCommand.WriteSingle(pwmOffset + OutputExpander.Registers.PwmDutyCycle, DutyCycle);
             if (Count > 0)

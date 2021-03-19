@@ -36,9 +36,9 @@ namespace Bonsai.Harp.Expander
             public const byte OutputClear = 36; // U16    Clear the outputs
             public const byte OutputToggle = 37; // U16    Toggle the outputs
             public const byte OutputWrite = 38; // U16    Write to all outputs at once
-            public const byte Reserved0 = 39; // U8
-            public const byte Reserved1 = 40; // U8
-            public const byte PwmEnable = 41; // U16     Selects the current expansion board available in the EXPANSION port
+            public const byte PwmStimEnable = 39; // U8
+            public const byte PwmStimDisable = 40; // U8
+            public const byte PwmStimWrite = 41; // U16     Selects the current expansion board available in the EXPANSION port
             public const byte Pwm0 = 42; // See below for register offsets
             public const byte Pwm1 = 50; // See below for register offsets
             public const byte PwmStart = 66; // U8
