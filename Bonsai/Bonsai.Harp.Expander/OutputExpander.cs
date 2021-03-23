@@ -45,6 +45,7 @@ namespace Bonsai.Harp.Expander
             public const byte PwmStop = 67; // U8
             public const byte PwmRiseEvent = 68; // U8
             public const byte ExpansionOptions = 87; // U8     Selects the current expansion board available in the EXPANSION port
+            public const byte MagEncoderRead = 90; // U16
             public const byte MagEncoderMode = 91; // U8
             public const byte Reserved4 = 92; // U8
             public const byte Reserved5 = 93; // U8
