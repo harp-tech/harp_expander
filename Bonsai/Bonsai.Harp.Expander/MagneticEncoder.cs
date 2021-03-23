@@ -22,7 +22,7 @@ namespace Bonsai.Harp.Expander
             return Expression.Call(typeof(MagneticEncoder), methodName, null, expression);
         }
 
-        MagneticEncoderDataFrame GetEncoderDataFrame(ushort[] payload)
+        static MagneticEncoderDataFrame GetEncoderDataFrame(ushort[] payload)
         {
             MagneticEncoderDataFrame result;
             result.Angle = payload[0];
@@ -30,13 +30,13 @@ namespace Bonsai.Harp.Expander
             return result;
         }
 
-        IObservable<MagneticEncoderDataFrame> GetMagneticEncoder(IObservable<HarpMessage> source)
+        static IObservable<MagneticEncoderDataFrame> GetMagneticEncoder(IObservable<HarpMessage> source)
         {
             return source.Where(OutputExpander.Registers.MagEncoderRead, MessageType.Event)
                          .Select(message => GetEncoderDataFrame(message.GetPayloadArray<ushort>()));
         }
 
-        IObservable<Timestamped<MagneticEncoderDataFrame>> GetTimestampedMagneticEncoder(IObservable<HarpMessage> source)
+        static IObservable<Timestamped<MagneticEncoderDataFrame>> GetTimestampedMagneticEncoder(IObservable<HarpMessage> source)
         {
             return source.Where(OutputExpander.Registers.MagEncoderRead, MessageType.Event).Select(message =>
             {

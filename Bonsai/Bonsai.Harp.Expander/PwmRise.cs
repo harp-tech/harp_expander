@@ -22,13 +22,13 @@ namespace Bonsai.Harp.Expander
             return Expression.Call(typeof(PwmRise), methodName, null, expression);
         }
 
-        IObservable<PwmFlags> GetPwmRiseEvent(IObservable<HarpMessage> source)
+        static IObservable<PwmFlags> GetPwmRiseEvent(IObservable<HarpMessage> source)
         {
             return source.Where(OutputExpander.Registers.PwmRiseEvent, MessageType.Event)
                          .Select(message => (PwmFlags)message.GetPayloadByte());
         }
 
-        IObservable<Timestamped<PwmFlags>> GetTimestampedPwmRiseEvent(IObservable<HarpMessage> source)
+        static IObservable<Timestamped<PwmFlags>> GetTimestampedPwmRiseEvent(IObservable<HarpMessage> source)
         {
             return source.Where(OutputExpander.Registers.PwmRiseEvent, MessageType.Event).Select(message =>
             {
