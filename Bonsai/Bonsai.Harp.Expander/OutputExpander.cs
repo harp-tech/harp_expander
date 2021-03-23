@@ -41,6 +41,7 @@ namespace Bonsai.Harp.Expander
             public const byte PwmStimWrite = 41; // U16     Selects the current expansion board available in the EXPANSION port
             public const byte Pwm0 = 42; // See below for register offsets
             public const byte Pwm1 = 50; // See below for register offsets
+            public const byte Pwm2 = 58; // See below for register offsets
             public const byte PwmStart = 66; // U8
             public const byte PwmStop = 67; // U8
             public const byte PwmRiseEvent = 68; // U8
