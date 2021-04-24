@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.5.1">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -5453,6 +5453,8 @@ IHLP-2525CZ-01</description>
 <text x="-0.135" y="4.043" size="0.8128" layer="25" font="vector" ratio="14">&gt;NAME</text>
 <text x="1.143" y="-4.826" size="0.8128" layer="27" font="vector" ratio="15">&gt;VALUE</text>
 </package>
+<package name="-">
+</package>
 </packages>
 <packages3d>
 <package3d name="SO16W" urn="urn:adsk.eagle:package:16487/2" type="model">
@@ -5655,6 +5657,11 @@ Step-Down Switching Regulator</description>
 <text x="-2.286" y="-4.826" size="1.778" layer="96">&gt;VALUE</text>
 <pin name="N.C./GND" x="-12.7" y="-7.62" length="short" direction="pas"/>
 </symbol>
+<symbol name="EXTERNAL">
+<text x="0" y="0" size="1.6764" layer="94" font="vector" ratio="15">[EXTERNAL]</text>
+<text x="-2.54" y="2.54" size="1.27" layer="95" font="vector" ratio="15">&gt;NAME</text>
+<text x="-2.54" y="-2.54" size="1.27" layer="96" font="vector" ratio="15">&gt;VALUE</text>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="CON_3.5MM_1X3">
@@ -5843,6 +5850,33 @@ Step-Down Switching Regulator</description>
 </connects>
 <technologies>
 <technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="EXTERNAL" prefix="EXTERNAL_">
+<description>external component</description>
+<gates>
+<gate name="G$1" symbol="EXTERNAL" x="0" y="0"/>
+</gates>
+<devices>
+<device name="-" package="-">
+<technologies>
+<technology name="">
+<attribute name="DEVICE" value="" constant="no"/>
+<attribute name="MPN" value="" constant="no"/>
+<attribute name="TYPE" value="" constant="no"/>
+<attribute name="_EXTERNAL_" value="" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="" package="-">
+<technologies>
+<technology name="">
+<attribute name="DIGIKEY_PN" value="" constant="no"/>
+<attribute name="MPN" value="" constant="no"/>
+<attribute name="TYPE" value="" constant="no"/>
+</technology>
 </technologies>
 </device>
 </devices>
@@ -15973,7 +16007,7 @@ Source: http://products.nichicon.co.jp/en/pdf/XJA043/e-ud.pdf</description>
 <part name="P+6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device="">
 <attribute name="VALUE2" value="+6.35V"/>
 </part>
-<part name="X5" library="con-3m" library_urn="urn:adsk.eagle:library:119" deviceset="2510-" device="" package3d_urn="urn:adsk.eagle:package:5571/1">
+<part name="X5" library="con-3m" library_urn="urn:adsk.eagle:library:119" deviceset="2510-" device="" package3d_urn="urn:adsk.eagle:package:5571/1" value="IDC 10WAY STRAIGHT">
 <attribute name="DIGIKEY_PN" value="S9169-ND"/>
 <attribute name="MF" value="-"/>
 <attribute name="MPN" value="SBH11-PBPC-D05-ST-BK"/>
@@ -16031,13 +16065,13 @@ Source: http://products.nichicon.co.jp/en/pdf/XJA043/e-ud.pdf</description>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="U1" library="harp expander servo driver v1.0" deviceset="SI8641AB" device="W" package3d_urn="urn:adsk.eagle:package:16487/2" value="SI8641AB-B-IS1R">
-<attribute name="DIGIKEY_PN" value="336-5212-1-ND"/>
+<attribute name="DIGIKEY_PN" value="SI8641AB-B-IS-ND"/>
 <attribute name="MOUSER_PN" value="634-SI8641AB-B-IS1R"/>
 <attribute name="MPN" value="SI8641AB-B-IS1R"/>
 <attribute name="TYPE" value="SMD"/>
 </part>
 <part name="U2" library="harp expander servo driver v1.0" deviceset="SI8641AB" device="W" package3d_urn="urn:adsk.eagle:package:16487/2" value="SI8641AB-B-IS1R">
-<attribute name="DIGIKEY_PN" value="336-5212-1-ND"/>
+<attribute name="DIGIKEY_PN" value="SI8641AB-B-IS-ND"/>
 <attribute name="MOUSER_PN" value="634-SI8641AB-B-IS1R"/>
 <attribute name="MPN" value="SI8641AB-B-IS1R"/>
 <attribute name="TYPE" value="SMD"/>
@@ -16075,6 +16109,36 @@ Source: http://products.nichicon.co.jp/en/pdf/XJA043/e-ud.pdf</description>
 <attribute name="MOUSER_PN" value="70-IHLP2525CZER100M0"/>
 <attribute name="MPN" value="IHLP2525CZER100M01"/>
 <attribute name="TYPE" value="SMD"/>
+</part>
+<part name="EXTERNAL_1" library="harp expander servo driver v1.0" deviceset="EXTERNAL" device="" value="TERMINAL BLOCK PLUG 3WAY">
+<attribute name="DIGIKEY_PN" value="732-2752-ND"/>
+<attribute name="MPN" value="691361100003"/>
+<attribute name="TYPE" value="-"/>
+</part>
+<part name="EXTERNAL_2" library="harp expander servo driver v1.0" deviceset="EXTERNAL" device="" value="TERMINAL BLOCK PLUG 3WAY">
+<attribute name="DIGIKEY_PN" value="732-2752-ND"/>
+<attribute name="MPN" value="691361100003"/>
+<attribute name="TYPE" value="-"/>
+</part>
+<part name="EXTERNAL_3" library="harp expander servo driver v1.0" deviceset="EXTERNAL" device="" value="TERMINAL BLOCK PLUG 3WAY">
+<attribute name="DIGIKEY_PN" value="732-2752-ND"/>
+<attribute name="MPN" value="691361100003"/>
+<attribute name="TYPE" value="-"/>
+</part>
+<part name="EXTERNAL_4" library="harp expander servo driver v1.0" deviceset="EXTERNAL" device="" value="CNTR PLRZD RECPT 10P">
+<attribute name="DIGIKEY_PN" value="AKC10H-ND"/>
+<attribute name="MPN" value="1658621-1"/>
+<attribute name="TYPE" value="-"/>
+</part>
+<part name="EXTERNAL_5" library="harp expander servo driver v1.0" deviceset="EXTERNAL" device="" value="CNTR PLRZD RECPT 10P">
+<attribute name="DIGIKEY_PN" value="AKC10H-ND"/>
+<attribute name="MPN" value="1658621-1"/>
+<attribute name="TYPE" value="-"/>
+</part>
+<part name="EXTERNAL_6" library="harp expander servo driver v1.0" deviceset="EXTERNAL" device="" value="10 COND. 28AWG ROUND 1PC=100FT">
+<attribute name="DIGIKEY_PN" value="3M157849-100-ND"/>
+<attribute name="MPN" value="3365/10 100"/>
+<attribute name="TYPE" value="-"/>
 </part>
 </parts>
 <sheets>
@@ -16446,6 +16510,36 @@ Vout=6.35V =&gt; R1=43k
 <attribute name="DIGIKEY_PN" x="139.7" y="149.86" size="1.778" layer="96" rot="R90" display="off"/>
 <attribute name="MOUSER_PN" x="139.7" y="149.86" size="1.778" layer="96" rot="R90" display="off"/>
 <attribute name="TYPE" x="139.7" y="149.86" size="1.778" layer="96" rot="R90" display="off"/>
+</instance>
+<instance part="EXTERNAL_1" gate="G$1" x="160.02" y="45.72" smashed="yes">
+<attribute name="NAME" x="157.48" y="48.26" size="1.27" layer="95" font="vector" ratio="15"/>
+<attribute name="VALUE" x="157.48" y="43.18" size="1.27" layer="96" font="vector" ratio="15"/>
+<attribute name="DIGIKEY_PN" x="160.02" y="45.72" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="EXTERNAL_2" gate="G$1" x="160.02" y="38.1" smashed="yes">
+<attribute name="NAME" x="157.48" y="40.64" size="1.27" layer="95" font="vector" ratio="15"/>
+<attribute name="VALUE" x="157.48" y="35.56" size="1.27" layer="96" font="vector" ratio="15"/>
+<attribute name="DIGIKEY_PN" x="160.02" y="38.1" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="EXTERNAL_3" gate="G$1" x="160.02" y="30.48" smashed="yes">
+<attribute name="NAME" x="157.48" y="33.02" size="1.27" layer="95" font="vector" ratio="15"/>
+<attribute name="VALUE" x="157.48" y="27.94" size="1.27" layer="96" font="vector" ratio="15"/>
+<attribute name="DIGIKEY_PN" x="160.02" y="30.48" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="EXTERNAL_4" gate="G$1" x="193.04" y="45.72" smashed="yes">
+<attribute name="NAME" x="190.5" y="48.26" size="1.27" layer="95" font="vector" ratio="15"/>
+<attribute name="VALUE" x="190.5" y="43.18" size="1.27" layer="96" font="vector" ratio="15"/>
+<attribute name="DIGIKEY_PN" x="193.04" y="45.72" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="EXTERNAL_5" gate="G$1" x="193.04" y="35.56" smashed="yes">
+<attribute name="NAME" x="190.5" y="38.1" size="1.27" layer="95" font="vector" ratio="15"/>
+<attribute name="VALUE" x="190.5" y="33.02" size="1.27" layer="96" font="vector" ratio="15"/>
+<attribute name="DIGIKEY_PN" x="193.04" y="35.56" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="EXTERNAL_6" gate="G$1" x="220.98" y="45.72" smashed="yes">
+<attribute name="NAME" x="218.44" y="48.26" size="1.27" layer="95" font="vector" ratio="15"/>
+<attribute name="VALUE" x="218.44" y="43.18" size="1.27" layer="96" font="vector" ratio="15"/>
+<attribute name="DIGIKEY_PN" x="220.98" y="45.72" size="1.778" layer="96" display="off"/>
 </instance>
 </instances>
 <busses>
