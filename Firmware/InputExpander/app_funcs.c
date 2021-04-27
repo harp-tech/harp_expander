@@ -16,8 +16,8 @@ void (*app_func_rd_pointer[])(void) = {
 	&app_read_REG_RISING_EDGE_ENABLE,
 	&app_read_REG_FALLING_EDGE_ENABLE,
 	&app_read_REG_INPUT_MODE,
-	&app_read_REG_RESERVED0,
-	&app_read_REG_RESERVED1,
+	&app_read_REG_ENCODER_MODE,
+	&app_read_REG_ENCODER,
 	&app_read_REG_EXPANSION_OPTIONS
 };
 
@@ -29,8 +29,8 @@ bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_RISING_EDGE_ENABLE,
 	&app_write_REG_FALLING_EDGE_ENABLE,
 	&app_write_REG_INPUT_MODE,
-	&app_write_REG_RESERVED0,
-	&app_write_REG_RESERVED1,
+	&app_write_REG_ENCODER_MODE,
+	&app_write_REG_ENCODER,
 	&app_write_REG_EXPANSION_OPTIONS
 };
 
@@ -162,27 +162,93 @@ bool app_write_REG_INPUT_MODE(void *a)
 
 
 /************************************************************************/
-/* REG_RESERVED0                                                        */
+/* REG_ENCODER_MODE                                                     */
 /************************************************************************/
-void app_read_REG_RESERVED0(void) {}
-bool app_write_REG_RESERVED0(void *a)
+extern uint8_t aux_inputs_previous_read;
+
+// https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8331-8-and-16-bit-AVR-Microcontroller-XMEGA-AU_Manual.pdf
+
+void app_read_REG_ENCODER_MODE(void) {}
+bool app_write_REG_ENCODER_MODE(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
+	
+	if (reg & ~(GM_ENC_MODE))
+		return false;
+	
+	if (reg & GM_ENC_MODE)
+	{
+		/* Disable interrupts on PORTE N=0 */
+		io_set_int(&PORTE, INT_LEVEL_OFF, 0, 0, true);
 
-	app_regs.REG_RESERVED0 = reg;
+		/* Set up quadrature decoding event */
+		EVSYS_CH0MUX = EVSYS_CHMUX_PORTE_PIN4_gc;                           // P. 77 of above manual
+		EVSYS_CH0CTRL = EVSYS_QDEN_bm | EVSYS_DIGFILT_2SAMPLES_gc;          // P. 78 of above manual
+			
+		/* Stop and reset timer */
+		TCE1_CTRLA = TC_CLKSEL_OFF_gc;
+		TCE1_CTRLFSET = TC_CMD_RESET_gc;
+			
+		/* Configure timer */
+		TCE1_CTRLD = TC_EVACT_QDEC_gc | TC_EVSEL_CH0_gc;	                // P. 176-177 of above manual
+		TCE1_PER = 0xFFFF;
+		TCE1_CNT = 0x8000;
+			
+		/* Start timer */
+		TCE1_CTRLA = TC_CLKSEL_DIV1_gc;		
+	}
+	else
+	{
+		/* Stop timer */
+		/* Do not reset to preserve last encoder */
+		TCE1_CTRLA = TC_CLKSEL_OFF_gc;
+		
+		/* Read current state of aux inputs */
+		aux_inputs_previous_read = (read_AUX_INPUT0 ? B_AUX_IN0 : 0) | (read_AUX_INPUT1 ? B_AUX_IN1 : 0);
+			
+		/* Enable interrupts on pins AUX_INPUT0 and AUX_INPUT1 */
+		io_set_int(&PORTE, INT_LEVEL_LOW, 0, (1<<2), false);	// AUX_INPUT0
+		io_set_int(&PORTE, INT_LEVEL_LOW, 0, (1<<5), false);	// AUX_INPUT1
+	}
+
+	app_regs.REG_ENCODER_MODE = reg;
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_RESERVED1                                                        */
+/* REG_ENCODER                                                          */
 /************************************************************************/
-void app_read_REG_RESERVED1(void) {}
-bool app_write_REG_RESERVED1(void *a)
+void app_read_REG_ENCODER(void)
 {
-	uint8_t reg = *((uint8_t*)a);
+	int16_t timer_cnt = TCE1_CNT;
+	
+	if (timer_cnt > 32768)
+	{
+		app_regs.REG_ENCODER = 0xFFFF - timer_cnt;
+	}
+	else
+	{
+		app_regs.REG_ENCODER = (32768 - timer_cnt) * -1;
+	}
+}
+bool app_write_REG_ENCODER(void *a)
+{
+	int16_t reg = *((int16_t*)a);
+	
+	if (app_regs.REG_ENCODER_MODE & GM_ENC_MODE)
+	{
+		if (reg > 32768)
+		{
+			TCE1_CNT = 0xFFFF - reg;
+		}
+		else
+		{
+			TCE1_CNT = (32768 - reg) * -1;
+		}
+	}
 
-	app_regs.REG_RESERVED1 = reg;
+	app_regs.REG_ENCODER = reg;
 	return true;
 }
 

@@ -124,7 +124,7 @@ uint8_t app_regs_type[] = {
 	TYPE_U16,
 	TYPE_U8,
 	TYPE_U8,
-	TYPE_U8,
+	TYPE_I16,
 	TYPE_U8
 };
 
@@ -149,7 +149,7 @@ uint8_t *app_regs_pointer[] = {
 	(uint8_t*)(&app_regs.REG_RISING_EDGE_ENABLE),
 	(uint8_t*)(&app_regs.REG_FALLING_EDGE_ENABLE),
 	(uint8_t*)(&app_regs.REG_INPUT_MODE),
-	(uint8_t*)(&app_regs.REG_RESERVED0),
-	(uint8_t*)(&app_regs.REG_RESERVED1),
+	(uint8_t*)(&app_regs.REG_ENCODER_MODE),
+	(uint8_t*)(&app_regs.REG_ENCODER),
 	(uint8_t*)(&app_regs.REG_EXPANSION_OPTIONS)
 };

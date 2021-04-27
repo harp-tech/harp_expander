@@ -239,8 +239,8 @@ typedef struct
 	uint16_t REG_RISING_EDGE_ENABLE;
 	uint16_t REG_FALLING_EDGE_ENABLE;
 	uint8_t REG_INPUT_MODE;
-	uint8_t REG_RESERVED0;
-	uint8_t REG_RESERVED1;
+	uint8_t REG_ENCODER_MODE;
+	int16_t REG_ENCODER;
 	uint8_t REG_EXPANSION_OPTIONS;
 } AppRegs;
 
@@ -255,8 +255,8 @@ typedef struct
 #define ADD_REG_RISING_EDGE_ENABLE          36 // U16    Enables the rising edge detection of the correspondet input (bitmask)
 #define ADD_REG_FALLING_EDGE_ENABLE         37 // U16    Enables the falling edge detection of the correspondet input (bitmask)
 #define ADD_REG_INPUT_MODE                  38 // U8     Configures the input mode
-#define ADD_REG_RESERVED0                   39 // U8     
-#define ADD_REG_RESERVED1                   40 // U8     
+#define ADD_REG_ENCODER_MODE                39 // U8     Configures the rotary encoder
+#define ADD_REG_ENCODER                     40 // I16    Contains the rotary encoder reading
 #define ADD_REG_EXPANSION_OPTIONS           41 // U8     Selects the current expansion board available in the EXPANSION port
 
 /************************************************************************/
@@ -268,7 +268,7 @@ typedef struct
 /* Memory limits */
 #define APP_REGS_ADD_MIN                    0x20
 #define APP_REGS_ADD_MAX                    0x29
-#define APP_NBYTES_OF_REG_BANK              15
+#define APP_NBYTES_OF_REG_BANK              16
 
 /************************************************************************/
 /* Registers' bits                                                      */
@@ -301,6 +301,12 @@ typedef struct
 #define MSK_ON_INTERRUPTS                  0            // 
 #define MSK_AT_1000FPS                     1            // 
 #define MSK_AT_2000FPS                     2            // 
+#define GM_ENC_MODE                        7            // 
+#define MSK_ENC_DISABLED                   0            // Disables the rotary encoder
+#define MSK_ENC_250Hz                      1            // Send encoder data at 250 Hz
+#define MSK_ENC_500Hz                      2            // Send encoder data at 500 Hz
+#define MSK_ENC_1000Hz                     3            // Send encoder data at 1000Hz
+#define MSK_ENC_WHEN_CHANGE                4            // Send encoder data only when movement is detected
 #define GM_EXPANSION_OPTIONS               1            // 
 #define MSK_BREAKOUT                       0            // 
 

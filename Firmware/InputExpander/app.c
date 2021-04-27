@@ -30,7 +30,7 @@ void hwbp_app_initialize(void)
     uint8_t hwH = 1;
     uint8_t hwL = 0;
     uint8_t fwH = 2;
-    uint8_t fwL = 0;
+    uint8_t fwL = 1;
     uint8_t ass = 0;
     
    	/* Start core */
@@ -171,7 +171,56 @@ uint16_t acquisition_counter = 0;
 
 void core_callback_t_before_exec(void)
 {
-	if (app_regs.REG_INPUT_MODE == MSK_AT_2000FPS || ((app_regs.REG_INPUT_MODE == MSK_AT_1000FPS) && (acquisition_counter++&1)))
+	acquisition_counter++;
+	
+	if (app_regs.REG_ENCODER_MODE & GM_ENC_MODE)
+	{
+		if ((app_regs.REG_ENCODER_MODE == MSK_ENC_1000Hz && ((acquisition_counter & 1) == 0)) ||
+			(app_regs.REG_ENCODER_MODE == MSK_ENC_500Hz  && ((acquisition_counter & 3) == 0)) ||
+			(app_regs.REG_ENCODER_MODE == MSK_ENC_250Hz  && ((acquisition_counter & 7) == 0)))
+		{
+	
+			int16_t timer_cnt = TCE1_CNT;
+	
+			if (timer_cnt > 32768)
+			{
+				app_regs.REG_ENCODER = 0xFFFF - timer_cnt;
+			}
+			else
+			{
+				app_regs.REG_ENCODER = (32768 - timer_cnt) * -1;
+			}
+			core_func_send_event(ADD_REG_ENCODER, true);
+		}
+	
+		if (app_regs.REG_ENCODER_MODE == MSK_ENC_WHEN_CHANGE && ((acquisition_counter & 1) == 0))
+		{
+			int16_t timer_cnt = TCE1_CNT;
+		
+			if (timer_cnt > 32768)
+			{
+				timer_cnt = 0xFFFF - timer_cnt;
+			
+				if (timer_cnt != app_regs.REG_ENCODER)
+				{
+					app_regs.REG_ENCODER = timer_cnt;
+					core_func_send_event(ADD_REG_ENCODER, true);
+				}
+			}
+			else
+			{
+				timer_cnt = (32768 - timer_cnt) * -1;
+			
+				if (timer_cnt != app_regs.REG_ENCODER)
+				{
+					app_regs.REG_ENCODER = timer_cnt;
+					core_func_send_event(ADD_REG_ENCODER, true);
+				}
+			}
+		}
+	}
+	
+	if (app_regs.REG_INPUT_MODE == MSK_AT_2000FPS || ((app_regs.REG_INPUT_MODE == MSK_AT_1000FPS) && (acquisition_counter & 1)))
 	{
 		app_regs.REG_INPUTS[0]  = (read_IN0 ? B_IN0 : 0) | (read_IN1 ? B_IN1 : 0) | (read_IN2 ? B_IN2 : 0) | (read_IN3 ? B_IN3 : 0) | (read_IN4 ? B_IN4 : 0);
 		app_regs.REG_INPUTS[0] |= (read_IN5 ? B_IN5 : 0) | (read_IN6 ? B_IN6 : 0) | (read_IN7 ? B_IN7 : 0) | (read_IN8 ? B_IN8 : 0) | (read_IN9 ? B_IN9 : 0);
@@ -187,12 +236,12 @@ void core_callback_t_before_exec(void)
 	}
 }
 void core_callback_t_after_exec(void) {}
-void core_callback_t_new_second(void) {}
-void core_callback_t_500us(void) {}
-void core_callback_t_1ms(void)
+void core_callback_t_new_second(void)
 {
 	acquisition_counter = 0;
 }
+void core_callback_t_500us(void) {}
+void core_callback_t_1ms(void) {}
 
 /************************************************************************/
 /* Callbacks: uart control                                              */
