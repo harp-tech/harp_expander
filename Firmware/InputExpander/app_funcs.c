@@ -156,7 +156,7 @@ bool app_write_REG_INPUT_MODE(void *a)
 			return false;
 	}
 
-	app_regs.REG_EXPANSION_OPTIONS = reg;
+	app_regs.REG_INPUT_MODE = reg;
 	return true;
 }
 

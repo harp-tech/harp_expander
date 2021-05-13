@@ -220,7 +220,7 @@ void core_callback_t_before_exec(void)
 		}
 	}
 	
-	if (app_regs.REG_INPUT_MODE == MSK_AT_2000FPS || ((app_regs.REG_INPUT_MODE == MSK_AT_1000FPS) && (acquisition_counter & 1)))
+	if ((app_regs.REG_INPUT_MODE == MSK_AT_2000FPS) || ((app_regs.REG_INPUT_MODE == MSK_AT_1000FPS) && ((acquisition_counter & 1) == 0)))
 	{
 		app_regs.REG_INPUTS[0]  = (read_IN0 ? B_IN0 : 0) | (read_IN1 ? B_IN1 : 0) | (read_IN2 ? B_IN2 : 0) | (read_IN3 ? B_IN3 : 0) | (read_IN4 ? B_IN4 : 0);
 		app_regs.REG_INPUTS[0] |= (read_IN5 ? B_IN5 : 0) | (read_IN6 ? B_IN6 : 0) | (read_IN7 ? B_IN7 : 0) | (read_IN8 ? B_IN8 : 0) | (read_IN9 ? B_IN9 : 0);
